@@ -17,6 +17,8 @@ let mainWindow = null;
     };  const mainProp = {
             dir: __dirname,
             file: "index.html",
+            protocol: "file:",
+            slashes: true
     };
 /*-!PROPS!-*/
 
@@ -43,8 +45,8 @@ function loadWindow(oWindow, oProp) {
     this.oWindow = oWindow;
     this.oWindow.loadURL(url.format({
         pathname: path.join(oProp.dir, oProp.file),
-        protocol: "file:",
-        slashes: true
+        protocol: oProp.protocol,
+        slashes: oProp.slashes
     }));
     return this.oWindow;
 }
