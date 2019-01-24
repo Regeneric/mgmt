@@ -8,14 +8,14 @@ html {
 }
 body {
     margin: auto;
-    /* background-color: #000; */
+    background-color: #1e1e1e;
     /* color: #fff; */
 }
 
 /*--HEADER--*/
 .title-bar {
     text-align: center;
-    background-color: gray;
+    background-color: #3c3c3c;
 }
 .menu {
     display: inline-block;
@@ -25,27 +25,30 @@ body {
     padding: 0; 
     list-style-type: none;
 } .menu li {
+    display: inline-block;
     padding-left: 1px;
     padding-right: 5px;
-    display: inline-block;
+    color: #fff;
     font-size: 11pt;
 }
 .title {
     display: inline-block;
     margin: 0;
     padding: 0 38.5% 0 36%;
+    color: #fff;
     text-align: center;
     font-weight: 500;
+    font-size: 12pt;
 }
 .btns-group {
     display: inline-block;
 } .title-btn {
     padding: 4px 11px 4px 11px;
     color: #fff;
-    background-color: gray;
+    background-color: #3c3c3c;
     border: none;
 } .title-btn:hover {
-    background-color: #9b9b9b;
+    background-color: #505050;
 } #close:hover {
     background-color: #ca0000;
 }
