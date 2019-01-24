@@ -2,6 +2,7 @@
 const ipcRenderer = require("electron").ipcRenderer;
 const remote = require("electron").remote;
 
+const title = document.querySelector(".title");
 const titleBtns = document.querySelectorAll(".title-btn");
 /*-!SETUP!-*/
 
@@ -11,6 +12,7 @@ let win = null;
 
 /*--RUN--*/
 titleBtns.forEach(function(btn) {
+    /*--EVENTS--*/
     btn.addEventListener("click", function() {
         switch(btn.id) {
             case "mini": {
@@ -22,8 +24,10 @@ titleBtns.forEach(function(btn) {
             } case "close": {
                 win = remote.getCurrentWindow();
                 win.close();
+                break;
             }
         }
     });
+    /*-!EVENTS!-*/
 });
 /*-!RUN!-*/

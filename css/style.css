@@ -9,13 +9,13 @@ html {
 body {
     margin: auto;
     background-color: #1e1e1e;
-    /* color: #fff; */
 }
+
 
 /*--HEADER--*/
 .title-bar {
-    text-align: center;
     background-color: #3c3c3c;
+    text-align: center;
 }
 .menu {
     display: inline-block;
@@ -25,30 +25,37 @@ body {
     padding: 0; 
     list-style-type: none;
 } .menu li {
+    margin: -2px;
     display: inline-block;
-    padding-left: 1px;
-    padding-right: 5px;
-    color: #fff;
-    font-size: 11pt;
+    padding: 6px;
+    color: #bcbcbc;
+    font-size: 10pt;
+} .menu li:hover {
+    background-color: #505050;
+    cursor: pointer;
 }
 .title {
-    display: inline-block;
+    height: 24px;
     margin: 0;
-    padding: 0 38.5% 0 36%;
-    color: #fff;
+    display: inline-block;
+    padding: 0 36% 0 37.5%;
+    color: #bcbcbc;
     text-align: center;
     font-weight: 500;
-    font-size: 12pt;
+    font-size: 10pt;
 }
 .btns-group {
     display: inline-block;
 } .title-btn {
-    padding: 4px 11px 4px 11px;
-    color: #fff;
+    width: 46px;
+    margin: -2px;
+    padding: 6px 11px 6px 11px;
     background-color: #3c3c3c;
+    color: #bcbcbc;
     border: none;
 } .title-btn:hover {
     background-color: #505050;
+    cursor: pointer;
 } #close:hover {
     background-color: #ca0000;
 }

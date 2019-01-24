@@ -14,7 +14,7 @@ let mainWindow = null;
         title: "Main Window",
         show: false,
         resizable: false,
-        // frame: false
+        frame: false
     };  const mainProp = {
             dir: __dirname,
             file: "index.html",
