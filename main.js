@@ -13,7 +13,8 @@ let mainWindow = null;
         height: 720,
         title: "Main Window",
         show: false,
-        resizable: false
+        resizable: false,
+        // frame: false
     };  const mainProp = {
             dir: __dirname,
             file: "index.html",
