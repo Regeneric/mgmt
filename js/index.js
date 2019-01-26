@@ -4,8 +4,9 @@ const remote = require("electron").remote;
 
 const title = document.querySelector(".title");
 const titleBtns = document.querySelectorAll(".title-btn");
+
 const menu = document.querySelectorAll(".menu ul li");
-    const fileDrop = document.querySelector(".menu ul .dropdown");
+const menuDrop = document.querySelectorAll(".menu ul .dropdown");
 
 const closeImg = document.querySelector("#closeImg");
 const site = document.querySelector("html");
@@ -46,16 +47,29 @@ titleBtns.forEach(function(btn) {
 menu.forEach(function(m) {
     /*--EVENTS--*/
     m.addEventListener("click", function() {
-        if (m.id == "file") {
-            fileDrop.style.display = "block";
-            // m.style.backgroundColor = "#505050";
+        switch(m.id) {
+            case "file": {
+                menuDrop[0].style.display = "block";
+                break;
+            }
+            case "edit": {
+                menuDrop[1].style.display = "block";
+                break;
+            }
+            case "help": {
+                menuDrop[2].style.display = "block";
+                break;
+            }
         }
     });
     /*-!EVENTS!-*/
 });
 
 site.addEventListener("mousedown", function() {
-    fileDrop.style.display = "none";
+    menuDrop.forEach(function(md) {
+        md.style.display = "none";
+    });
+
     menu.forEach(function(m) {
         // m.style.backgroundColor = "#3c3c3c";
     });
