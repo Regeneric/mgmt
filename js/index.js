@@ -7,9 +7,10 @@ const titleBtns = document.querySelectorAll(".title-btn");
 
 const menu = document.querySelectorAll(".menu ul li");
 const menuDrop = document.querySelectorAll(".menu ul .dropdown");
+const liDrop = document.querySelectorAll(".menu ul .li-drop");
 
 const closeImg = document.querySelector("#closeImg");
-const site = document.querySelector("html");
+const site = document.querySelector(".bdd");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
@@ -44,8 +45,8 @@ titleBtns.forEach(function(btn) {
     /*-!EVENTS!-*/
 });
 
+/*--EVENTS--*/
 menu.forEach(function(m) {
-    /*--EVENTS--*/
     m.addEventListener("click", function() {
         switch(m.id) {
             case "file": {
@@ -62,16 +63,20 @@ menu.forEach(function(m) {
             }
         }
     });
-    /*-!EVENTS!-*/
 });
 
 site.addEventListener("mousedown", function() {
     menuDrop.forEach(function(md) {
         md.style.display = "none";
     });
+});
 
-    menu.forEach(function(m) {
-        // m.style.backgroundColor = "#3c3c3c";
+liDrop.forEach(function(ld) {
+    ld.addEventListener("click", function() {
+        if (ld.id == "theme") {
+            console.log("Dupa");
+        }
     });
 });
+/*-!EVENTS!-*/
 /*-!RUN!-*/

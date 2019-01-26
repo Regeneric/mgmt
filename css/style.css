@@ -9,6 +9,8 @@ html {
 body {
     margin: auto;
     background-color: #1e1e1e;
+} .bdd {
+    min-height: 650px;
 }
 
 
@@ -27,7 +29,7 @@ body {
     padding: 0; 
     list-style-type: none;
     position: relative;
-} .menu ul li {
+} .menu li {
     margin: -2px;
     display: inline-block;
     padding: 6px;
@@ -35,7 +37,7 @@ body {
     color: #cccccc;
     font-size: 10pt;
     position: relative;
-} .menu ul li:hover {
+} .menu li:hover {
     background-color: #505050;
     cursor: default;
 }
