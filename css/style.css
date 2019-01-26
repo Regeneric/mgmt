@@ -14,7 +14,8 @@ body {
 
 /*--HEADER--*/
 .title-bar {
-    background-color: #3c3c3c;
+    /* background-color: #333333; kolor paska bez focusu na okno */
+    background-color: #3c3c3c;  /*kolor paska z focuesem*/
     text-align: center;
 }
 .menu {
@@ -52,8 +53,8 @@ body {
     height: 32px;   
     width: 46px;
     margin: -2px;
-    /* padding: 6px 11px 6px 11px; */
-    background-color: #3c3c3c;
+    /* background-color: #333333; kolor przycisków bez focusu na okno */
+    background-color: #3c3c3c;  /*kolor przycisków z focuesem*/
     color: #bcbcbc;
     border: none;
     outline: none;
