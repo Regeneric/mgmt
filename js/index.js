@@ -4,6 +4,8 @@ const remote = require("electron").remote;
 
 const title = document.querySelector(".title");
 const titleBtns = document.querySelectorAll(".title-btn");
+
+const closeImg = document.querySelector("#closeImg");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
@@ -27,6 +29,13 @@ titleBtns.forEach(function(btn) {
                 break;
             }
         }
+    });
+
+    btn.addEventListener("mouseover", function() {
+        if (btn.id == "close") closeImg.src = "img/close-title-ml.png";
+    });
+    btn.addEventListener("mouseout", function() {
+        if (btn.id == "close") closeImg.src = "img/close-title-m.png";
     });
     /*-!EVENTS!-*/
 });

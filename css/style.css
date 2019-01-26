@@ -34,8 +34,6 @@ body {
 } .menu li:hover {
     background-color: #505050;
     cursor: pointer;
-} #logo {
-    margin-top: 4px;
 }
 .title {
     height: 25px;
@@ -46,6 +44,7 @@ body {
     text-align: center;
     font-weight: 500;
     font-size: 10pt;
+    -webkit-app-region: drag;
 }
 .btns-group {
     display: inline-block;
@@ -53,7 +52,7 @@ body {
     height: 32px;   
     width: 46px;
     margin: -2px;
-    padding: 6px 11px 6px 11px;
+    /* padding: 6px 11px 6px 11px; */
     background-color: #3c3c3c;
     color: #bcbcbc;
     border: none;
