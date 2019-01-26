@@ -46,7 +46,7 @@ body {
     left: 0;
     display: none;
     padding: 0;
-    background-color: #505050;
+    background-color: #252526;
     position: absolute;
 } .menu ul .li-drop {
     min-width: 120px;
@@ -55,8 +55,8 @@ body {
     padding-left: 12px;
     text-align: left;
 } .menu ul .li-drop:hover {
-    background-color: #3c3c3c;
-    color: #faebd7;
+    background-color: #094771;
+    color: #f0f4f7;
 }
 /*-!Dropdown menu!-*/
 
