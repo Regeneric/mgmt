@@ -56,6 +56,7 @@ body {
     background-color: #3c3c3c;
     color: #bcbcbc;
     border: none;
+    outline: none;
 } .title-btn:hover {
     background-color: #505050;
     cursor: pointer;
