@@ -32,7 +32,7 @@ body {
     display: inline-block;
     padding: 6px;
     padding-bottom: 7px;
-    color: #bcbcbc;
+    color: #cccccc;
     font-size: 10pt;
     position: relative;
 } .menu ul li:hover {
@@ -65,7 +65,7 @@ body {
     margin: 0;
     display: inline-block;
     padding: 0 36% 0 37.5%;
-    color: #bcbcbc;
+    color: #cccccc;
     text-align: center;
     font-weight: 500;
     font-size: 10pt;
