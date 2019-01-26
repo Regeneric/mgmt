@@ -21,21 +21,44 @@ body {
 .menu {
     display: inline-block;
     padding: 0;
+    position: relative;
 } .menu ul {
     margin: 0;
     padding: 0; 
     list-style-type: none;
-} .menu li {
+    position: relative;
+} .menu ul li {
     margin: -2px;
     display: inline-block;
     padding: 6px;
     padding-bottom: 7px;
     color: #bcbcbc;
     font-size: 10pt;
-} .menu li:hover {
+    position: relative;
+} .menu ul li:hover {
     background-color: #505050;
-    cursor: pointer;
+    cursor: default;
 }
+
+/*--Dropdown menu--*/
+.menu ul .dropdown {
+    display: none;
+    position: absolute;
+    top: 29px;
+    left: -3px;
+    background-color: #505050;
+    padding: 0;
+} .menu ul .dropdown li {
+    float: none;
+    min-width: 140px;
+    padding-top: 3px;
+    padding-left: 12px;
+    text-align: left;
+} .menu ul .dropdown li:hover {
+    background-color: #3c3c3c;
+    color: #faebd7;
+}
+
 .title {
     height: 25px;
     margin: 0;
@@ -60,9 +83,11 @@ body {
     outline: none;
 } .title-btn:hover {
     background-color: #505050;
-    cursor: pointer;
+    cursor: default;
 } #close:hover {
-    background-color: #ca0000;
+    background-color: #d61424;
+} .title-btn:last-child {
+    margin-right: -3px;
 }
 /*-!HEADER!-*/
 
