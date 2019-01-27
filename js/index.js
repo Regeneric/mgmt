@@ -10,7 +10,7 @@ const menuDrop = document.querySelectorAll(".menu ul .dropdown");
 const liDrop = document.querySelectorAll(".menu ul .li-drop");
 
 const closeImg = document.querySelector("#closeImg");
-const site = document.querySelector(".bdd");
+const site = document.querySelector("html");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
