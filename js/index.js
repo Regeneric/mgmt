@@ -37,10 +37,10 @@ titleBtns.forEach(function(btn) {
     });
 
     btn.addEventListener("mouseover", function() {
-        if (btn.id == "close") closeImg.src = "img/close-title-ml.png";
+        btn.id == "close" ? closeImg.src = "img/close-title-ml.png" : null;
     });
     btn.addEventListener("mouseout", function() {
-        if (btn.id == "close") closeImg.src = "img/close-title-m.png";
+        btn.id == "close" ? closeImg.src = "img/close-title-m.png" : null;
     });
     /*-!EVENTS!-*/
 });
@@ -73,9 +73,8 @@ site.addEventListener("mousedown", function() {
 
 liDrop.forEach(function(ld) {
     ld.addEventListener("click", function() {
-        if (ld.id == "theme") {
-            console.log("Dupa");
-        }
+        ld.id == "theme" ? console.log("Dupsko") :
+        console.log("Pupcia");
     });
 });
 /*-!EVENTS!-*/
