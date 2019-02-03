@@ -1,0 +1,20 @@
+{
+  "name": "mgmt",
+  "version": "0.1.1",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Regeneric/mgmt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Regeneric/mgmt/issues"
+  },
+  "homepage": "https://github.com/Regeneric/mgmt#readme",
+  "dependencies": {
+    "electron": "^4.0.4"
+  }
+}
