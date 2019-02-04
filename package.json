@@ -4,7 +4,8 @@
   "private": true,
   "main": "main.js",
   "scripts": {
-    "dev": "electron main.js"
+    "dev": "git checkout develop && electron main.js",
+    "start": "git checkout master && electron main.js"
   },
   "repository": {
     "type": "git",
