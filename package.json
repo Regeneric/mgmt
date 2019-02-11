@@ -2,20 +2,24 @@
   "name": "mgmt",
   "version": "0.1.1",
   "private": true,
-  "main": "main.js",
   "scripts": {
-    "dev": "git checkout develop && electron main.js",
-    "start": "git checkout master && electron main.js"
+    "dev": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "start": "npm run build && live-server dist",
+    "server": "live-server dist",
+    "electron": "electron main.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Regeneric/mgmt.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Regeneric/mgmt/issues"
-  },
-  "homepage": "https://github.com/Regeneric/mgmt#readme",
   "dependencies": {
-    "electron": "^4.0.4"
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "electron": "^4.0.4",
+    "history": "^4.7.2",
+    "live-server": "^1.2.1",
+    "parcel-bundler": "^1.11.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2"
   }
 }
