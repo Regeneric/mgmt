@@ -7,7 +7,7 @@ const titleBtns = document.querySelectorAll(".title-btn");
 
 const menu = document.querySelectorAll(".menu ul li");
 const menuDrop = document.querySelectorAll(".menu ul .dropdown");
-const liDrop = document.querySelectorAll(".menu ul .li-drop");
+const liDropEl = document.querySelectorAll(".menu ul .li-drop");
 
 const closeImg = document.querySelector("#closeImg");
 const site = document.querySelector("html");
@@ -18,9 +18,9 @@ let win = null;
 /*-!PROPS!-*/
 
 /*--RUN--*/
-titleBtns.forEach(function(btn) {
+titleBtns.forEach(btn => {
     /*--EVENTS--*/
-    btn.addEventListener("click", function() {
+    btn.addEventListener("click", () => {
         switch(btn.id) {
             case "mini": {
                 win = remote.getCurrentWindow();
@@ -36,18 +36,18 @@ titleBtns.forEach(function(btn) {
         }
     });
 
-    btn.addEventListener("mouseover", function() {
+    btn.addEventListener("mouseover", () => {
         btn.id == "close" ? closeImg.src = "img/close-title-ml.png" : null;
     });
-    btn.addEventListener("mouseout", function() {
+    btn.addEventListener("mouseout", () => {
         btn.id == "close" ? closeImg.src = "img/close-title-m.png" : null;
     });
     /*-!EVENTS!-*/
 });
 
 /*--EVENTS--*/
-menu.forEach(function(m) {
-    m.addEventListener("click", function() {
+menu.forEach(m => {
+    m.addEventListener("click", () => {
         switch(m.id) {
             case "file": {
                 menuDrop[0].style.display = "block";
@@ -65,14 +65,22 @@ menu.forEach(function(m) {
     });
 });
 
-site.addEventListener("mousedown", function() {
-    menuDrop.forEach(function(md) {
-        md.style.display = "none";
+menuDrop.forEach(m => {
+    m.addEventListener("mouseleave", () => {
+        site.addEventListener("mousedown", () => {
+            m.style.display = "none";
+        });
     });
 });
 
-liDrop.forEach(function(ld) {
-    ld.addEventListener("click", function() {
+// site.addEventListener("mousedown", () => {
+//     menuDrop.forEach(md => {
+//         md.style.display = "none";
+//     });
+// });
+
+liDropEl.forEach(ld => {
+    ld.addEventListener("click", () => {
         ld.id == "theme" ? console.log("Dupsko") :
         console.log("Pupcia");
     });
