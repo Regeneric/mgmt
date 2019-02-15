@@ -3,11 +3,11 @@ const ipcRenderer = require("electron").ipcRenderer;
 const remote = require("electron").remote;
 
 const title = document.querySelector(".title");
-const titleBtns = document.querySelectorAll(".title-btn");
+    const titleBtns = document.querySelectorAll(".title-btn");
 
 const menu = document.querySelectorAll(".menu ul li");
-const menuDrop = document.querySelectorAll(".menu ul .dropdown");
-const liDrop = document.querySelectorAll(".menu ul .li-drop");
+    const menuDrop = document.querySelectorAll(".menu ul .dropdown");
+    const liDrop = document.querySelectorAll(".menu ul .li-drop");
 
 const closeImg = document.querySelector("#closeImg");
 const site = document.querySelector("main");
