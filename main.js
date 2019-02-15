@@ -3,7 +3,7 @@ const electron = require("electron");
 const path = require("path");
 const url = require("url");
 
-const {app, Menu, BrowserWindow} = electron;
+const {app, BrowserWindow} = electron;
 /*-!SETUP!-*/
 
 /*--PROPS--*/
@@ -24,16 +24,16 @@ let mainWindow = null;
 /*-!PROPS!-*/
 
 /*--RUN--*/
-app.on("ready", function() {
+app.on("ready", () => {
     mainWindow = new BrowserWindow(main);
         mainWindow = loadWindow(mainWindow, mainProp);
 
     /*--EVENTS--*/
-    mainWindow.once("ready-to-show", function() {
+    mainWindow.once("ready-to-show", () => {
         mainWindow.show();
         // mainWindow.setPosition(x, y);
     });
-    mainWindow.once("close", function() {
+    mainWindow.once("close", () => {
         mainWindow = null;
         app.quit();
     });
