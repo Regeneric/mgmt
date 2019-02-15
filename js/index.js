@@ -73,12 +73,6 @@ menuDrop.forEach(m => {
     });
 });
 
-// site.addEventListener("mousedown", () => {
-//     menuDrop.forEach(md => {
-//         md.style.display = "none";
-//     });
-// });
-
 liDropEl.forEach(ld => {
     ld.addEventListener("click", () => {
         ld.id == "theme" ? console.log("Dupsko") :
