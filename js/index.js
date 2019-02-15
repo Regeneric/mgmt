@@ -7,14 +7,15 @@ const titleBtns = document.querySelectorAll(".title-btn");
 
 const menu = document.querySelectorAll(".menu ul li");
 const menuDrop = document.querySelectorAll(".menu ul .dropdown");
-const liDropEl = document.querySelectorAll(".menu ul .li-drop");
+const liDrop = document.querySelectorAll(".menu ul .li-drop");
 
 const closeImg = document.querySelector("#closeImg");
-const site = document.querySelector("html");
+const site = document.querySelector("main");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
 let win = null;
+let clickIndex = null;
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -51,32 +52,38 @@ menu.forEach(m => {
         switch(m.id) {
             case "file": {
                 menuDrop[0].style.display = "block";
+                
+                menuDrop[1].style.display = "none";
+                menuDrop[2].style.display = "none";
                 break;
             }
             case "edit": {
                 menuDrop[1].style.display = "block";
+
+                menuDrop[0].style.display = "none";
+                menuDrop[2].style.display = "none";
                 break;
             }
             case "help": {
                 menuDrop[2].style.display = "block";
+                
+                menuDrop[0].style.display = "none";
+                menuDrop[1].style.display = "none";
                 break;
             }
         }
     });
 });
 
-menuDrop.forEach(m => {
-    m.addEventListener("mouseleave", () => {
-        site.addEventListener("mousedown", () => {
-            m.style.display = "none";
-        });
+liDrop.forEach(ld => {
+    ld.addEventListener("click", () => {
+        console.log(ld.innerHTML);
     });
 });
 
-liDropEl.forEach(ld => {
-    ld.addEventListener("click", () => {
-        ld.id == "theme" ? console.log("Dupsko") :
-        console.log("Pupcia");
+menuDrop.forEach(md => {
+    site.addEventListener("mousedown", () => {
+        md.style.display = "none";
     });
 });
 /*-!EVENTS!-*/
