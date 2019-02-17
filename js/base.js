@@ -24,11 +24,15 @@ baseButtons.forEach(baseButton => {
         // Max characters
         if (inputBox.firstChild.nodeValue.length <= maxChar) {
             // Insert 0
-            if (baseButton.id == "btn0" && inputBox.firstChild.nodeValue != ' ' && inputBox.firstChild.nodeValue != 0) {
-                inputBox.firstChild.nodeValue += 0;
-            }
-            if (baseButton.id == "btn0" && inputBox.firstChild.nodeValue == ' ') {
-                inputBox.firstChild.nodeValue = 0;
+            if (baseButton.id == "btn0") {
+                if (inputBox.firstChild.nodeValue == ' ') inputBox.firstChild.nodeValue = 0;
+                else if (parseInt(eval(inputBox.firstChild.nodeValue)) == 0) {
+                    inputBox.firstChild.nodeValue += 0;
+                } 
+                // else if (isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) { 
+                //     inputBox.firstChild.nodeValue += 0;
+                // } 
+                else inputBox.firstChild.nodeValue += 0;
             } 
             // Insert 1-9
             for (let i = 1; i < 10; i++) {
