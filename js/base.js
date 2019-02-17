@@ -1,84 +1,98 @@
+/*--SETUP--*/
 const inputBox = document.querySelector("#inputBox");
 const resultBox = document.querySelector("#resultBox");
-const baseButton = document.querySelectorAll(".baseButton");
+
+const baseButtons = document.querySelectorAll(".baseButton");
 const calc = document.querySelectorAll(".calc");
 const equals = document.querySelector(".equals");
+/*-!SETUP!-*/
 
+/*--PROPS--*/
 const maxChar = 12; // Max number of characters you can input
+/*-!PROPS!-*/
 
-
-//Mouse 0-9
-baseButton.forEach(baseButton => {
-    baseButton.addEventListener("click", function(){
-
-
+/*--RUN--*/
+/*--EVENTS--*/
+// Mouse 0-9
+baseButtons.forEach(baseButton => {
+    baseButton.addEventListener("click", () => {
         if (resultBox.className == "highlited") {
             resultBox.className = "unhighlited";
             inputBox.className = "highlited";
-            inputBox.firstChild.nodeValue = " ";
+            inputBox.firstChild.nodeValue = ' ';
         }
-
-         //Max characters
-         if(inputBox.firstChild.nodeValue.length <= maxChar){
-            //Insert 0
-            if (baseButton.id == "btn0" && inputBox.firstChild.nodeValue != ' '){
+        // Max characters
+        if (inputBox.firstChild.nodeValue.length <= maxChar) {
+            // Insert 0
+            if (baseButton.id == "btn0" && inputBox.firstChild.nodeValue != ' ' && inputBox.firstChild.nodeValue != 0) {
                 inputBox.firstChild.nodeValue += 0;
             }
-            //Insert 1-9
-            for(let i = 1; i<10; i++){
+            if (baseButton.id == "btn0" && inputBox.firstChild.nodeValue == ' ') {
+                inputBox.firstChild.nodeValue = 0;
+            } 
+            // Insert 1-9
+            for (let i = 1; i < 10; i++) {
                 if (baseButton.id == "btn" + i) {
-                    inputBox.firstChild.nodeValue += i;
+                    if (inputBox.firstChild.nodeValue === '0') {
+                        inputBox.firstChild.nodeValue = i;
+                        break;
+                    } inputBox.firstChild.nodeValue += i;
                 }
             }
         }
-    if(!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1]))){
-        resultBox.firstChild.nodeValue = "= " + eval(inputBox.firstChild.nodeValue);
-    }
+        if ( !(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) ) {
+            resultBox.firstChild.nodeValue = "= " + eval(inputBox.firstChild.nodeValue);
+        }
     });
 });
 
-//Mouse operations
-
+// Mouse operations
 calc.forEach(calc => {
-    calc.addEventListener("click", function(){
-
-        if(resultBox.className == "highlited") {
+    calc.addEventListener("click", () => {
+        if (resultBox.className == "highlited") {
             resultBox.className = "unhighlited";
             inputBox.firstChild.nodeValue = resultBox.firstChild.nodeValue;
-            resultBox.firstChild.nodeValue = " ";
+            resultBox.firstChild.nodeValue = ' ';
         }
 
-        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' '){
-
-            switch(calc.id){
-                case "btnplus":
+        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+            switch(calc.id) {
+                case "btnplus": {
                     inputBox.firstChild.nodeValue += "+";
                     break;
-                case "btnminus":
+                }
+                case "btnminus": {
                     inputBox.firstChild.nodeValue += "-";
                     break;
-                case "btnmultiple":
+                }
+                case "btnmultiple": {
                     inputBox.firstChild.nodeValue += "*";
                     break;
-                case "btndivide":
+                }
+                case "btndivide": {
                     inputBox.firstChild.nodeValue += "/";
                     break;
-                case "btndot":
+                }
+                case "btndot": {
                     inputBox.firstChild.nodeValue += ".";
                     break;
-                case "btnbackspace":
+                }
+                case "btnbackspace": {
                     inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.slice(0, -1);
                     break;
-                case "btnc":
+                }
+                case "btnc": {
                     inputBox.firstChild.nodeValue = " "
                     break;
+                }
             }
         }
-        
     });
 });
 
-equals.addEventListener("click", function(){
+equals.addEventListener("click", () => {
     inputBox.className = "unhighlited";
     resultBox.className = "highlited";
 });
+/*-!EVENTS!-*/ 
+/*-!RUN!-*/

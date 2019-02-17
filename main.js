@@ -24,11 +24,11 @@ let mainWindow = null;
 /*-!PROPS!-*/
 
 /*--RUN--*/
+/*--EVENTS--*/
 app.on("ready", () => {
     mainWindow = new BrowserWindow(main);
         mainWindow = loadWindow(mainWindow, mainProp);
 
-    /*--EVENTS--*/
     mainWindow.once("ready-to-show", () => {
         mainWindow.show();
         // mainWindow.setPosition(x, y);
@@ -37,10 +37,10 @@ app.on("ready", () => {
         mainWindow = null;
         app.quit();
     });
-    /*-!EVENTS!-*/
 
     // Menu.setApplicationMenu(null);
 });
+/*-!EVENTS!-*/
 
 function loadWindow(oWindow, oProp) {
     this.oWindow = oWindow;

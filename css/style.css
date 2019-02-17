@@ -94,7 +94,6 @@ body {
 }
 /*-!HEADER!-*/
 
-
 /* 
 width
 height
@@ -108,8 +107,8 @@ text-align
 text-transform
 */
 
-/* base.js */
-
+/*--base.js--*/
+/*--MAIN--*/
 header.base {
     height: 105px;
     border-radius: 6px;
@@ -142,3 +141,4 @@ header.base section#resultBox {
     font-size: 18pt;
     color: rgb(173, 173, 173);
 }
+/*-!MAIN!-*/
