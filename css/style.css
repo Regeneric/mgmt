@@ -107,3 +107,38 @@ color
 text-align
 text-transform
 */
+
+/* base.js */
+
+header.base {
+    height: 105px;
+    border-radius: 6px;
+    border: solid 1px white;
+    background-color: #3e4549;
+    text-align: right;
+    margin: 10px 3px;
+}
+
+header.base section#inputBox {
+    height: 45px;
+    margin: 8px 6px;
+    line-height: 45px;
+}
+
+header.base section#resultBox {
+    height: 30px;
+    margin: 8px 6px;
+    line-height: 30px;
+}
+
+.highlited {
+    font-weight: bold;
+    font-size: 28pt;
+    color: white;
+}
+
+.unhighlited {
+    font-weight: normal;
+    font-size: 18pt;
+    color: rgb(173, 173, 173);
+}
