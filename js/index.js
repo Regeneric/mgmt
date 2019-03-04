@@ -1,5 +1,5 @@
 /*--SETUP--*/
-const ipcRenderer = require("electron").ipcRenderer;
+// const ipcRenderer = require("electron").ipcRenderer;
 const remote = require("electron").remote;
 
 const title = document.querySelector(".title");
@@ -77,7 +77,15 @@ menu.forEach(m => {
 
 liDrop.forEach(ld => {
     ld.addEventListener("click", () => {
-        console.log(ld.innerHTML);
+        win = remote.getCurrentWindow();
+        switch(ld.id) {
+            case "base":
+                win = loadWindow(win, mainProp);
+                break;
+            case "func2d": 
+                win = loadWindow(win, funcProp);
+                break;
+        }
     });
 });
 

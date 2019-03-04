@@ -142,3 +142,8 @@ header.base section#resultBox {
     color: rgb(173, 173, 173);
 }
 /*-!MAIN!-*/
+
+.line-chart {
+    height: 710px;
+    width: 1270px;
+}
