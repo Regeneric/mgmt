@@ -144,6 +144,5 @@ header.base section#resultBox {
 /*-!MAIN!-*/
 
 .line-chart {
-    height: 710px;
-    width: 1270px;
+    height: 400px;
 }
