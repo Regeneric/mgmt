@@ -96,6 +96,7 @@ calc.forEach(calc => {
 
 equals.addEventListener("click", () => {
     inputBox.className = "unhighlited";
+    ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
     resultBox.className = "highlited";
 });
 /*-!EVENTS!-*/ 

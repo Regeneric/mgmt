@@ -3,7 +3,7 @@ const electron = require("electron");
 const path = require("path");
 const url = require("url");
 
-const {app, BrowserWindow} = electron;
+const {app, BrowserWindow, ipcMain, ipcRenderer} = electron;
 /*-!SETUP!-*/
 
 /*--PROPS--*/
@@ -14,12 +14,18 @@ let mainWindow = null;
         title: "Main Window",
         show: false,
         resizable: false,
-        frame: false
+        frame: false,
     };  const mainProp = {
             dir: __dirname,
             file: "index.html",
             protocol: "file:",
             slashes: true
+    };
+    const funcProp = {
+        dir: __dirname,
+        file: "func2d.html",
+        protocol: "file:",
+        slashes: true
     };
 /*-!PROPS!-*/
 
@@ -39,6 +45,11 @@ app.on("ready", () => {
     });
 
     // Menu.setApplicationMenu(null);
+});
+
+ipcMain.on("inputBox", (e, input) => {
+    console.log(input);
+    e.sender.send("inputBox", input);
 });
 /*-!EVENTS!-*/
 
