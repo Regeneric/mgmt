@@ -4,4 +4,4 @@
 
 ## Commands
 `npm run dev` - develop version start  
-`npm run start` - production version start
+`npm run start` - production version start1
