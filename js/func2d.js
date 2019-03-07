@@ -12,6 +12,7 @@ const fxInp = document.querySelectorAll(".fx-inp");
 /*--PROPS--*/
 let fxValue = 0;
 let a = b = c = p = q = 1;
+let W = {p: 0, q: 0};
 let func2d = null;
 
 let data = new Array();
@@ -20,15 +21,26 @@ const chartProps = {
     data: {
         datasets: [{
             label: '',
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: "#ff6384",
             data: data
         }]
     },
     options: {
         responsive: false,
+        bezierCurve: false,
+        // elements: {
+        //     line: {
+        //         tension: 0
+        //     }
+        // },
         scales: {
             xAxes: [{
-                type: "linear"
+                type: "linear",
+                ticks: {
+                    precision: 200,
+                    min: -25,
+                    max: 25
+                }
             }]
         }
     }
@@ -47,11 +59,11 @@ const regExes = [{
     }, {
         id: 2,
         name: "genSquareFx",
-        fx: /^([0-9]{1,6}|a)\*x\^2(\+|\-)([0-9]{1,6}|b)\*x(\+|\-)([0-9]{1,6}|c)$/
+        fx: /^.([0-9]{1,6}|a)\*x\^2(\+|\-)([0-9]{1,6}|b)\*x(\+|\-)([0-9]{1,6}|c)$/
         // a*x^2+b*x+c
     }, {
         id: 3,
-        name: "genSquareFxShort",
+        name: "genSquareFxTiny",
         fx: /^x\^2$/
         // x^2
     }, {
@@ -96,27 +108,65 @@ fxBtn.addEventListener("click", () => {
 
     fxValue = fxInp[1].value
     func2d.destroy();
-    data.length = 0;
+
     regExes.forEach(r => {
         if (r.fx.test(fxValue)) {
             switch(r.id) {
-                // Zwykłe funkcje
+                // Funkcja liniowa i inne proste
                 case 0:
                 case 1:
                 case 4:
                 case 5:
                 case 7:
-                case 8:
+                case 8: {
+                    let a = b = c = p = q = 1;
                     fxValue = r.fx.exec(fxValue)[0];
 
                     function f(x) {
+                        console.log(eval(fxValue));
                         return eval(fxValue);
                     }
 
+                    data.length = 0;
                     for (let x = leftX; x < rightX; x++) {
                         data.push({x:x,y:f(x)});
-                    } break;     
-                case 2:
+                    } break;
+                }   
+                // Funkcja kwadratowa  
+                case 2: {
+                    fxValue = r.fx.exec(fxValue)[0];
+                    const regA = /^.[0-9]{0,6}/g;
+                    const regB = /(?=)(\+|\-)[0-9]{1,6}/;
+                    const regC = /(?=)(\+|\-)[0-9]{1,6}$/g;
+
+                    a = regA.exec(fxValue)[0];
+                    b = regB.exec(fxValue)[0];
+                    c = regC.exec(fxValue)[0];
+                        if (a[0] === '+') a = a.split('+')[1];
+                        if (b[0] === '+') b = b.split('+')[1];
+                        if (c[0] === '+') c = c.split('+')[1];
+                    
+                    let d = b**2 - 4*a*c;
+                    let x1 = -b - Math.sqrt(d)/(2*a);
+                    let x2 = -b + Math.sqrt(d)/(2*a);
+
+                    p = -b/(2*a);
+                    q = -d/(4*a);
+                        W.p = p;
+                        W.q = q;
+
+                    data.length = 0;
+                        data.push({x: x1, y: 0});
+                        data.push({x: W.p, y: W.q});
+                        data.push({x: x2, y: 0});
+
+                    // chartProps.options.scales.xAxes[0].ticks.min = leftX;
+                    // chartProps.options.scales.xAxes[0].ticks.max = rightX;
+                    // 1*x^2-2*x-8
+
+                    console.log(a, b, c, d, p, q);
+                    break;
+                }
                 case 3:
                 case 6:
                 case 9:
