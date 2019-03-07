@@ -59,7 +59,7 @@ const regExes = [{
     }, {
         id: 2,
         name: "genSquareFx",
-        fx: /^.([0-9]{1,6}|a)\*x\^2(\+|\-)([0-9]{1,6}|b)\*x(\+|\-)([0-9]{1,6}|c)$/
+        fx: /^([0-9]{1,6}|a)\*x\^2(\+|\-)([0-9]{1,6}|b)\*x(\+|\-)([0-9]{1,6}|c)$/
         // a*x^2+b*x+c
     }, {
         id: 3,
@@ -119,7 +119,7 @@ fxBtn.addEventListener("click", () => {
                 case 5:
                 case 7:
                 case 8: {
-                    let a = b = c = p = q = 1;
+                    a = b = c = p = q = 1;
                     fxValue = r.fx.exec(fxValue)[0];
 
                     function f(x) {
