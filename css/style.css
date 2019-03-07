@@ -94,6 +94,65 @@ body {
 }
 /*-!HEADER!-*/
 
+/*--base.js--*/
+/*--MAIN--*/
+header.base {
+    height: 105px;
+    border-radius: 6px;
+    border: solid 1px #bcbcbc;
+    background-color: #3e4549;
+    text-align: right;
+    margin: 10px 3px;
+}
+header.base section#inputBox {
+    height: 45px;
+    margin: 8px 6px;
+    line-height: 45px;
+}
+header.base section#resultBox {
+    height: 30px;
+    margin: 8px 6px;
+    line-height: 30px;
+}
+
+.highlited {
+    font-weight: bold;
+    font-size: 28pt;
+    color: #fff;
+} .unhighlited {
+    font-weight: normal;
+    font-size: 18pt;
+    color: #bcbcbc;
+}
+/*-!MAIN!-*/
+
+/*--func2d.js*/
+/*--MAIN--*/
+.inputs-group {
+    display: inline-block;
+} .fx {
+    padding: 10px;
+    color: #fff;
+    font-size: 14pt;
+} .fx-desc {
+    margin-right: 10px;
+} .fx-inp {
+    margin-right: 10px;
+    padding: 4px;
+    padding-right: 35px;
+} .fx-btn {
+    padding: 6px 6px;
+    background-color: #3c3c3c;
+    color: #bcbcbc;
+    border: none;
+    font-weight: 600;
+} .fx-btn:hover {
+    background-color: #505050;
+    cursor: pointer;
+}
+/*-!MAIN!-*/
+
+
 /* 
 width
 height
@@ -106,39 +165,3 @@ color
 text-align
 text-transform
 */
-
-/*--base.js--*/
-/*--MAIN--*/
-header.base {
-    height: 105px;
-    border-radius: 6px;
-    border: solid 1px white;
-    background-color: #3e4549;
-    text-align: right;
-    margin: 10px 3px;
-}
-
-header.base section#inputBox {
-    height: 45px;
-    margin: 8px 6px;
-    line-height: 45px;
-}
-
-header.base section#resultBox {
-    height: 30px;
-    margin: 8px 6px;
-    line-height: 30px;
-}
-
-.highlited {
-    font-weight: bold;
-    font-size: 28pt;
-    color: white;
-}
-
-.unhighlited {
-    font-weight: normal;
-    font-size: 18pt;
-    color: rgb(173, 173, 173);
-}
-/*-!MAIN!-*/
