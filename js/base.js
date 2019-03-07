@@ -85,6 +85,7 @@ calc.forEach(calc => {
                 }
                 case "btnc": {
                     inputBox.firstChild.nodeValue = " "
+                    resultBox.firstChild.nodeValue = "= "
                     break;
                 }
             }
