@@ -28,12 +28,11 @@ baseButtons.forEach(baseButton => {
                 if (inputBox.firstChild.nodeValue == " "){
                     inputBox.firstChild.nodeValue = 0;
                 }
-            if (inputBox.firstChild.nodeValue.match(/\d+/g).map(Number)[inputBox.firstChild.nodeValue.match(/\d+/g).map(Number).length-1] == 0) console.log("Nie wrzucam");
-            else inputBox.firstChild.nodeValue += 0;
+                if (inputBox.firstChild.nodeValue.match(/\d+/g).map(Number)[inputBox.firstChild.nodeValue.match(/\d+/g).map(Number).length-1] == 0 ) {
+                    if (/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) inputBox.firstChild.nodeValue += 0;
             }
-
-            //inputBox.firstChild.nodeValue.match(/\d+/g).map(Number)[inputBox.firstChild.nodeValue.match(/\d+/g).map(Number).length-1]
-            
+                else inputBox.firstChild.nodeValue += 0;
+            }
             
 
             // Insert 1-9
