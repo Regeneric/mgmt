@@ -24,23 +24,22 @@ baseButtons.forEach(baseButton => {
         // Max characters
         if (inputBox.firstChild.nodeValue.length <= maxChar) {
             // Insert 0
-            if (baseButton.id == "btn0") {
-                if (inputBox.firstChild.nodeValue == ' ') inputBox.firstChild.nodeValue = 0;
-                else if (parseInt(eval(inputBox.firstChild.nodeValue)) == 0) {
-                    inputBox.firstChild.nodeValue += 0;
-                } 
-                // else if (isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) { 
-                //     inputBox.firstChild.nodeValue += 0;
-                // } 
-                else inputBox.firstChild.nodeValue += 0;
-            } 
+            if (baseButton.id == "btn0"){
+                if (inputBox.firstChild.nodeValue == " "){
+                    inputBox.firstChild.nodeValue = 0;
+                }
+            if (inputBox.firstChild.nodeValue.match(/\d+/g).map(Number)[inputBox.firstChild.nodeValue.match(/\d+/g).map(Number).length-1] == 0) console.log("Nie wrzucam");
+            else inputBox.firstChild.nodeValue += 0;
+            }
+
+            //inputBox.firstChild.nodeValue.match(/\d+/g).map(Number)[inputBox.firstChild.nodeValue.match(/\d+/g).map(Number).length-1]
+            
+            
+
             // Insert 1-9
             for (let i = 1; i < 10; i++) {
-                if (baseButton.id == "btn" + i) {
-                    if (inputBox.firstChild.nodeValue === '0') {
-                        inputBox.firstChild.nodeValue = i;
-                        break;
-                    } inputBox.firstChild.nodeValue += i;
+                if (baseButton.id == "btn" + i && inputBox.firstChild.nodeValue !== '0') {
+                    inputBox.firstChild.nodeValue += i;
                 }
             }
         }
