@@ -21,7 +21,7 @@ baseButtons.forEach(baseButton => {
             inputBox.className = "highlited";
             inputBox.firstChild.nodeValue = ' ';
         }
-        // Max characters
+        // Max char number
         if (inputBox.firstChild.nodeValue.length <= maxChar) {
             // Insert 0
             if (baseButton.id == "btn0"){
