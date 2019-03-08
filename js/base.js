@@ -7,7 +7,7 @@ const calc = document.querySelectorAll(".calc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-const maxChar = 12; // Max number of characters you can input
+const maxChar = 15; // Max number of characters you can input
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -81,7 +81,9 @@ calc.forEach(calc => {
                     break;
                 }
                 case "btndot": {
+                    if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue))){
                     inputBox.firstChild.nodeValue += ".";
+                    }
                     break;
                 }
             }
