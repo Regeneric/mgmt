@@ -71,28 +71,27 @@ calc.forEach(calc => {
         //Calculating buttons
         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
             switch(calc.id) {
-                case "btnplus": {
+                case "btnplus":
                     inputBox.firstChild.nodeValue += "+";
-                    break;
-                }
-                case "btnminus": {
+                break;
+
+                case "btnminus":
                     inputBox.firstChild.nodeValue += "-";
-                    break;
-                }
-                case "btnmultiple": {
+                break;
+
+                case "btnmultiple":
                     inputBox.firstChild.nodeValue += "*";
-                    break;
-                }
-                case "btndivide": {
+                break;
+
+                case "btndivide": 
                     inputBox.firstChild.nodeValue += "/";
-                    break;
-                }
-                case "btndot": {
+                break;
+
+                case "btndot":
                     if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue))){
                     inputBox.firstChild.nodeValue += ".";
                     }
-                    break;
-                }
+                break;
             }
         }
 
@@ -126,6 +125,12 @@ calc.forEach(calc => {
 document.addEventListener("keyup", () => {
 
     console.log(event.key);
+
+
+
+    //Inserting numbers
+    if (!(isNaN(event.key))){
+
     //Continue inserting numbers after using calculate button
     if (resultBox.className == "highlited") {
         resultBox.className = "unhighlited";
@@ -135,9 +140,7 @@ document.addEventListener("keyup", () => {
 
     //Max char number
     if (inputBox.firstChild.nodeValue.length <= maxChar) {
-
-        //Inserting numbers
-        if (!(isNaN(event.key))){
+        
             // Insert 0
             if (event.key == "0"){
                 //0 at the start of a number
@@ -164,14 +167,14 @@ document.addEventListener("keyup", () => {
     }
         //Keyboard operations
         //Continue after using equal button
-         if (resultBox.className == "highlited" && event.key != "Enter" && event.key != "Backspace"){
+         if (resultBox.className == "highlited" && ["+", "-", "*", ":", "/", ".", ","].includes(event.key)){
             resultBox.className = "unhighlited";
             inputBox.className = "highlited";
             inputBox.firstChild.nodeValue = resultBox.firstChild.nodeValue.substr(2);
         }
 
         //Equal button
-        if (event.key == "Enter" && resultBox.className == "unhighlited") {
+        if (event.key == "Enter" && resultBox.className == "unhighlited" || event.key == "=" && resultBox.className == "unhighlited") {
             resultBox.className = "highlited";
             ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
             inputBox.className = "unhighlited";
@@ -180,28 +183,30 @@ document.addEventListener("keyup", () => {
         //Calculating buttons
         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
             switch(event.key) {
-                case "+": {
+                case "+":
                     inputBox.firstChild.nodeValue += "+";
-                    break;
-                }
-                case "-": {
+                break;
+
+                case "-": 
                     inputBox.firstChild.nodeValue += "-";
-                    break;
-                }
-                case "*": {
+                break;
+
+                case "*": 
                     inputBox.firstChild.nodeValue += "*";
-                    break;
-                }
-                case "/": {
+                break;
+
+                case ":":
+                case "/": 
                     inputBox.firstChild.nodeValue += "/";
-                    break;
-                }
-                case ".": {
+                break;
+
+                case ",":
+                case ".": 
                     if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue))){
                     inputBox.firstChild.nodeValue += ".";
                     }
-                    break;
-                }
+                break;
+                
             }
         }
 
