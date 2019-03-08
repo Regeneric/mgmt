@@ -49,10 +49,17 @@ baseButtons.forEach(baseButton => {
 // Mouse operations
 calc.forEach(calc => {
     calc.addEventListener("click", () => {
-        if (resultBox.className == "highlited") {
+
+        if (resultBox.className == "highlited" && calc.id != "btnequals" && calc.id != "btnbackspace"){
             resultBox.className = "unhighlited";
-            inputBox.firstChild.nodeValue = resultBox.firstChild.nodeValue;
-            resultBox.firstChild.nodeValue = ' ';
+            inputBox.className = "highlited";
+            inputBox.firstChild.nodeValue = resultBox.firstChild.nodeValue.substr(2);
+        }
+
+        if (calc.id == "btnequals" && resultBox.className == "unhighlited") {
+            resultBox.className = "highlited";
+            ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
+            inputBox.className = "unhighlited";
         }
 
         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
@@ -98,11 +105,7 @@ calc.forEach(calc => {
             inputBox.firstChild.nodeValue = " ";
             resultBox.firstChild.nodeValue = "= ";
         }
-        if (calc.id == "btnequals"){
-            inputBox.className = "unhighlited";
-            ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
-            resultBox.className = "highlited";
-        }
+        
     });
 });
 
