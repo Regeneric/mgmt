@@ -85,6 +85,9 @@ liDrop.forEach(ld => {
             case "func2d": 
                 win = loadWindow(win, funcProp);
                 break;
+            case "func3d":
+                win = loadWindow(win, func3DProp);
+                break;
         }
     });
 });

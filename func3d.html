@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
+        <link rel="stylesheet" href="css/style.css">
+
+        <script src="main.js" defer></script>
+        <script src="js/index.js" defer></script>
+        <script src="js/func3d.js" defer></script>
+    </head>
+    
+    <body>
+        <!-- Title bar -->
+        <header class="title-bar" role="banner">
+            <nav class="menu" role="navigation">
+                <ul>
+                    <li id="file">File
+                        <ul class="dropdown" id="file-drop">
+                            <li class="li-drop" id="base">Base Calculator</li>
+                            <li class="li-drop" id="func2d">Function Drawing (2D)</li>
+                            <li class="li-drop" id="func3d">Function Drawing (3D)</li>
+                        </ul>
+                    </li>
+                    <li id="edit">Edit
+                        <ul class="dropdown" id="edit-drop">
+                            <li class="li-drop">Switch Theme</li>
+                            <li class="li-drop">edit1</li>
+                            <li class="li-drop">edit2</li>
+                        </ul>
+                    </li>
+                    <li id="help">Help
+                        <ul class="dropdown" id="help-drop">
+                            <li class="li-drop">help</li>
+                            <li class="li-drop">help1</li>
+                            <li class="li-drop">help2</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <h4 class="title">Main Window</h4>
+
+            <div class="btns-group">
+                <button class="title-btn" id="mini"><img src="img/minimize-title-mm.png" alt="--"></button>
+                <button class="title-btn" id="maxi"><img src="img/maximize-title-mm.png" alt="[]"></button>
+                <button class="title-btn" id="close"><img id="closeImg" src="img/close-title-mm.png" alt="X"></button>
+            </div>
+        </header>
+        <!-- !Title Bar! -->
+
+        <main role=”main”>
+            <div id="func3d-chart" style="width: 1280px; height: 500px;"></div>
+        </main>
+
+        <!-- <aside role=”complementary”>
+            <nav class="side-menu">
+                <ul>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </nav>
+
+            <section>
+                <p></p>
+            </section>
+        </aside>
+
+        <footer role=”contentinfo”>
+            <p></p>
+        </footer> -->
+
+    </body>
+</html>
