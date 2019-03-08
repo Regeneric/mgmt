@@ -153,10 +153,6 @@ fxBtn.addEventListener("click", () => {
                 case 5:
                 case 7:
                 case 8: {
-<<<<<<< HEAD
-                    a = b = c = p = q = 1;
-=======
->>>>>>> func2d
                     fxValue = r.fx.exec(fxValue)[0];
                     fxValue = fxValue.replace('^', "**");  // Zamienia x^2 na x**2 przy funkcji kwadratowej
                     let a = b = c = p = q = 1;
