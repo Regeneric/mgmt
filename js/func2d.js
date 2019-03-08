@@ -5,7 +5,7 @@ const chart = require("chart.js");
 // const body = document.querySelector("body").style.backgroundColor = "#fff";
 const ctx = document.getElementById("func2d-chart").getContext("2d");
 
-const fxBtn = document.querySelector(".fx-btn");
+const fxBtn = document.querySelectorAll(".fx-btn");
 const fxInp = document.querySelectorAll(".fx-inp");
 /*-!SETUP!-*/
 
@@ -13,13 +13,21 @@ const fxInp = document.querySelectorAll(".fx-inp");
 let fxValue = 0;
 let func2d = null;
 
+let rightX = 0;
+let leftX = 0; 
+
 const data = new Array();
+const ptBgColour = new Array();
+const ptBorderCl = new Array();
+
 const chartProps = {
     type: "line",
     data: {
         datasets: [{
             label: '',
             borderColor: "#ff6384",
+            pointBackgroundColor: ptBgColour,
+            pointBorderColor: ptBorderCl,
             data: data
         }]
     },
@@ -133,13 +141,14 @@ const regExes = [{
 
 /*--RUN--*/
 /*--EVENTS--*/
-fxBtn.addEventListener("click", () => {
-    let rightX = fxInp[0].value;
-    let leftX = ~rightX+1; 
-
+fxBtn[0].addEventListener("click", () => {
     func2d.options.elements.line.tension = 0.3;
 
+    rightX = fxInp[0].value;
+    leftX = ~rightX+1; 
+
     fxValue = fxInp[1].value
+    fxInp[3].checked = false;
     func2d.destroy();
 
     regExes.forEach(r => {
@@ -165,6 +174,8 @@ fxBtn.addEventListener("click", () => {
                     for (let x = leftX; x < rightX; x++) {
                         data.push({x:x,y:f(x)});
                     } 
+
+                    checkForX(fxInp[2].value, data);
                     break;
                 }   
                 // Funkcja kwadratowa  
@@ -205,8 +216,9 @@ fxBtn.addEventListener("click", () => {
                         // data.push({x: 0, y: c});
                         data.push({x: W.p, y: W.q});
                         data.push({x: x2, y: 0});
-
                     // 1*x^2-2*x-8
+
+                    checkForX(fxInp[2].value, data);
                     break;
                 }
                 case 6: {
@@ -241,6 +253,8 @@ fxBtn.addEventListener("click", () => {
                     for (let x = leftX; x < rightX; x++) {
                         data.push({x:x,y:f(x)});
                     } 
+
+                    checkForX(fxInp[2].value, data);
                     break;
                 }
                 case 9:
@@ -255,9 +269,10 @@ fxBtn.addEventListener("click", () => {
                     data.length = 0;
                     for (let x = leftX; x < rightX; x++) {
                         data.push({x:x,y:f(x)});
-                    } 
+                    }
 
                     func2d.options.elements.line.tension = 0;
+                    checkForX(fxInp[2].value, data);
                     break;
                 }
             }
@@ -270,6 +285,22 @@ fxBtn.addEventListener("click", () => {
         func2d.options.scales.xAxes[0].ticks.max = parseInt(rightX);
     func2d.update();
 }); 
+
+fxBtn[1].addEventListener("click", () => {
+    ptBgColour.length = 0;
+    ptBorderCl.length = 0;
+
+    checkForX(fxInp[2].value, data);
+    func2d.update();
+});
+
+fxInp[3].addEventListener("click", () => {
+    ptBgColour.length = 0;
+    ptBorderCl.length = 0;
+
+    if (fxInp[3].checked) findZero(data); 
+    func2d.update();
+});
 /*-!EVENTS!-*/
 
 func2d = new Chart(ctx, chartProps);
@@ -281,4 +312,28 @@ let x2Fx = (a, b, d) => {return -b + Math.sqrt(d)/(2*a)}
 let pFx = (a, b) => {return -b/(2*a)}
 let qFx = (a, d) => {return -d/(4*a)}
 
+function checkForX(x, obj) {
+    fxInp[3].checked = false;
+    obj.forEach(d => {
+        if (d.x == x) {
+            ptBgColour.push("#fff384");
+            ptBorderCl.push("#fff");
+        } else {
+            ptBgColour.push("#cc3756");
+            ptBorderCl.push("#000"); 
+        }
+    });
+}
+
+function findZero(obj) {
+    obj.forEach(d => {
+        if (d.y == 0) {
+            ptBgColour.push("#003f1f");
+            ptBorderCl.push("#fff");
+        } else {
+            ptBgColour.push("#cc3756");
+            ptBorderCl.push("#000"); 
+        }
+    });
+}
 /*-!RUN!-*/
