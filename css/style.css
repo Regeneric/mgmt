@@ -119,7 +119,8 @@ header.base section#resultBox {
     font-weight: bold;
     font-size: 28pt;
     color: #fff;
-} .unhighlited {
+} 
+.unhighlited {
     font-weight: normal;
     font-size: 18pt;
     color: #bcbcbc;
