@@ -25,9 +25,11 @@ baseButtons.forEach(baseButton => {
         if (inputBox.firstChild.nodeValue.length <= maxChar) {
             // Insert 0
             if (baseButton.id == "btn0"){
+                //0 at the start of a number
                 if (inputBox.firstChild.nodeValue == " "){
                     inputBox.firstChild.nodeValue = 0;
                 }
+                //0 in other places
                 if (inputBox.firstChild.nodeValue.match(/\d+/g).map(Number)[inputBox.firstChild.nodeValue.match(/\d+/g).map(Number).length-1] == 0 ) {
                     if (/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) inputBox.firstChild.nodeValue += 0;
             }
@@ -42,6 +44,7 @@ baseButtons.forEach(baseButton => {
                 }
             }
         }
+        //Update resultbox
             resultBox.firstChild.nodeValue = "= " + eval(inputBox.firstChild.nodeValue);
     });
 });
@@ -50,18 +53,21 @@ baseButtons.forEach(baseButton => {
 calc.forEach(calc => {
     calc.addEventListener("click", () => {
 
+        //Continue after using equal button
         if (resultBox.className == "highlited" && calc.id != "btnequals" && calc.id != "btnbackspace"){
             resultBox.className = "unhighlited";
             inputBox.className = "highlited";
             inputBox.firstChild.nodeValue = resultBox.firstChild.nodeValue.substr(2);
         }
 
+        //Equal button
         if (calc.id == "btnequals" && resultBox.className == "unhighlited") {
             resultBox.className = "highlited";
             ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
             inputBox.className = "unhighlited";
         }
 
+        //Calculating buttons
         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
             switch(calc.id) {
                 case "btnplus": {
@@ -89,6 +95,7 @@ calc.forEach(calc => {
             }
         }
 
+        //Backspace button
         if (calc.id == "btnbackspace"){
 
             if (inputBox.firstChild.nodeValue != " ") {
@@ -103,6 +110,8 @@ calc.forEach(calc => {
             }
 
         }
+
+        //C button
         if (calc.id == "btnc"){
             inputBox.firstChild.nodeValue = " ";
             resultBox.firstChild.nodeValue = "= ";
