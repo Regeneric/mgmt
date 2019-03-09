@@ -1,17 +1,47 @@
 {
-  "name": "mgmt",
-  "version": "0.1.1",
+  "name": "wgec",
+  "author": "Hubert Batkiewicz <hbatkiewicz898@gmail.com>",
+  "contributors": [
+    "Gabriel Król <werander.k@gmail.com>",
+    "Patryk Piszczek <patrykpiszczek3@gmail.com>"
+  ],
+  "version": "0.2.2",
   "private": true,
   "main": "main.js",
   "scripts": {
-    "dev": "git checkout develop && electron main.js",
-    "start": "git checkout master && electron main.js",
-    "current": "electron main.js"
+    "dev": "git checkout develop && npm install && electron main.js",
+    "start": "git checkout master && npm install && electron main.js",
+    "current": "electron main.js",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "com.electron.wgec",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        "default"
+      ]
+    },
+    "linux": {
+      "category": "Utility",
+      "target": [
+        "AppImage",
+        "deb",
+        "pacman"
+      ]
+    },
+    "win": {
+      "target": "NSIS"
+    }
   },
   "dependencies": {
     "chart.js": "^2.7.3",
-    "electron": "^4.0.4",
     "mathjs": "^5.6.0",
     "plotly.js-dist": "^1.45.2"
+  },
+  "devDependencies": {
+    "electron": "^4.0.4",
+    "electron-builder": "^20.38.5"
   }
 }
