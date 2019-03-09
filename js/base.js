@@ -8,6 +8,8 @@ const calc = document.querySelectorAll(".calc");
 
 /*--PROPS--*/
 const maxChar = 16; // Max number of characters you can input
+const btnColor = "#31363b";
+const btnColorFocus = "#22282e";
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -121,43 +123,46 @@ calc.forEach(calc => {
 });
 
 
-//Keyboard button colors
+
+////////////////////////////////////Keyboard button colors//////////////////////////////////////////////
 document.addEventListener("keydown", function(){
 
     if (!(isNaN(event.key))){
-    document.querySelector("#btn"+ event.key).style.backgroundColor = "#22282e";}
+    document.querySelector("#btn"+ event.key).style.backgroundColor = btnColorFocus;}
 
     switch (event.key){
         case "+":
-        document.querySelector("#btnplus").style.backgroundColor = "#22282e";
+        document.querySelector("#btnplus").style.backgroundColor = btnColorFocus;
         break;
         case "-":
-        document.querySelector("#btnminus").style.backgroundColor = "#22282e";
+        document.querySelector("#btnminus").style.backgroundColor = btnColorFocus;
         break;
         case "*":
-        document.querySelector("#btnmultiple").style.backgroundColor = "#22282e";
+        document.querySelector("#btnmultiple").style.backgroundColor = btnColorFocus;
         break;
         case ":":
         case "/":
-        document.querySelector("#btndivide").style.backgroundColor = "#22282e";
+        document.querySelector("#btndivide").style.backgroundColor = btnColorFocus;
         break; 
         case "Enter":
         case "=":
-        document.querySelector("#btnequals").style.backgroundColor = "#22282e";
+        document.querySelector("#btnequals").style.backgroundColor = btnColorFocus;
         break;
         case "Escape":
         case "Delete":
-        document.querySelector("#btnc").style.backgroundColor = "#22282e";
+        document.querySelector("#btnc").style.backgroundColor = btnColorFocus;
         break;
         case ".":
-        document.querySelector("#btndot").style.backgroundColor = "#22282e"
+        document.querySelector("#btndot").style.backgroundColor = btnColorFocus
         break;
         case "Backspace":
-        document.querySelector("#btnbackspace").style.backgroundColor = "#22282e";
+        document.querySelector("#btnbackspace").style.backgroundColor = btnColorFocus;
         break;
     }
 
 });
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 //Keyboard support
@@ -188,6 +193,7 @@ document.addEventListener("keyup", () => {
                     if (/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) inputBox.firstChild.nodeValue += 0;
                 }
                 else inputBox.firstChild.nodeValue += 0;
+                document.querySelector("#btn0").style.backgroundColor = btnColor;
             }
             
 
@@ -196,6 +202,7 @@ document.addEventListener("keyup", () => {
                 if (event.key == i && inputBox.firstChild.nodeValue !== '0') {
                     inputBox.firstChild.nodeValue += i;
                 }
+                document.querySelector("#btn" + i).style.backgroundColor = btnColor;
             }
             //Update resultbox
             resultBox.firstChild.nodeValue = "= " + eval(inputBox.firstChild.nodeValue);
@@ -210,41 +217,55 @@ document.addEventListener("keyup", () => {
         }
 
         //Equal button
-        if (event.key == "Enter" && resultBox.className == "unhighlited" || event.key == "=" && resultBox.className == "unhighlited") {
+        if (event.key == "Enter" || event.key == "=") {
+        if (resultBox.className == "unhighlited") {
             resultBox.className = "highlited";
             ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
             inputBox.className = "unhighlited";
         }
+            document.querySelector("#btnequals").style.backgroundColor = btnColor;
+        }
 
         //Calculating buttons
-        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
             switch(event.key) {
                 case "+":
+                if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
                     inputBox.firstChild.nodeValue += "+";
+                    }
+                    document.querySelector("#btnplus").style.backgroundColor = btnColor;
                 break;
 
                 case "-": 
+                    if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
                     inputBox.firstChild.nodeValue += "-";
+                }
+                    document.querySelector("#btnminus").style.backgroundColor = btnColor;
                 break;
 
                 case "*": 
+                if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
                     inputBox.firstChild.nodeValue += "*";
+                    }
+                    document.querySelector("#btnmultiple").style.backgroundColor = btnColor;
                 break;
 
                 case ":":
                 case "/": 
+                if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
                     inputBox.firstChild.nodeValue += "/";
+                    }
+                    document.querySelector("#btndivide").style.backgroundColor = btnColor;
                 break;
 
                 case ",":
                 case ".": 
-                    if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue))){
+                    if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) && inputBox.firstChild.nodeValue != ' '){
                     inputBox.firstChild.nodeValue += ".";
                     }
+                document.querySelector("#btndot").style.backgroundColor = btnColor;
                 break;
                 
             }
-        }
 
         //Backspace button
         if (event.key == "Backspace"){
@@ -259,13 +280,14 @@ document.addEventListener("keyup", () => {
                 } else resultBox.firstChild.nodeValue = "= "
 
             }
-
+            document.querySelector("#btnbackspace").style.backgroundColor = btnColor;
         }
 
         //C button
         if (event.key == "Escape"){
             inputBox.firstChild.nodeValue = " ";
             resultBox.firstChild.nodeValue = "= ";
+            document.querySelector("#btnc").style.backgroundColor = btnColor;
         }
 
     
