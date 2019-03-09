@@ -18,7 +18,9 @@ body {
 .title-bar {
     /* background-color: #333333; kolor paska bez focusu na okno */
     background-color: #3c3c3c;  /*kolor paska z focuesem*/
+    display: inline-block;
     text-align: center;
+    
 }
 .menu {
     display: inline-block;
@@ -63,10 +65,9 @@ body {
 /*-!Dropdown menu!-*/
 
 .title {
-    height: 25px;
+    padding-bottom: 7px;
     margin: 0;
     display: inline-block;
-    padding: 0 36% 0 37.5%;
     color: #cccccc;
     text-align: center;
     font-weight: 500;
