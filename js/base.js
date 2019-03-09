@@ -97,6 +97,11 @@ calc.forEach(calc => {
             }
         }
 
+        //Minus at the beggining
+        if (calc.id == "btnminus" && inputBox.firstChild.nodeValue == ' '){
+            inputBox.firstChild.nodeValue += "-";
+        }
+
         //Backspace button
         if (calc.id == "btnbackspace"){
 
@@ -265,6 +270,11 @@ document.addEventListener("keyup", () => {
                 document.querySelector("#btndot").style.backgroundColor = btnColor;
                 break;
                 
+            }
+
+            //Minus at the beggining
+            if (event.key == "-" && inputBox.firstChild.nodeValue == ' '){
+                inputBox.firstChild.nodeValue += "-";
             }
 
         //Backspace button
