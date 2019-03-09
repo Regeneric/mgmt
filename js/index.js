@@ -90,18 +90,20 @@ menu.forEach(m => {
 
 liDrop.forEach(ld => {
     ld.addEventListener("click", () => {
-        win = remote.getCurrentWindow();
         switch(ld.id) {
             case "base": {
-                // win.setSize(430, 450);
+                win = remote.getCurrentWindow();
+                win.setSize(430, 450);
                 win = loadWindow(win, mainProp);
                 break;
             } case "func2d": { 
-                // win.setSize(1280, 730);
+                win = remote.getCurrentWindow();
+                win.setSize(1280, 730);
                 win = loadWindow(win, funcProp);
                 break;
             } case "func3d": {
-                // win.setSize(1280, 730);
+                win = remote.getCurrentWindow();
+                win.setSize(1280, 730);
                 win = loadWindow(win, func3DProp);
                 break;
             }
