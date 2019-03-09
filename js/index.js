@@ -16,6 +16,19 @@ const site = document.querySelector("main");
 /*--PROPS--*/
 let win = null;
 let clickIndex = null;
+
+const funcProp = {
+    dir: __dirname,
+    file: "func2d.html",
+    protocol: "file:",
+    slashes: true
+}; 
+const func3DProp = {
+    dir: __dirname,
+    file: "func3d.html",
+    protocol: "file:",
+    slashes: true
+};
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -79,15 +92,19 @@ liDrop.forEach(ld => {
     ld.addEventListener("click", () => {
         win = remote.getCurrentWindow();
         switch(ld.id) {
-            case "base":
+            case "base": {
+                // win.setSize(430, 450);
                 win = loadWindow(win, mainProp);
                 break;
-            case "func2d": 
+            } case "func2d": { 
+                // win.setSize(1280, 730);
                 win = loadWindow(win, funcProp);
                 break;
-            case "func3d":
+            } case "func3d": {
+                // win.setSize(1280, 730);
                 win = loadWindow(win, func3DProp);
                 break;
+            }
         }
     });
 });

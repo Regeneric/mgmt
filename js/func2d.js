@@ -7,6 +7,9 @@ const ctx = document.getElementById("func2d-chart").getContext("2d");
 
 const fxBtn = document.querySelectorAll(".fx-btn");
 const fxInp = document.querySelectorAll(".fx-inp");
+
+const squareDiv = document.querySelectorAll("#square");
+const squreDesc = document.querySelectorAll(".fx-desc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
@@ -143,6 +146,7 @@ const regExes = [{
 /*--EVENTS--*/
 fxBtn[0].addEventListener("click", () => {
     func2d.options.elements.line.tension = 0.3;
+    squareDiv.forEach(s => s.style.display = "none");
 
     rightX = fxInp[0].value;
     leftX = ~rightX+1; 
@@ -211,6 +215,7 @@ fxBtn[0].addEventListener("click", () => {
                         W.p = p;
                         W.q = q;
 
+                    // trzeba jakoś zwiększyć dokładność rysowanej paraboli
                     data.length = 0;
                         data.push({x: x1, y: 0});
                         // data.push({x: 0, y: c});
@@ -218,6 +223,25 @@ fxBtn[0].addEventListener("click", () => {
                         data.push({x: x2, y: 0});
                     // 1*x^2-2*x-8
 
+                    squareDiv.forEach(s => s.style.display = "block");                
+                    squreDesc.forEach(s => {
+                        switch (s.id) {
+                            case "x1": {
+                                s.innerHTML = x1;
+                                break;
+                            }
+                            case "x2": {
+                                s.innerHTML = x2;
+                                break;
+                            }
+                            case "W": {
+                                let wStr = '('+W.p+", "+W.q+')';
+                                s.innerHTML = wStr;
+                                break;
+                            }
+                        }
+                    });
+                    
                     checkForX(fxInp[2].value, data);
                     break;
                 }
@@ -303,6 +327,7 @@ fxInp[3].addEventListener("click", () => {
 });
 /*-!EVENTS!-*/
 
+squareDiv.forEach(s => s.style.display = "none");
 func2d = new Chart(ctx, chartProps);
 
 // Funkcja kwadratowa
