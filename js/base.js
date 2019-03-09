@@ -7,7 +7,7 @@ const calc = document.querySelectorAll(".calc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-const maxChar = 15; // Max number of characters you can input
+const maxChar = 16; // Max number of characters you can input
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -121,11 +121,47 @@ calc.forEach(calc => {
 });
 
 
+//Keyboard button colors
+document.addEventListener("keydown", function(){
+
+    if (!(isNaN(event.key))){
+    document.querySelector("#btn"+ event.key).style.backgroundColor = "#22282e";}
+
+    switch (event.key){
+        case "+":
+        document.querySelector("#btnplus").style.backgroundColor = "#22282e";
+        break;
+        case "-":
+        document.querySelector("#btnminus").style.backgroundColor = "#22282e";
+        break;
+        case "*":
+        document.querySelector("#btnmultiple").style.backgroundColor = "#22282e";
+        break;
+        case ":":
+        case "/":
+        document.querySelector("#btndivide").style.backgroundColor = "#22282e";
+        break; 
+        case "Enter":
+        case "=":
+        document.querySelector("#btnequals").style.backgroundColor = "#22282e";
+        break;
+        case "Escape":
+        case "Delete":
+        document.querySelector("#btnc").style.backgroundColor = "#22282e";
+        break;
+        case ".":
+        document.querySelector("#btndot").style.backgroundColor = "#22282e"
+        break;
+        case "Backspace":
+        document.querySelector("#btnbackspace").style.backgroundColor = "#22282e";
+        break;
+    }
+
+});
+
+
 //Keyboard support
 document.addEventListener("keyup", () => {
-
-    console.log(event.key);
-
 
 
     //Inserting numbers

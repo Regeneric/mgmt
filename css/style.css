@@ -99,7 +99,7 @@ body {
 header.base {
     height: 105px;
     border-radius: 6px;
-    border: solid 1px #bcbcbc;
+    border: solid 1px #a1a1a1;
     background-color: #3e4549;
     text-align: right;
     margin: 10px 3px;
@@ -124,6 +124,28 @@ header.base section#resultBox {
     font-weight: normal;
     font-size: 18pt;
     color: #bcbcbc;
+}
+
+.baseButton, .calc {
+    margin: 2px;
+    height: 50px;
+    width: 70px;
+    background-color: #31363b;
+    outline: none;
+    border: solid 1px rgb(167, 167, 167);
+    border-radius: 7px;
+    color: white;
+    font-size: 26pt;
+}
+
+.baseButton:active, .calc:active {
+    background-color: #22282e;
+    border: solid 1px rgb(163, 180, 255);
+}
+
+table#base {
+    display: flex;
+    justify-content: center;
 }
 /*-!MAIN!-*/
 

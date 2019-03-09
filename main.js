@@ -9,11 +9,11 @@ const {app, BrowserWindow, ipcMain, ipcRenderer} = electron;
 /*--PROPS--*/
 let mainWindow = null;
     const main = {
-        width: 1280,
-        height: 720,
+        width: 430,
+        height: 450,
         title: "Main Window",
         show: false,
-        resizable: false,
+        resizable: true,
         frame: false,
     };  const mainProp = {
             dir: __dirname,
