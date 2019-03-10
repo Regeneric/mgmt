@@ -17,6 +17,10 @@ const site = document.querySelector("main");
 let win = null;
 let clickIndex = null;
 
+let file = 1;
+let edit = 1;
+let help = 1;
+
 const funcProp = {
     dir: __dirname,
     file: "func2d.html",
@@ -64,22 +68,28 @@ menu.forEach(m => {
     m.addEventListener("click", () => {
         switch(m.id) {
             case "file": {
-                menuDrop[0].style.display = "block";
+                file += 1;
+                if (!(file % 2)) menuDrop[0].style.display = "block";
+                else menuDrop[0].style.display = "none";
                 
                 menuDrop[1].style.display = "none";
                 menuDrop[2].style.display = "none";
                 break;
             }
             case "edit": {
-                menuDrop[1].style.display = "block";
+                edit += 1;
+                if (!(edit % 2)) menuDrop[1].style.display = "block";
+                else menuDrop[1].style.display = "none";
 
                 menuDrop[0].style.display = "none";
                 menuDrop[2].style.display = "none";
                 break;
             }
             case "help": {
-                menuDrop[2].style.display = "block";
-                
+                help += 1;
+                if (!(help % 2)) menuDrop[2].style.display = "block";
+                else menuDrop[2].style.display = "none";
+
                 menuDrop[0].style.display = "none";
                 menuDrop[1].style.display = "none";
                 break;
