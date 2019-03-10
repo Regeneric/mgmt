@@ -101,9 +101,13 @@ header.base {
     height: 105px;
     border-radius: 6px;
     border: solid 1px #a1a1a1;
-    background-color: #3e4549;
+    background-color: #2b2b2b;
     text-align: right;
     margin: 10px 3px;
+    -webkit-user-select: none;
+}
+header.base:active {
+    background-color: rgb(20, 20, 20);
 }
 header.base section#inputBox {
     height: 45px;
@@ -133,13 +137,13 @@ header.base section#resultBox {
     height: 50px;
     width: 70px;
 
-    background: white;
+    background-color: rgb(223, 223, 223);
     outline: none;
 
-    border: solid 1px rgb(167, 167, 167);
+    border: solid 1px rgb(124, 124, 124);
     border-radius: 3px;
     box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
-    color: #888888;
+    color: #5e5e5e;
 
     font-size: 26pt;
 
@@ -149,11 +153,12 @@ header.base section#resultBox {
     transition: background-color 0.2s ease-out;
 
     cursor: pointer;
+    -webkit-user-select: none;
 }
 
 .baseButton:active, .calc:active {
     background-color: #22282e;
-    border: solid 1px rgb(163, 180, 255);
+    color: rgb(204, 204, 204);
 }
 
 table#base {
