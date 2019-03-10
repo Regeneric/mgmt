@@ -161,6 +161,31 @@ header.base section#resultBox {
     color: rgb(204, 204, 204);
 }
 
+.activated {
+    margin: 2px;
+
+    height: 50px;
+    width: 70px;
+
+    outline: none;
+
+    border: solid 1px rgb(124, 124, 124);
+    border-radius: 3px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+
+    font-size: 26pt;
+
+    -webkit-transition: background-color 0.2s ease-out;
+    -moz-transition: background-color 0.2s ease-out;
+    -o-transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
+
+    cursor: pointer;
+    -webkit-user-select: none;
+    background-color: #22282e;
+    color: rgb(204, 204, 204);
+}
+
 table#base {
     display: flex;
     justify-content: center;
