@@ -269,7 +269,7 @@ fxBtn[0].addEventListener("click", () => {
                                     if (a[0] === '+') a = a.split('+')[1];
                                     break;
                                 } case 1: {
-                                    b = r.re.exec(fxValue);
+                                    b = r.re.exec(fxValue)[0];
                                     if (b[0] === '+') b = b.split('+')[1];
                                     break;
                                 } case 2: { 
@@ -312,26 +312,23 @@ fxBtn[0].addEventListener("click", () => {
                         W.q = q;
 
                     function f(x) {
-                        console.log(eval(fxValue));
                         return eval(fxValue);
                     }
 
                     // trzeba jakoś zwiększyć dokładność rysowanej paraboli
                     data.length = 0;
-
-                    for (let x = leftX; x < x1; x++) {
-                        data.push({x: x, y:f(x)});
-                    }
-                    for (let x = x1; x < W.p; x++) {
-                        data.push({x: x, y:f(x)});
-                    }
-                    for (let x = W.p; x < x2; x++) {
-                        data.push({x: x, y:f(x)});
-                    }
-                    for (let x = x2; x < rightX; x++) {
-                        data.push({x: x, y:f(x)});
-                    }
-
+                        for (let x = leftX; x < x1; x++) {
+                            data.push({x: x, y:f(x)});
+                        }
+                        for (let x = x1; x < W.p; x++) {
+                            data.push({x: x, y:f(x)});
+                        }
+                        for (let x = W.p; x < x2; x++) {
+                            data.push({x: x, y:f(x)});
+                        }
+                        for (let x = x2; x < rightX; x++) {
+                            data.push({x: x, y:f(x)});
+                        }
                     // 1*x^2-2*x-8
 
                     squareDiv.forEach(s => s.style.display = "block");                
