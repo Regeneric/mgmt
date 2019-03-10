@@ -15,6 +15,7 @@ const squreDesc = document.querySelectorAll(".fx-desc");
 /*--PROPS--*/
 let fxValue = 0;
 let func2d = null;
+let pos = 1;
 
 let rightX = 0;
 let leftX = 0; 
@@ -83,7 +84,7 @@ const regExes = [{
     }, {
         id: 13,
         name: "genSquareFxNeg",
-        fx: /^(.[0-9]{1,6}|a)\*x\^2(\+|\-)([0-9]{1,6}|b)\*x(\+|\-)([0-9]{1,6}|c)$/
+        fx: /^.([0-9]{1,6}|a)\*x\^2(\+|\-)([0-9]{1,6}|b)\*x(\+|\-)([0-9]{1,6}|c)$/
         // -a*x^2+b*x+c
     }, {
         id: 3, // do poprawy
@@ -169,7 +170,20 @@ const regExes = [{
     }, {
         id: 1,
         name: "regB",
-        re: /(?=)(\+|\-)[0-9]{1,6}/
+        re: /(?=)(\+|\-)[0-9]{1,6}/g
+    }, {
+        id: 2,
+        name: "regC",
+        re: /(?=)(\+|\-)[0-9]{1,6}$/g
+    }];
+    const regQuadNeg = [{
+        id: 0,
+        name: "regA",
+        re: /^.[0-9]{0,6}/g
+    }, {
+        id: 1,
+        name: "regB",
+        re: /[0-9]{1}(\+|\-)[0-9]{1,6}/g
     }, {
         id: 2,
         name: "regC",
@@ -239,30 +253,55 @@ fxBtn[0].addEventListener("click", () => {
                     checkForX(fxInp[2].value, data);
                     break;
                 }
-                case 13:   
+                case 13: {
+                    pos = 0;
+                }
                 case 2: {
                     fxValue = r.fx.exec(fxValue)[0];
                     let a = b = c = p = q = 1;
                     let W = {p: 0, q: 0};
+
+                    if (pos) {
+                        regQuad.forEach(r => {
+                            switch (r.id) {
+                                case 0: {
+                                    a = r.re.exec(fxValue)[0];
+                                    if (a[0] === '+') a = a.split('+')[1];
+                                    break;
+                                } case 1: {
+                                    b = r.re.exec(fxValue);
+                                    if (b[0] === '+') b = b.split('+')[1];
+                                    break;
+                                } case 2: { 
+                                    c = r.re.exec(fxValue)[0];
+                                    if (c[0] === '+') c = c.split('+')[1];
+                                    break; 
+                                }   
+                            }
+                        });
+                    } else {
+                        regQuadNeg.forEach(r => {
+                            switch (r.id) {
+                                case 0: {
+                                    a = r.re.exec(fxValue)[0];
+                                    if (a[0] === '+') a = a.split('+')[1];
+                                    break;
+                                } case 1: {
+                                    b = r.re.exec(fxValue)[0];
+                                    b = b.substr(1);
+                                    if (b[0] === '+') b = b.split('+')[1];
+                                    break;
+                                } case 2: { 
+                                    c = r.re.exec(fxValue)[0];
+                                    if (c[0] === '+') c = c.split('+')[1];
+                                    break; 
+                                }   
+                            }
+                        });
+                    }
                     
-                    regQuad.forEach(r => {
-                        switch (r.id) {
-                            case 0: {
-                                a = r.re.exec(fxValue)[0];
-                                if (a[0] === '+') a = a.split('+')[1];
-                                break;
-                            } case 1: {
-                                b = r.re.exec(fxValue)[0];
-                                if (b[0] === '+') b = b.split('+')[1];
-                                break;
-                            } case 2: { 
-                                c = r.re.exec(fxValue)[0];
-                                if (c[0] === '+') c = c.split('+')[1];
-                                break; 
-                            }   
-                        }
-                    });
-                    
+                    fxValue = fxValue.replace('^', "**");  // Zamienia x^2 na x**2 przy funkcji kwadratowej
+
                     let d = deltaFx(a, b, c);
                     let x1 = x1Fx(a, b, d);
                     let x2 = x2Fx(a, b, d);
@@ -272,12 +311,27 @@ fxBtn[0].addEventListener("click", () => {
                         W.p = p;
                         W.q = q;
 
+                    function f(x) {
+                        console.log(eval(fxValue));
+                        return eval(fxValue);
+                    }
+
                     // trzeba jakoś zwiększyć dokładność rysowanej paraboli
                     data.length = 0;
-                        data.push({x: x1, y: 0});
-                        // data.push({x: 0, y: c});
-                        data.push({x: W.p, y: W.q});
-                        data.push({x: x2, y: 0});
+
+                    for (let x = leftX; x < x1; x++) {
+                        data.push({x: x, y:f(x)});
+                    }
+                    for (let x = x1; x < W.p; x++) {
+                        data.push({x: x, y:f(x)});
+                    }
+                    for (let x = W.p; x < x2; x++) {
+                        data.push({x: x, y:f(x)});
+                    }
+                    for (let x = x2; x < rightX; x++) {
+                        data.push({x: x, y:f(x)});
+                    }
+
                     // 1*x^2-2*x-8
 
                     squareDiv.forEach(s => s.style.display = "block");                

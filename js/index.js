@@ -108,7 +108,7 @@ liDrop.forEach(ld => {
                 break;
             } case "func2d": { 
                 win = remote.getCurrentWindow();
-                win.setSize(1280, 730);
+                win.setSize(1290, 730);
                 win = loadWindow(win, funcProp);
                 break;
             } case "func3d": {
