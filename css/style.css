@@ -23,6 +23,7 @@ body {
 
     width: 100%;
     
+    
     -webkit-user-select: none; /* tekst na górnym pasku nie jest zaznaczalny*/
 }
 .menu {
@@ -59,12 +60,14 @@ body {
 } .menu ul .li-drop {
     min-width: 120px;
     float: none;
-    padding-top: 3px;
-    padding-left: 12px;
+    padding: 5;
+    margin: 0;
+
     text-align: left;
 } .menu ul .li-drop:hover {
     background-color: #094771;
     color: #f0f4f7;
+    
 }
 /*-!Dropdown menu!-*/
 
@@ -72,13 +75,13 @@ body {
     padding-bottom: 7px;
     justify-content: center;
     padding: 2px;
-    margin: 0;
+    margin-top: 4px;
     display: inline-block;
     color: #cccccc;
     text-align: center;
     font-weight: 500;
     font-size: 10pt;
-    -webkit-app-region: drag;
+    -webkit-app-region: drag;\
 }
 .btns-group {
     float: right;
