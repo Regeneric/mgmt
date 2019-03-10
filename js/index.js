@@ -65,7 +65,7 @@ titleBtns.forEach(btn => {
 
 /*--EVENTS--*/
 menu.forEach(m => {
-    m.addEventListener("mouseover", () => {
+    m.addEventListener("click", () => {
         switch(m.id) {
             case "file": {
                 file += 1;
