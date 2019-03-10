@@ -20,7 +20,7 @@ body {
     background-color: #3c3c3c;  /*kolor paska z focuesem*/
     display: inline-block;
     text-align: center;
-    
+    -webkit-user-select: none; /* tekst na górnym pasku nie jest zaznaczalny*/
 }
 .menu {
     display: inline-block;
