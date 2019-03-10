@@ -13,7 +13,7 @@ let mainWindow = null;
         height: 510,
         title: "Main Window",
         show: false,
-        resizable: true,
+        resizable: false,
         frame: false,
     };  const mainProp = {
             dir: __dirname,
@@ -21,17 +21,6 @@ let mainWindow = null;
             protocol: "file:",
             slashes: true
     };
-    const funcProp = {
-        dir: __dirname,
-        file: "func2d.html",
-        protocol: "file:",
-        slashes: true
-    }; const func3DProp = {
-            dir: __dirname,
-            file: "func3d.html",
-            protocol: "file:",
-            slashes: true
-        };
 /*-!PROPS!-*/
 
 /*--RUN--*/

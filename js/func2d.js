@@ -7,6 +7,9 @@ const ctx = document.getElementById("func2d-chart").getContext("2d");
 
 const fxBtn = document.querySelectorAll(".fx-btn");
 const fxInp = document.querySelectorAll(".fx-inp");
+
+const squareDiv = document.querySelectorAll("#square");
+const squreDesc = document.querySelectorAll(".fx-desc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
@@ -58,45 +61,90 @@ const regExes = [{
         fx: /^([0-9]{1,11}|a)\*x(\+|\-)([0-9]{1,11}|b)$/
         // a*x+b
     }, {
+        id: 11,
+        name: "linearFxNeg",
+        fx: /^.([0-9]{1,11}|a)\*x(\+|\-)([0-9]{1,11}|b)$/
+        // -a*x+b
+    }, {
         id: 1,
         name: "linearFxShort",
         fx: /^x(\+|\-)([0-9]{1,11}|b)$/
         // x+b
+    }, {
+        id: 12,
+        name: "linearFxShortNeg",
+        fx: /^.x(\+|\-)([0-9]{1,11}|b)$/
+        // -x+b
     }, {
         id: 2,
         name: "genSquareFx",
         fx: /^([0-9]{1,6}|a)\*x\^2(\+|\-)([0-9]{1,6}|b)\*x(\+|\-)([0-9]{1,6}|c)$/
         // a*x^2+b*x+c
     }, {
+        id: 13,
+        name: "genSquareFxNeg",
+        fx: /^(.[0-9]{1,6}|a)\*x\^2(\+|\-)([0-9]{1,6}|b)\*x(\+|\-)([0-9]{1,6}|c)$/
+        // -a*x^2+b*x+c
+    }, {
         id: 3, // do poprawy
         name: "genSquareFxTiny",
-        fx: /^x\^2$/
-        // x^2
+        fx: /^([0-9]{1,20}|a)\*x\^2$/
+        // a*x^2
+    }, {
+        id: 14, // do poprawy
+        name: "genSquareFxTinyNeg",
+        fx: /^(.[0-9]{1,20}|a)\*x\^2$/
+        // -a*x^2
     }, {
         id: 4,
         name: "ratSquareFx",
         fx: /^([0-9]{1,5}|a)\*\(x(\+|\-)([0-9]{1,5}|b)\)\*\(x(\+|\-)([0-9]{1,6}|c)\)$/
         // a*(x-b)*(x-c)
     }, {
+        id: 15,
+        name: "ratSquareFxNeg",
+        fx: /^.([0-9]{1,5}|a)\*\(x(\+|\-)([0-9]{1,5}|b)\)\*\(x(\+|\-)([0-9]{1,6}|c)\)$/
+        // -a*(x-b)*(x-c)
+    }, {
         id: 5,
         name: "canSquareFx",
-        fx: /([0-9]{1,6}|a)\*\(x(\+|\-)([0-9]{1,6}|p)\)\^2(\+|\-)([0-9]{1,6}|q)$/
+        fx: /^([0-9]{1,6}|a)\*\(x(\+|\-)([0-9]{1,6}|p)\)\^2(\+|\-)([0-9]{1,6}|q)$/
         // a*(x-p)^2+q
+    }, {
+        id: 16,
+        name: "canSquareFxNeg",
+        fx: /^.([0-9]{1,6}|a)\*\(x(\+|\-)([0-9]{1,6}|p)\)\^2(\+|\-)([0-9]{1,6}|q)$/
+        // -a*(x-p)^2+q
     }, {
         id: 6, // do poprawy
         name: "absValueFx",
         fx: /^([0-9]{1,6}|a)\*\|x(\+|\-)([0-9]{1,6}|p)\|(\+|\-)([0-9]{1,7}|q)$/
         // a*|x-p|+q
     }, {
+        id: 17, // do poprawy
+        name: "absValueFxNeg",
+        fx: /^.([0-9]{1,6}|a)\*\|x(\+|\-)([0-9]{1,6}|p)\|(\+|\-)([0-9]{1,7}|q)$/
+        // -a*|x-p|+q
+    }, {
         id: 7,
         name: "homoFx",
         fx: /^([0-9]{1,7}|a)\/\(x(\+|\-)([0-9]{1,7}|p)\)(\+|\-)([0-9]{1,7}|q)$/
         // a/(x-p)+q
     }, {
+        id: 18,
+        name: "homoFxNeg",
+        fx: /^.([0-9]{1,7}|a)\/\(x(\+|\-)([0-9]{1,7}|p)\)(\+|\-)([0-9]{1,7}|q)$/
+        // -a/(x-p)+q
+    }, {
         id: 8,
         name: "homoFxShort",
         fx: /^([0-9]{1,20}|a)\/x$/
         // a/x
+    }, {
+        id: 19,
+        name: "homoFxShortNeg",
+        fx: /^.([0-9]{1,20}|a)\/x$/
+        // -a/x
     }, {
         id: 9,
         name: "thirdPolyFx",
@@ -107,6 +155,11 @@ const regExes = [{
         name: "absValueFxShort",
         fx: /^\|x\|$/
         // |x|
+    }, {
+        id: 21,
+        name: "absValueFxShort",
+        fx: /^.\|x\|$/
+        // -|x|
     }]; 
 
     const regQuad = [{
@@ -136,13 +189,13 @@ const regExes = [{
         name: "regC",
         re: /(?=)(\+|\-)[0-9]{1,6}$/g
     }];
-    
 /*-!PROPS!-*/
 
 /*--RUN--*/
 /*--EVENTS--*/
 fxBtn[0].addEventListener("click", () => {
     func2d.options.elements.line.tension = 0.3;
+    squareDiv.forEach(s => s.style.display = "none");
 
     rightX = fxInp[0].value;
     leftX = ~rightX+1; 
@@ -156,17 +209,25 @@ fxBtn[0].addEventListener("click", () => {
             switch(r.id) {
                 // Funkcja liniowa i inne proste
                 case 0:
+                case 11:
                 case 1:
+                case 12:
                 case 3:
+                case 14:
                 case 4:
+                case 15:
                 case 5:
+                case 16:
                 case 7:
-                case 8: {
+                case 18:
+                case 8: 
+                case 19: {
                     fxValue = r.fx.exec(fxValue)[0];
                     fxValue = fxValue.replace('^', "**");  // Zamienia x^2 na x**2 przy funkcji kwadratowej
                     let a = b = c = p = q = 1;
 
                     function f(x) {
+                        console.log(eval(fxValue));
                         return eval(fxValue);
                     }
 
@@ -177,8 +238,8 @@ fxBtn[0].addEventListener("click", () => {
 
                     checkForX(fxInp[2].value, data);
                     break;
-                }   
-                // Funkcja kwadratowa  
+                }
+                case 13:   
                 case 2: {
                     fxValue = r.fx.exec(fxValue)[0];
                     let a = b = c = p = q = 1;
@@ -211,6 +272,7 @@ fxBtn[0].addEventListener("click", () => {
                         W.p = p;
                         W.q = q;
 
+                    // trzeba jakoś zwiększyć dokładność rysowanej paraboli
                     data.length = 0;
                         data.push({x: x1, y: 0});
                         // data.push({x: 0, y: c});
@@ -218,9 +280,29 @@ fxBtn[0].addEventListener("click", () => {
                         data.push({x: x2, y: 0});
                     // 1*x^2-2*x-8
 
+                    squareDiv.forEach(s => s.style.display = "block");                
+                    squreDesc.forEach(s => {
+                        switch (s.id) {
+                            case "x1": {
+                                s.innerHTML = x1;
+                                break;
+                            }
+                            case "x2": {
+                                s.innerHTML = x2;
+                                break;
+                            }
+                            case "W": {
+                                let wStr = '('+W.p+", "+W.q+')';
+                                s.innerHTML = wStr;
+                                break;
+                            }
+                        }
+                    });
+                    
                     checkForX(fxInp[2].value, data);
                     break;
                 }
+                case 17:
                 case 6: {
                     // a*|x-p|+q
                     fxValue = r.fx.exec(fxValue)[0];
@@ -258,6 +340,23 @@ fxBtn[0].addEventListener("click", () => {
                     break;
                 }
                 case 9:
+                case 21: {
+                    fxValue = r.fx.exec(fxValue)[0];
+                    fxValue = fxValue.split('|')[1];
+
+                    function f(x) {
+                        return Math.abs(x)*(-1);
+                    }
+
+                    data.length = 0;
+                    for (let x = leftX; x < rightX; x++) {
+                        data.push({x:x,y:f(x)});
+                    }
+
+                    func2d.options.elements.line.tension = 0;
+                    checkForX(fxInp[2].value, data);
+                    break;
+                }
                 case 10: {
                     fxValue = r.fx.exec(fxValue)[0];
                     fxValue = fxValue.split('|')[1];
@@ -303,6 +402,7 @@ fxInp[3].addEventListener("click", () => {
 });
 /*-!EVENTS!-*/
 
+squareDiv.forEach(s => s.style.display = "none");
 func2d = new Chart(ctx, chartProps);
 
 // Funkcja kwadratowa
