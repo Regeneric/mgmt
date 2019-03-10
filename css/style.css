@@ -83,7 +83,7 @@ body {
 .btns-group {
     float: right;
     padding: 2px;
-    margin-right: 2px;
+    margin-right: 1px;
     position: relative;
 } .title-btn {
     height: 32px;   
