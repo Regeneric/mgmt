@@ -20,17 +20,14 @@ body {
     background-color: #3c3c3c;  /*kolor paska z focuesem*/
     display: inline-block;
     text-align: center;
-<<<<<<< HEAD
 
     width: 100%;
     
-=======
     -webkit-user-select: none; /* tekst na górnym pasku nie jest zaznaczalny*/
->>>>>>> develop
 }
 .menu {
     float: left;
-    padding: 0;
+    padding: 2px;
     position: relative;
 
 } .menu ul {
@@ -73,6 +70,8 @@ body {
 
 .title {
     padding-bottom: 7px;
+    justify-content: center;
+    padding: 2px;
     margin: 0;
     display: inline-block;
     color: #cccccc;
@@ -82,7 +81,10 @@ body {
     -webkit-app-region: drag;
 }
 .btns-group {
-    display: inline-block;
+    float: right;
+    padding: 2px;
+    margin-right: 2px;
+    position: relative;
 } .title-btn {
     height: 32px;   
     width: 46px;
