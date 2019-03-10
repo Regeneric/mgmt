@@ -65,16 +65,18 @@ titleBtns.forEach(btn => {
 
 /*--EVENTS--*/
 menu.forEach(m => {
-    m.addEventListener("click", () => {
+    m.addEventListener("mouseover", () => {
         switch(m.id) {
             case "file": {
                 file += 1;
                 if (!(file % 2)) menuDrop[0].style.display = "block";
-                else menuDrop[0].style.display = "none";
+                else menuDrop[0].style.color = "none";
                 
                 menuDrop[1].style.display = "none";
                 menuDrop[2].style.display = "none";
+
                 break;
+                
             }
             case "edit": {
                 edit += 1;
