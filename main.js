@@ -13,7 +13,7 @@ let mainWindow = null;
         height: 510,
         title: "Main Window",
         show: false,
-        resizable: false,
+        resizable: true,
         frame: false,
     };  const mainProp = {
             dir: __dirname,
