@@ -20,9 +20,13 @@ body {
     background-color: #3c3c3c;  /*kolor paska z focuesem*/
     display: inline-block;
     text-align: center;
+<<<<<<< HEAD
 
     width: 100%;
     
+=======
+    -webkit-user-select: none; /* tekst na górnym pasku nie jest zaznaczalny*/
+>>>>>>> develop
 }
 .menu {
     float: left;
