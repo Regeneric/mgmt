@@ -47,7 +47,7 @@ const chartProps = {
             xAxes: [{
                 type: "linear",
                 ticks: {
-                    precision: 200,
+                    precision: 2,
                     min: -25,
                     max: 25
                 }
