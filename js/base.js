@@ -97,7 +97,7 @@ calc.forEach(calc => {
             }
         }
 
-        //Minus at the beggining
+        //Minus at the beginning
         if (calc.id == "btnminus" && inputBox.firstChild.nodeValue == ' '){
             inputBox.firstChild.nodeValue += "-";
         }
@@ -272,7 +272,7 @@ document.addEventListener("keyup", () => {
                 
             }
 
-            //Minus at the beggining
+            //Minus at the beginning
             if (event.key == "-" && inputBox.firstChild.nodeValue == ' '){
                 inputBox.firstChild.nodeValue += "-";
             }
