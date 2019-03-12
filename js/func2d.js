@@ -127,7 +127,6 @@ fxBtn.forEach(fb => {
                                         switch (r.id) {
                                             case 0: {
                                                 a = eval(r.re.exec(fxValue)[0]);
-                                                console.log(a);
                                                 if (a[0] === '+') a = a.split('+')[1];
                                                 break;
                                             } case 1: {
@@ -168,39 +167,53 @@ fxBtn.forEach(fb => {
                                 let d = deltaFx(a, b, c);
                                 let x1 = x1Fx(a, b, d);
                                 let x2 = x2Fx(a, b, d);
-            
+                                    // x1 = x1.toFixed(2);
+                                    // x2 = x2.toFixed(2);
+                                    x1 = Math.round(x1);
+                                    x2 = Math.round(x2);
+
                                 p = pFx(a, b);
                                 q = qFx(a, d);
-                                    W.p = p;
-                                    W.q = q;
+                                    // p = p.toFixed(2);
+                                    // q = q.toFixed(2);
+                                    p = Math.round(p);
+                                    q = Math.round(q);
+
+                                W.p = p;
+                                W.q = q;
                                 
                                 console.log("a", a, "b", b, "c", c, "d", d, "p", p, "q", q, "x1", x1, "x2", x2);
-
                                 function f(x) {
-                                    console.log(eval(fxValue));
                                     return eval(fxValue);
                                 }
             
                                 data.length = 0;
                                 if (d > 0){
                                     for (let x = leftX; x < x1; x++) {
-                                        data.push({x: x, y:f(x)});
+                                        data.push({x: x, y: f(x)});
+                                        console.log('y', f(x), 'x', x);
                                     }
-                                    for (let x = x1; x < W.p; x++) {
-                                        data.push({x: x, y:f(x)});
-                                    }
-                                    for (let x = W.p; x < x2; x++) {
-                                        data.push({x: x, y:f(x)});
-                                    }
+                                    // for (let x = x1; x < W.p; x++) {
+                                    //     data.push({x: x, y: f(x)});
+                                    //     console.log('y', f(x), 'x', x);
+                                    //     console.log('y', f(x), 'x', x);
+                                    // }
+                                    // for (let x = W.p; x < x2; x++) {
+                                    //     data.push({x: x, y: f(x)});
+                                    //     console.log('y', f(x), 'x', x);
+                                    // }
                                     for (let x = x2; x < rightX; x++) {
-                                        data.push({x: x, y:f(x)});
+                                        data.push({x: x, y: f(x)});
+                                        console.log('y', f(x), 'x', x);
                                     }
                                 } else {
                                     for (let x = leftX; x < W.p; x++) {
                                         data.push({x: x, y: f(x)});
+                                        console.log('y', f(x), 'x', x);
                                     }
                                     for (let x = W.p; x < rightX; x++) {
-                                        data.push({x: x, y: f(x)});  
+                                        data.push({x: x, y: f(x)});
+                                        console.log('y', f(x), 'x', x);
                                     }
                                 }
                                 // 1*x^2-2*x-8
