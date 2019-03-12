@@ -80,13 +80,16 @@ fxBtn.forEach(fb => {
                     if (r.fx.test(fxValue)) {
                         switch(r.id) {
                             // Funkcja liniowa i inne proste
-                            case 0:
-                            case 1:
-                            case 3:
-                            case 4:
-                            case 5:
-                            case 7:
-                            case 8:
+                            case 0.1:
+                            case 0.2:
+                            case 0.3:
+                            case 0.4:
+                            case 1.2:
+                            case 1.3:
+                            case 2.1:
+                            case 3.1:
+                            case 5.1:
+                            case 5.2:
                             case 11:
                             case 12:
                             case 14:
@@ -97,9 +100,8 @@ fxBtn.forEach(fb => {
                                 fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.replace('^', "**");  // Zamienia x^2 na x**2 przy funkcji kwadratowej
                                 let a = b = c = p = q = 1;
-            
+
                                 function f(x) {
-                                    console.log(eval(fxValue));
                                     return eval(fxValue);
                                 }
             
@@ -115,7 +117,7 @@ fxBtn.forEach(fb => {
                             case 13: {
                                 pos = 0;
                             }
-                            case 2: {
+                            case 1.1: {
                                 fxValue = r.fx.exec(fxValue)[0];
                                 let a = b = c = p = q = 1;
                                 let W = {p: 0, q: 0};
@@ -124,15 +126,16 @@ fxBtn.forEach(fb => {
                                     quad.forEach(r => {
                                         switch (r.id) {
                                             case 0: {
-                                                a = r.re.exec(fxValue)[0];
+                                                a = eval(r.re.exec(fxValue)[0]);
+                                                console.log(a);
                                                 if (a[0] === '+') a = a.split('+')[1];
                                                 break;
                                             } case 1: {
-                                                b = r.re.exec(fxValue)[0];
+                                                b = eval(r.re.exec(fxValue)[0]);
                                                 if (b[0] === '+') b = b.split('+')[1];
                                                 break;
                                             } case 2: { 
-                                                c = r.re.exec(fxValue)[0];
+                                                c = eval(r.re.exec(fxValue)[0]);
                                                 if (c[0] === '+') c = c.split('+')[1];
                                                 break; 
                                             }   
@@ -160,7 +163,8 @@ fxBtn.forEach(fb => {
                                 }
                                 
                                 fxValue = fxValue.replace('^', "**");  // Zamienia x^2 na x**2 przy funkcji kwadratowej
-            
+                                console.log(fxValue);
+
                                 let d = deltaFx(a, b, c);
                                 let x1 = x1Fx(a, b, d);
                                 let x2 = x2Fx(a, b, d);
@@ -169,12 +173,16 @@ fxBtn.forEach(fb => {
                                 q = qFx(a, d);
                                     W.p = p;
                                     W.q = q;
-            
+                                
+                                console.log("a", a, "b", b, "c", c, "d", d, "p", p, "q", q, "x1", x1, "x2", x2);
+
                                 function f(x) {
+                                    console.log(eval(fxValue));
                                     return eval(fxValue);
                                 }
             
                                 data.length = 0;
+                                if (d > 0){
                                     for (let x = leftX; x < x1; x++) {
                                         data.push({x: x, y:f(x)});
                                     }
@@ -187,23 +195,57 @@ fxBtn.forEach(fb => {
                                     for (let x = x2; x < rightX; x++) {
                                         data.push({x: x, y:f(x)});
                                     }
+                                } else {
+                                    for (let x = leftX; x < W.p; x++) {
+                                        data.push({x: x, y: f(x)});
+                                    }
+                                    for (let x = W.p; x < rightX; x++) {
+                                        data.push({x: x, y: f(x)});  
+                                    }
+                                }
                                 // 1*x^2-2*x-8
             
-                                squareDiv.forEach(s => s.style.display = "block");                
+                                squareDiv.forEach(s => s.style.display = "block");          
                                 squreDesc.forEach(s => {
-                                    switch (s.id) {
-                                        case "x1": {
-                                            s.innerHTML = x1;
-                                            break;
+                                    if (d > 0) {
+                                        switch (s.id) {
+                                            case "d": {
+                                                s.innerHTML = d;
+                                                break;
+                                            }
+                                            case "x1": {
+                                                s.innerHTML = x1;
+                                                break;
+                                            }
+                                            case "x2": {
+                                                s.innerHTML = x2;
+                                                break;
+                                            }
+                                            case "W": {
+                                                let wStr = '('+W.p+", "+W.q+')';
+                                                s.innerHTML = wStr;
+                                                break;
+                                            }
                                         }
-                                        case "x2": {
-                                            s.innerHTML = x2;
-                                            break;
-                                        }
-                                        case "W": {
-                                            let wStr = '('+W.p+", "+W.q+')';
-                                            s.innerHTML = wStr;
-                                            break;
+                                    } else {
+                                        switch (s.id) {
+                                            case "d": {
+                                                s.innerHTML = d;
+                                                break;
+                                            }
+                                            case "x1": {
+                                                s.style.display = "none";
+                                                break;
+                                            }
+                                            case "x2": {
+                                                s.style.display = "none";
+                                                break;
+                                            }
+                                            case "W": {
+                                                let wStr = '('+W.p+", "+W.q+')';
+                                                s.innerHTML = wStr;
+                                                break;
+                                            }
                                         }
                                     }
                                 });
@@ -213,32 +255,31 @@ fxBtn.forEach(fb => {
                             }
 
                             case 17:
-                            case 6: {
+                            case 4.1: {
                                 // a*|x-p|+q
                                 fxValue = r.fx.exec(fxValue)[0];
                                 let a = b = c = p = q = 1;
-            
+
                                 abs.forEach(r => {
                                     switch (r.id) {
                                         case 0: {
-                                            a = r.re.exec(fxValue)[0];
+                                            a = eval(r.re.exec(fxValue)[0]);
                                             if (a[0] === '+') a = a.split('+')[1];
                                             break;
                                         } case 1: {
-                                            b = r.re.exec(fxValue)[0];
-                                            b = b.split('|')[1];
+                                            p = eval(r.re.exec(fxValue)[0]);
+                                            if (p[0] === '+') p = p.split('+')[1];
                                             break;
                                         } case 2: { 
-                                            c = r.re.exec(fxValue)[0];
-                                            if (c[0] === '+') c = c.split('+')[1];
+                                            q = eval(r.re.exec(fxValue)[0]);
+                                            if (q[0] === '+') q = q.split('+')[1];
                                             break; 
                                         }   
                                     }
                                 });
             
                                 function f(x) {
-                                    let res = eval(b);
-                                    return (a*Math.abs(res))+c;
+                                    return (a*Math.abs(eval(x-p)))+q;
                                 }
             
                                 data.length = 0;
@@ -246,6 +287,7 @@ fxBtn.forEach(fb => {
                                     data.push({x:x,y:f(x)});
                                 } 
             
+                                func2d.options.elements.line.tension = 0;
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
@@ -268,7 +310,8 @@ fxBtn.forEach(fb => {
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
-                            case 10: {
+                            case 6.1:
+                            case 6.2: {
                                 fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
             
