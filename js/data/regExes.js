@@ -1,21 +1,48 @@
 module.exports = {
     fx: function() {
         const fx = [{
-            id: 0,
+            id: 0.1,
             name: "linearFx",
-            fx: /^([0-9]{1,11}|a)\*x(\+|\-)([0-9]{1,11}|b)$/
+            fx: /^([0-9]{1,7}|a)\*([0-9]{1,7}|x)(\+|\-)([0-9]{1,7}|b)$/
             // a*x+b
+            // 3*x+b
+            // 3*x+3
+            // 3*3+b
+            // 3*3+3
         }, {
-            id: 1,
-            name: "linearFxShort",
-            fx: /^x(\+|\-)([0-9]{1,11}|b)$/
+            id: 0.2,
+            name: "linearFxShortAdd",
+            fx: /^([0-9]{1,11}|x)(\+|\-)([0-9]{1,11}|b)$/
             // x+b
+            // 3+b
+            // x+b
+            // 3+3
         }, {
-            id: 2,
+            id: 0.3,
+            name: "linearFxShortMult",
+            fx: /^([0-9]{1,11}|a)\*([0-9]{1,11}|x)$/
+            // a*x
+            // 3*x
+            // a*3
+            // 3*3
+        }, {
+            id: 0.4,
+            name: "linearFxTiny",
+            fx: /^[0-9]{1,20}$/
+            // 3
+        },
+
+        {
+            id: 1.1,
             name: "genSquareFx",
             fx: /^([0-9]{1,6}|a)\*x\^2(\+|\-)([0-9]{1,6}|b)\*x(\+|\-)([0-9]{1,6}|c)$/
             // a*x^2+b*x+c
-        }, {
+            // 3*x^2+b*c+c
+            // 
+        }, 
+        
+        
+        {
             id: 3, // do poprawy
             name: "genSquareFxTiny",
             fx: /^([0-9]{1,20}|a)\*x\^2$/
