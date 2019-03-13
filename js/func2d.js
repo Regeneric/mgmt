@@ -53,6 +53,23 @@ const chartProps = {
                     precision: 2,
                     min: -25,
                     max: 25
+                },
+                gridLines: {
+                    color: "fff",
+                    zeroLineColor: "#0065ff",
+                    lineWidth: 1,
+                    zeroLineWidth: 1
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    precision: 2
+                },
+                gridLines: {
+                    color: "fff",
+                    zeroLineColor: "#037700",
+                    lineWidth: 1,
+                    zeroLineWidth: 1
                 }
             }]
         }
