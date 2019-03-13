@@ -51,6 +51,7 @@ module.exports = {
             // 3*3^2+b*x+3
             // 3*3^2+3*3+c
             // 3*3^2+3*3+3
+            // dodać x^2+b*x+c
         }, {
             id: 1.2, //3
             name: "genSquareFxShort",
@@ -80,6 +81,7 @@ module.exports = {
             // 3*(3-3)*(3-c)
             // 3*(3-b)*(3-3)
             // 3*(3-3)*(3-3)
+            // dodać (x-b)*(x-c)
         }, {
             id: 3.1, //5
             name: "canSquareFx",
@@ -95,7 +97,8 @@ module.exports = {
             // 3*(x-3)^2+3
             // 3*(3-3)^2+q
             // 3*(3-3)^2+3
-        }, 
+            // dodać (x-p)^2+q
+        },
         
         {
             id: 4.1, //6
@@ -112,6 +115,7 @@ module.exports = {
             // 3*|3-3|+q
             // 3*|3-p|+3
             // 3*|3-3|+q
+            // dodać |x-p|+q
         }, 
         
         {
