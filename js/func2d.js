@@ -79,7 +79,6 @@ fxBtn.forEach(fb => {
                 fxFind.forEach(r => {
                     if (r.fx.test(fxValue)) {
                         switch(r.id) {
-                            // Funkcja liniowa i inne proste
                             case 0.1:
                             case 0.2:
                             case 0.3:
@@ -98,170 +97,54 @@ fxBtn.forEach(fb => {
                             case 18:
                             case 19: {
                                 fxValue = r.fx.exec(fxValue)[0];
-                                fxValue = fxValue.replace('^', "**");  // Zamienia x^2 na x**2 przy funkcji kwadratowej
                                 let a = b = c = p = q = 1;
 
-                                function f(x) {
-                                    return eval(fxValue);
-                                }
-            
+                                // Zamienia x^2 na x**2 na potrzeby eval()
+                                fxValue = fxValue.replace('^', "**");  
+                                
                                 data.length = 0;
-                                for (let x = leftX; x < rightX; x++) {
-                                    data.push({x:x,y:f(x)});
-                                } 
+                                drawLinearFx(fxValue, a, b, leftX, data);
             
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
 
-                            case 13: {
-                                pos = 0;
-                            }
+                            case 13: pos = 0;
                             case 1.1: {
                                 fxValue = r.fx.exec(fxValue)[0];
-                                let a = b = c = p = q = 1;
-                                let W = {p: 0, q: 0};
+
+                                const P = {a: 1, b: 1, c: 1, p: 1, q: 1, d: 0};
+                                const W = {p: 0, q: 0};
+                                const X = {x1: 0, x2: 0};
             
-                                if (pos) {
-                                    quad.forEach(r => {
-                                        switch (r.id) {
-                                            case 0: {
-                                                a = eval(r.re.exec(fxValue)[0]);
-                                                if (a[0] === '+') a = a.split('+')[1];
-                                                break;
-                                            } case 1: {
-                                                b = eval(r.re.exec(fxValue)[0]);
-                                                if (b[0] === '+') b = b.split('+')[1];
-                                                break;
-                                            } case 2: { 
-                                                c = eval(r.re.exec(fxValue)[0]);
-                                                if (c[0] === '+') c = c.split('+')[1];
-                                                break; 
-                                            }   
-                                        }
-                                    });
-                                } else {
-                                    quadNeg.forEach(r => {
-                                        switch (r.id) {
-                                            case 0: {
-                                                a = r.re.exec(fxValue)[0];
-                                                if (a[0] === '+') a = a.split('+')[1];
-                                                break;
-                                            } case 1: {
-                                                b = r.re.exec(fxValue)[0];
-                                                b = b.substr(1);
-                                                if (b[0] === '+') b = b.split('+')[1];
-                                                break;
-                                            } case 2: { 
-                                                c = r.re.exec(fxValue)[0];
-                                                if (c[0] === '+') c = c.split('+')[1];
-                                                break; 
-                                            }   
-                                        }
-                                    });
-                                }
+                                if (pos) findABCPos(P, fxValue);
+                                else findABCNeg(P, fxValue);
                                 
-                                fxValue = fxValue.replace('^', "**");  // Zamienia x^2 na x**2 przy funkcji kwadratowej
-                                console.log(fxValue);
+                                // Zamienia x^2 na x**2 na potrzeby eval()
+                                fxValue = fxValue.replace('^', "**");
 
-                                let d = deltaFx(a, b, c);
-                                let x1 = x1Fx(a, b, d);
-                                let x2 = x2Fx(a, b, d);
-                                    // x1 = x1.toFixed(2);
-                                    // x2 = x2.toFixed(2);
-                                    x1 = Math.round(x1);
-                                    x2 = Math.round(x2);
-
-                                p = pFx(a, b);
-                                q = qFx(a, d);
-                                    // p = p.toFixed(2);
-                                    // q = q.toFixed(2);
-                                    p = Math.round(p);
-                                    q = Math.round(q);
-
-                                W.p = p;
-                                W.q = q;
+                                P.d = deltaFx(P.a, P.b, P.c);
                                 
-                                console.log("a", a, "b", b, "c", c, "d", d, "p", p, "q", q, "x1", x1, "x2", x2);
-                                function f(x) {
-                                    return eval(fxValue);
+                                X.x1 = x1Fx(P.a, P.b, P.d);
+                                X.x2 = x2Fx(P.a, P.b, P.d);
+
+                                W.p = pFx(P.a, P.b);
+                                W.q = qFx(P.a, P.d);
+
+                                if (fxInp[4].checked) {
+                                    X.x1 = Math.round(X.x1);
+                                    X.x2 = Math.round(X.x2);
+                                    W.p = Math.round(W.p);
+                                    W.q = Math.round(W.q);
                                 }
-            
+                                            
                                 data.length = 0;
-                                if (d > 0){
-                                    for (let x = leftX; x < x1; x++) {
-                                        data.push({x: x, y: f(x)});
-                                        console.log('y', f(x), 'x', x);
-                                    }
-                                    // for (let x = x1; x < W.p; x++) {
-                                    //     data.push({x: x, y: f(x)});
-                                    //     console.log('y', f(x), 'x', x);
-                                    //     console.log('y', f(x), 'x', x);
-                                    // }
-                                    // for (let x = W.p; x < x2; x++) {
-                                    //     data.push({x: x, y: f(x)});
-                                    //     console.log('y', f(x), 'x', x);
-                                    // }
-                                    for (let x = x2; x < rightX; x++) {
-                                        data.push({x: x, y: f(x)});
-                                        console.log('y', f(x), 'x', x);
-                                    }
-                                } else {
-                                    for (let x = leftX; x < W.p; x++) {
-                                        data.push({x: x, y: f(x)});
-                                        console.log('y', f(x), 'x', x);
-                                    }
-                                    for (let x = W.p; x < rightX; x++) {
-                                        data.push({x: x, y: f(x)});
-                                        console.log('y', f(x), 'x', x);
-                                    }
-                                }
-                                // 1*x^2-2*x-8
+                                if (P.d > 0) drawDPos(fxValue, X, leftX, data);
+                                else if (P.d == 0) console.log("Delta 0");
+                                else drawDNeg(fxValue, W, leftX, data);
             
                                 squareDiv.forEach(s => s.style.display = "block");          
-                                squreDesc.forEach(s => {
-                                    if (d > 0) {
-                                        switch (s.id) {
-                                            case "d": {
-                                                s.innerHTML = d;
-                                                break;
-                                            }
-                                            case "x1": {
-                                                s.innerHTML = x1;
-                                                break;
-                                            }
-                                            case "x2": {
-                                                s.innerHTML = x2;
-                                                break;
-                                            }
-                                            case "W": {
-                                                let wStr = '('+W.p+", "+W.q+')';
-                                                s.innerHTML = wStr;
-                                                break;
-                                            }
-                                        }
-                                    } else {
-                                        switch (s.id) {
-                                            case "d": {
-                                                s.innerHTML = d;
-                                                break;
-                                            }
-                                            case "x1": {
-                                                s.style.display = "none";
-                                                break;
-                                            }
-                                            case "x2": {
-                                                s.style.display = "none";
-                                                break;
-                                            }
-                                            case "W": {
-                                                let wStr = '('+W.p+", "+W.q+')';
-                                                s.innerHTML = wStr;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                });
+                                squreDesc.forEach(s => showDivs(s, P, W, X));
                                 
                                 checkForX(fxInp[2].value, data);
                                 break;
@@ -269,43 +152,18 @@ fxBtn.forEach(fb => {
 
                             case 17:
                             case 4.1: {
-                                // a*|x-p|+q
-                                fxValue = r.fx.exec(fxValue)[0];
+                                let fx = r.fx.exec(fxValue)[0];
                                 let a = b = c = p = q = 1;
 
-                                abs.forEach(r => {
-                                    switch (r.id) {
-                                        case 0: {
-                                            a = eval(r.re.exec(fxValue)[0]);
-                                            if (a[0] === '+') a = a.split('+')[1];
-                                            break;
-                                        } case 1: {
-                                            p = eval(r.re.exec(fxValue)[0]);
-                                            if (p[0] === '+') p = p.split('+')[1];
-                                            break;
-                                        } case 2: { 
-                                            q = eval(r.re.exec(fxValue)[0]);
-                                            if (q[0] === '+') q = q.split('+')[1];
-                                            break; 
-                                        }   
-                                    }
-                                });
-            
-                                function f(x) {
-                                    return (a*Math.abs(eval(x-p)))+q;
-                                }
-            
                                 data.length = 0;
-                                for (let x = leftX; x < rightX; x++) {
-                                    data.push({x:x,y:f(x)});
-                                } 
+                                findAPQPos(a, p, q, fxValue);
+                                drawHomoPos(a, p, q, leftX, data);
             
                                 func2d.options.elements.line.tension = 0;
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
                             
-                            case 9:
                             case 20: {
                                 fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
@@ -323,19 +181,27 @@ fxBtn.forEach(fb => {
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
-                            case 6.1:
+                            case 6.1: {
+                                fxValue = r.fx.exec(fxValue)[0];
+                                fxValue = fxValue.split('|');
+                                let a = 1;
+                                
+                                data.length = 0;
+                                a = findAPos(a, fxValue);
+                                drawHomoShortPos(fxValue, a, leftX, data);
+                                console.log(fxValue);
+
+                                func2d.options.elements.line.tension = 0;
+                                checkForX(fxInp[2].value, data);
+                                break;
+                            }
                             case 6.2: {
                                 fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
             
-                                function f(x) {
-                                    return Math.abs(x);
-                                }
-            
                                 data.length = 0;
-                                for (let x = leftX; x < rightX; x++) {
-                                    data.push({x:x,y:f(x)});
-                                }
+                                if (fxValue == 'x') drawHomoTinyXPos(leftX, data)
+                                else drawLinearFx(fxValue, 1, 1, leftX, data);
             
                                 func2d.options.elements.line.tension = 0;
                                 checkForX(fxInp[2].value, data);
@@ -376,12 +242,199 @@ fxInp[3].addEventListener("click", () => {
 squareDiv.forEach(s => s.style.display = "none");
 func2d = new Chart(ctx, chartProps);
 
-// Funkcja kwadratowa
+// Quadratic Equation
+////////////////////////////////////////////////////////////////
 let deltaFx = (a, b, c) => {return b**2 - 4*a*c}
 let x1Fx = (a, b, d) => {return -b - Math.sqrt(d)/(2*a)}
 let x2Fx = (a, b, d) => {return -b + Math.sqrt(d)/(2*a)}
 let pFx = (a, b) => {return -b/(2*a)}
 let qFx = (a, d) => {return -d/(4*a)}
+
+function drawDPos(fx, X, range, data) {
+    let leftX = range;
+    let rightX = ~leftX+1;
+    
+    function f(x) {
+        return eval(fx);
+    }
+
+    for (let x = leftX; x < X.x1; x++) {
+        data.push({x: x, y: f(x)});
+        console.log('y', f(x), 'x', x);
+    }
+    for (let x = X.x1; x < X.x2; x++) {
+        data.push({x: x, y: f(x)});
+        console.log('y', f(x), 'x', x);   
+    }
+    for (let x = X.x2; x < rightX; x++) {
+        data.push({x: x, y: f(x)});
+        console.log('y', f(x), 'x', x);
+    }
+}
+function drawDNeg(fx, W, range, data) {
+    let leftX = range;
+    let rightX = ~leftX+1;
+    
+    function f(x) {
+        return eval(fx);
+    }
+
+    for (let x = leftX; x < W.p; x++) {
+        data.push({x: x, y: f(x)});
+        console.log('y', f(x), 'x', x);
+    }
+    for (let x = W.p; x < rightX; x++) {
+        data.push({x: x, y: f(x)});
+        console.log('y', f(x), 'x', x);
+    }
+}
+
+function findABCPos(P, fx) {
+    quad.forEach(r => {
+        switch (r.id) {
+            case 0: {
+                P.a = eval(r.re.exec(fx)[0]);
+                if (P.a[0] === '+') P.a = P.a.split('+')[1];
+                break;
+            } case 1: {
+                P.b = eval(r.re.exec(fx)[0]);
+                if (P.b[0] === '+') P.b = P.b.split('+')[1];
+                break;
+            } case 2: { 
+                P.c = eval(r.re.exec(fx)[0]);
+                if (P.c[0] === '+') P.c = P.c.split('+')[1];
+                break; 
+            }   
+        }
+    });
+}
+function findABCNeg(P, fx) {
+    quadNeg.forEach(r => {
+        switch (r.id) {
+            case 0: {
+                P.a = r.re.exec(fx)[0];
+                if (P.a[0] === '+') P.a = P.a.split('+')[1];
+                break;
+            } case 1: {
+                P.b = r.re.exec(fx)[0];
+                P.b = P.b.substr(1);
+                if (P.b[0] === '+') P.b = P.b.split('+')[1];
+                break;
+            } case 2: { 
+                P.c = r.re.exec(fx)[0];
+                if (P.c[0] === '+') P.c = P.c.split('+')[1];
+                break; 
+            }   
+        }
+    });
+}
+
+function showDivs(s, P, W, X) {
+    switch (s.id) {
+        case "d": {
+            s.innerHTML = P.d;
+            break;
+        }
+        case "x1": {
+            s.innerHTML = X.x1;
+            break;
+        }
+        case "x2": {
+            s.innerHTML = X.x2;
+            break;
+        }
+        case "W": {
+            let wStr = '('+W.p+", "+W.q+')';
+            s.innerHTML = wStr;
+            break;
+        }
+    }
+}
+////////////////////////////////////////////////////////////////
+
+// Homonymous equation
+////////////////////////////////////////////////////////////////
+function drawHomoPos(a, p, q, range, data) {
+    let leftX = range;
+    let rightX = ~range+1;
+
+    function f(x) {
+        return (a*Math.abs(eval(x-p)))+q;
+    }
+
+    for (let x = leftX; x < rightX; x++) {
+        data.push({x: x, y: f(x)});
+    } 
+}
+function drawHomoShortPos(fx, a, range, data) {
+    let leftX = range;
+    let rightX = ~range+1;
+
+    function f(xp) {
+        let x = Math.abs(xp);
+        let buff = fx[0]+fx[1];
+
+        return eval(buff)
+    }
+
+    for (let x = leftX; x < rightX; x++) {
+        data.push({x:x, y: f(x)});
+    }
+}
+function drawHomoTinyXPos(range, data) {
+    let leftX = range;
+    let rightX = ~range+1;
+
+    function f(x) {
+        return Math.abs(x);
+    }
+
+    for (let x = leftX; x < rightX; x++) {
+        data.push({x:x, y: f(x)});
+    }
+}
+
+function findAPQPos(a, p, q, fx) {
+    abs.forEach(r => {
+        switch (r.id) {
+            case 0: {
+                a = eval(r.re.exec(fx)[0]);
+                if (a[0] === '+') a = a.split('+')[1];
+                break;
+            } case 1: {
+                p = eval(r.re.exec(fx)[0]);
+                if (p[0] === '+') p = p.split('+')[1];
+                break;
+            } case 2: { 
+                q = eval(r.re.exec(fx)[0]);
+                if (q[0] === '+') q = q.split('+')[1];
+                break; 
+            }   
+        }
+    });
+}
+function findAPos(a, fx) {
+    a = eval(abs[0].re.exec(fx)[0]);
+    if (a[0] === '+') a = a.split('+')[1];
+    return a;
+}
+////////////////////////////////////////////////////////////////
+
+// Linear equation
+////////////////////////////////////////////////////////////////
+function drawLinearFx(fx, a, b, range, data) {
+    let leftX = range;
+    let rightX = ~range+1;
+
+    function f(x) {
+        return eval(fx);
+    }
+    
+    for (let x = leftX; x < rightX; x++) {
+        data.push({x: x, y: f(x)});
+    } 
+}
+////////////////////////////////////////////////////////////////
 
 function checkForX(x, obj) {
     fxInp[3].checked = false;
