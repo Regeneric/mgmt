@@ -152,12 +152,14 @@ fxBtn.forEach(fb => {
 
                             case 17:
                             case 4.1: {
-                                let fx = r.fx.exec(fxValue)[0];
-                                let a = b = c = p = q = 1;
+                                fxValue = r.fx.exec(fxValue)[0];
+                                let a = b = c = x = p = q = 1;
 
                                 data.length = 0;
-                                findAPQPos(a, p, q, fxValue);
-                                drawHomoPos(a, p, q, leftX, data);
+                                let P = findAPQXPos(a, p, q, x, fxValue);
+                                    a = P.a; p = P.p; q = P.q; x = P.x;
+
+                                drawHomoPos(a, p, q, x, leftX, data);
             
                                 func2d.options.elements.line.tension = 0;
                                 checkForX(fxInp[2].value, data);
@@ -354,17 +356,27 @@ function showDivs(s, P, W, X) {
 
 // Homonymous equation
 ////////////////////////////////////////////////////////////////
-function drawHomoPos(a, p, q, range, data) {
+function drawHomoPos(a, p, q, x, range, data) {
     let leftX = range;
     let rightX = ~range+1;
+    let abs = 0;
 
     function f(x) {
-        return (a*Math.abs(eval(x-p)))+q;
+        if (x < 0 || x > 0) abs = (a*Math.abs(x+p))+q;
+        else abs = (a*Math.abs(0+p))+q;
+        
+        return abs;
     }
 
-    for (let x = leftX; x < rightX; x++) {
-        data.push({x: x, y: f(x)});
-    } 
+    if (x != 'x') { 
+        fx = "a+b";
+        a = a*Math.abs(x+p);
+        drawLinearFx(fx, a, q, range, data)
+    } else {
+        for (let x = leftX; x < rightX; x++) {
+            data.push({x: x, y: f(x)});
+        }
+    }
 }
 function drawHomoShortPos(fx, a, range, data) {
     let leftX = range;
@@ -394,7 +406,7 @@ function drawHomoTinyXPos(range, data) {
     }
 }
 
-function findAPQPos(a, p, q, fx) {
+function findAPQXPos(a, p, q, x, fx) {
     abs.forEach(r => {
         switch (r.id) {
             case 0: {
@@ -403,15 +415,23 @@ function findAPQPos(a, p, q, fx) {
                 break;
             } case 1: {
                 p = eval(r.re.exec(fx)[0]);
-                if (p[0] === '+') p = p.split('+')[1];
+                // if (p[0] === '+') p = p.split('+')[1];
                 break;
             } case 2: { 
                 q = eval(r.re.exec(fx)[0]);
                 if (q[0] === '+') q = q.split('+')[1];
                 break; 
-            }   
+            } case 3: {
+                x = r.re.exec(fx)[0];
+                x = x.split('|')[1];
+                x = eval(x);
+                if (x[0] === '+') x = x.split('+')[1];
+                break;
+            }
         }
     });
+    const P = {a: a, x: x, p: p, q: q};
+    return P;
 }
 function findAPos(a, fx) {
     a = eval(abs[0].re.exec(fx)[0]);
