@@ -5,7 +5,7 @@
     "Gabriel Król <werander.k@gmail.com>",
     "Patryk Piszczek <patrykpiszczek3@gmail.com>"
   ],
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "main": "main.js",
   "scripts": {
@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "chart.js": "^2.7.3",
-    "mathjs": "^5.6.0",
     "plotly.js-dist": "^1.45.2"
   },
   "devDependencies": {

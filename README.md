@@ -7,7 +7,6 @@ Install one at a time:
 `npm install electron@4.0.4 --save`  
 `npm install electron-builder@20.38.5 --save`  
 `npm install chart.js@2.7.3 --save`  
-`npm install mathjs@5.6.0 --save`  
 `npm install plotly.js-dist@1.45.2 --save`
 
 ## Commands
