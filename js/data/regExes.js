@@ -3,55 +3,30 @@ module.exports = {
         const fx = [{
             id: 0.1, //0
             name: "linearFx",
-            fx: /^([0-9]{1,7}|a)\*([0-9]{1,7}|x)(\+|\-)([0-9]{1,7}|b)$/
+            fx: /^(\+|\-){0,1}(\d{0,10}|a)[*]{0,1}(\d{1,10}|x)(\+|\-){0,1}(\d{0,10}|b)$/
             // a*x+b
             // 3*x+b
             // 3*x+3
             // 3*3+b
             // 3*3+3
-        }, {
-            id: 0.2, //1
-            name: "linearFxShortAdd",
-            fx: /^([0-9]{1,11}|x)(\+|\-)([0-9]{1,11}|b)$/
-            // x+b
             // 3+b
             // x+3
             // 3+3
-        }, {
-            id: 0.3, //nowe
-            name: "linearFxShortMult",
-            fx: /^([0-9]{1,11}|a)\*([0-9]{1,11}|x)$/
             // a*x
             // 3*x
             // a*3
             // 3*3
-        }, {
-            id: 0.4, //nowe
-            name: "linearFxTiny",
-            fx: /^[0-9]{1,20}$/
-            // 3
-        }, {
-            id: 0.5, //nowe
-            name: "linearFxShortMult",
-            fx: /^([0-9]{1,11}|a)\*([0-9]{1,11}|x)$/
-            // a*x
-            // 3*x
-            // a*3
-            // 3*3
-        }, {
-            id: 0.6, //nowe
-            name: "linearFxTiny",
-            fx: /^[0-9]{1,20}$/
             // 3
         },
 
+        
         {
-            id: 1.1, //2
+            id: 1.1, //2 - do poprawy
             name: "genSquareFx",
             fx: /^([0-9]{1,6}|a)\*([0-9]{1,6}|x)\^2(\+|\-)([0-9]{1,6}|b)\*([0-9]{1,5}|x)(\+|\-)([0-9]{1,6}|c)$/
             // a*x^2+b*x+c
-            // 3*x^2+b*x+c
-            // a*3^2+b*x+c
+            // 3*x^2+b*x+c 
+            // a*3^2+b*x+c 
             // a*x^2+3*x+c
             // a*x^2+b*3+c
             // a*x^2+b*x+3
@@ -79,7 +54,16 @@ module.exports = {
             fx: /^([0-9]{1,20}|x)\^2$/
             // x^2
             // 3^2
-        }, {
+        }, 
+        
+        // {
+        //     id: 1.2, //2
+        //     name: "linearFx",
+        //     fx: /^(\+|\-){0,1}(\d{0,6}|a)[*]{0,1}(\d{1,6}|x)\^2((\+|\-){0,1}(\d{0,6}|b)[*]{0,1}(\d{0,6}|x))(\+|\-){0,1}(\d{0,6}|c)$/
+            
+        // },
+
+        {
             id: 2.1, //4
             name: "ratSquareFx",
             fx: /^([0-9]{1,5}|a)\*\(([0-9]{1,5}|x)(\+|\-)([0-9]{1,5}|b)\)\*\(([0-9]{1,5}|x)(\+|\-)([0-9]{1,6}|c)\)$/
@@ -113,8 +97,9 @@ module.exports = {
             // dodać (x-p)^2+q
         },
         
+
         {
-            id: 4.1, //6
+            id: 4.1, //6 - do poprawy
             name: "absValueFx",
             fx: /^([0-9]{1,6}|a)\*\|([0-9]{1,5}|x)(\+|\-)([0-9]{1,6}|p)\|(\+|\-)([0-9]{1,7}|q)$/
             // a*|x-p|+q
@@ -130,7 +115,6 @@ module.exports = {
             // 3*|3-3|+q
             // dodać |x-p|+q
         }, 
-        
         {
             id: 5.1, //7
             name: "homoFx",
@@ -143,8 +127,9 @@ module.exports = {
             // a/x
         }, 
         
+
         {
-            id: 6.1, //nowe
+            id: 6.1, //nowe - do poprawy
             name: "absValueFxShort",
             fx: /^([0-9]{1,8}|a)\*\|([0-9]{1,8}|x)\|$/
             // a*|x|
@@ -159,7 +144,7 @@ module.exports = {
             // |3|
         }, 
 
-
+        
         {
             id: 0.11, //11
             name: "linearFxNegAll",
@@ -172,17 +157,6 @@ module.exports = {
             // -3*(-3)+b
             // -3*(-x)+3
             // -3*(-3)+3  
-        }, {
-            id: 0.21, //nowe
-            name: "linearFxNegA",
-            fx: /^.([0-9]{1,7}|a)\*([0-9]{1,7}|x)(\+|\-)([0-9]{1,7}|b)$/
-            // -a*x+b
-            // -3*x+b
-            // -a*3+b
-            // -a*x+3
-            // -3*3+b
-            // -3*x+3
-            // -3*3+3
         }, {
             id: 0.31, //nowe
             name: "linearFxNegX",
@@ -203,14 +177,6 @@ module.exports = {
             // -x+(-3)
             // -3+(-3)
         }, {
-            id: 0.51, //12
-            name: "linearFxShortNegXAdd",
-            fx: /^.([0-9]{1,11}|x)(\+|\-)([0-9]{1,11}|b)$/
-            // -x+b
-            // -3+b
-            // -x+3
-            // -3+3
-        }, {
             id: 0.61, //nowe
             name: "linearFxShortNegBAdd",
             fx: /^([0-9]{1,11}|x)(\+|\-)\(.([0-9]{1,11}|b)\)$/
@@ -226,14 +192,6 @@ module.exports = {
             // -3*(-x)
             // -a*(-3)
             // -3*(-3)
-        }, {
-            id: 0.81, //nowe
-            name: "linearFxShortNegAMult",
-            fx: /^.([0-9]{1,11}|a)\*([0-9]{1,11}|x)$/
-            // -a*x
-            // -3*x
-            // -a*3
-            // -3*3
         }, {
             id: 0.91, //nowe
             name: "linearFxShortNegBAdd",
@@ -282,6 +240,7 @@ module.exports = {
             // -a/x
         }, 
         
+
         {
             id: 6.11, //20
             name: "absValueFxTinyNegAbs",
@@ -300,12 +259,7 @@ module.exports = {
             fx: /^.\|.([0-9]{1,20}|x)\|$/
             // -|-x|
             // -|-3|
-        }
-    
-    
-    
-    
-    ]; return fx;
+        }]; return fx;
     },
     quad: function() {
         const regQuad = [{
