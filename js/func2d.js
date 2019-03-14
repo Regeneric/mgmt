@@ -91,31 +91,23 @@ fxBtn.forEach(fb => {
             
                 fxValue = fxInp[1].value
                 fxInp[3].checked = false;
-                func2d.destroy();
+                // func2d.destroy();
             
                 fxFind.forEach(r => {
                     if (r.fx.test(fxValue)) {
                         switch(r.id) {
                             case 0.1:
-                            case 0.2:
-                            case 0.3:
-                            case 0.4:
-                            case 0.5:
-                            case 0.6:
                             case 1.2:
                             case 1.3:
                             case 2.1:
                             case 3.1:
                             case 5.1:
                             case 5.2:
-                            case 0.11:
-                            case 0.21:
+                            case 0.11:   
                             case 0.31:
                             case 0.41:
-                            case 0.51:
                             case 0.61:
                             case 0.71:
-                            case 0.81:
                             case 0.91:
                             case 14:
                             case 15:
@@ -127,6 +119,7 @@ fxBtn.forEach(fb => {
 
                                 // Zamienia x^2 na x**2 na potrzeby eval()
                                 fxValue = fxValue.replace('^', "**");  
+                                console.log(fxValue);
                                 
                                 data.length = 0;
                                 drawLinearFx(fxValue, a, b, leftX, data);
@@ -259,10 +252,10 @@ fxBtn.forEach(fb => {
                     }
                 });
             
-                func2d = new Chart(ctx, chartProps);
-                    func2d.data.datasets[0].label = fxValue.toString();
-                    func2d.options.scales.xAxes[0].ticks.min = parseInt(leftX);
-                    func2d.options.scales.xAxes[0].ticks.max = parseInt(rightX);
+                // func2d = new Chart(ctx, chartProps);
+                func2d.data.datasets[0].label = fxValue.toString();
+                func2d.options.scales.xAxes[0].ticks.min = parseInt(leftX);
+                func2d.options.scales.xAxes[0].ticks.max = parseInt(rightX);
                 func2d.update();
                 break;
             }
@@ -302,21 +295,19 @@ function drawDPos(fx, X, range, data) {
     let leftX = range;
     let rightX = ~leftX+1;
     
+    console.log(fx);
     function f(x) {
         return eval(fx);
     }
 
     for (let x = leftX; x < X.x1; x++) {
         data.push({x: x, y: f(x)});
-        console.log('y', f(x), 'x', x);
     }
     for (let x = X.x1; x < X.x2; x++) {
         data.push({x: x, y: f(x)});
-        console.log('y', f(x), 'x', x);   
     }
     for (let x = X.x2; x < rightX; x++) {
         data.push({x: x, y: f(x)});
-        console.log('y', f(x), 'x', x);
     }
 }
 function drawDNeg(fx, W, range, data) {
@@ -329,15 +320,17 @@ function drawDNeg(fx, W, range, data) {
 
     for (let x = leftX; x < W.p; x++) {
         data.push({x: x, y: f(x)});
-        console.log('y', f(x), 'x', x);
     }
     for (let x = W.p; x < rightX; x++) {
         data.push({x: x, y: f(x)});
-        console.log('y', f(x), 'x', x);
     }
 }
 
 function findABCPos(P, fx) {
+    fx = fx.replace('^', "**");
+    a = P.a;
+    b = P.b;
+    c = P.c;
     quad.forEach(r => {
         switch (r.id) {
             case 0: {
