@@ -27,6 +27,12 @@ const funcProp = {
     protocol: "file:",
     slashes: true
 }; 
+const help2dProp = {
+    dir: __dirname,
+    file: "help2d.html",
+    protocol: "file:",
+    slashes: true
+};
 const func3DProp = {
     dir: __dirname,
     file: "func3d.html",
@@ -123,6 +129,11 @@ liDrop.forEach(ld => {
                 win.setSize(1290, 730);
                 win.setResizable(false);
                 win = loadWindow(win, funcProp);
+                break;
+            } case "poss-funcs": {
+                const ipcRenderer = require("electron").ipcRenderer;
+                ipcRenderer.send("popCreate", 1);
+                ipcRenderer.send("popShow", 1);
                 break;
             } case "func3d": {
                 win = remote.getCurrentWindow();

@@ -21,6 +21,21 @@ let mainWindow = null;
             protocol: "file:",
             slashes: true
     };
+
+let popWindow = null;
+    const pop = {
+        width: 800,
+        height: 480,
+        title: "Help",
+        show: false,
+        resizable: false,
+        frame: false
+    };  const popProp = {
+        dir: __dirname,
+        file: "help2d.html",
+        protocol: "file:",
+        slashes: true
+    };
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -31,19 +46,13 @@ app.on("ready", () => {
 
     mainWindow.once("ready-to-show", () => {
         mainWindow.show();
-        // mainWindow.setPosition(x, y);
     });
     mainWindow.once("close", () => {
         mainWindow = null;
         app.quit();
     });
-
+     
     // Menu.setApplicationMenu(null);
-});
-
-ipcMain.on("inputBox", (e, input) => {
-    console.log(input);
-    e.sender.send("inputBox", input);
 });
 /*-!EVENTS!-*/
 
@@ -57,3 +66,12 @@ function loadWindow(oWindow, oProp) {
     return this.oWindow;
 }
 /*-!RUN!-*/
+
+/*--IPC--*/
+ipcMain.on("popCreate", (e, input) => popWindow = new BrowserWindow(pop));
+ipcMain.on("popShow", (e, input) => {
+    popWindow = loadWindow(popWindow, popProp)
+    popWindow.on("ready-to-show", () => popWindow.show());
+    popWindow.on("close", () => popWindow = null);
+});
+/*-!IPC!- */
