@@ -33,6 +33,13 @@ const func3DProp = {
     protocol: "file:",
     slashes: true
 };
+
+const scienceProp = {
+    dir: __dirname,
+    file: "science.html",
+    protocol: "file:",
+    slashes: true
+}
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -123,6 +130,13 @@ liDrop.forEach(ld => {
                 win.setSize(1280, 730);
                 win.setResizable(false);
                 win = loadWindow(win, func3DProp);
+                break;
+            } case "science": {
+                win = remote.getCurrentWindow();
+                win.setResizable(true);
+                win.setSize(1280, 730);
+                win.setResizable(false);
+                win = loadWindow(win, scienceProp);
                 break;
             }
         }
