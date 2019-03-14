@@ -6,6 +6,10 @@ const fxFind = require("./js/data/regExes").fx();
     const quadNeg = require("./js/data/regExes").quadNeg();
     const abs = require("./js/data/regExes").abs();
 
+// Przygotowania pod optymalizację kodu
+// const reg = require("./js/data/regExes");
+//     const {fx, quad, quadNeg, abs} = reg;
+
 const ctx = document.querySelector("#func2d-chart").getContext("2d");
 
 const fxBtn = document.querySelectorAll(".fx-btn");
