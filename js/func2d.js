@@ -100,14 +100,23 @@ fxBtn.forEach(fb => {
                             case 0.2:
                             case 0.3:
                             case 0.4:
+                            case 0.5:
+                            case 0.6:
                             case 1.2:
                             case 1.3:
                             case 2.1:
                             case 3.1:
                             case 5.1:
                             case 5.2:
-                            case 11:
-                            case 12:
+                            case 0.11:
+                            case 0.21:
+                            case 0.31:
+                            case 0.41:
+                            case 0.51:
+                            case 0.61:
+                            case 0.71:
+                            case 0.81:
+                            case 0.91:
                             case 14:
                             case 15:
                             case 16:
@@ -183,18 +192,39 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             
-                            case 20: {
+                            case 6.11: {
                                 fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
-            
-                                function f(x) {
-                                    return Math.abs(x)*(-1);
-                                }
-            
+
                                 data.length = 0;
-                                for (let x = leftX; x < rightX; x++) {
-                                    data.push({x:x,y:f(x)});
-                                }
+                                if (fxValue == 'x') drawHomoTinyXNeg(leftX, data)
+                                else drawLinearFx(-fxValue, 1, 1, leftX, data);
+            
+                                func2d.options.elements.line.tension = 0;
+                                checkForX(fxInp[2].value, data);
+                                break;
+                            }
+                            case 6.21: {
+                                fxValue = r.fx.exec(fxValue)[0];
+                                fxValue = fxValue.split('|')[1];
+                                if(fxValue < 0) fxValue = Math.abs(fxValue);
+
+                                data.length = 0;
+                                if (fxValue == 'x') drawHomoTinyXNeg(leftX, data)
+                                else if (fxValue == "-x") drawHomoTinyXPos(leftX, data)
+                                else drawLinearFx(fxValue, 1, 1, leftX, data);
+            
+                                func2d.options.elements.line.tension = 0;
+                                checkForX(fxInp[2].value, data);
+                                break;
+                            }
+                            case 6.31: {
+                                fxValue = r.fx.exec(fxValue)[0];
+                                fxValue = fxValue.split('|')[1];
+
+                                data.length = 0;
+                                if (fxValue == "-x") drawHomoTinyXNeg(leftX, data)
+                                else drawLinearFx(fxValue, 1, 1, leftX, data);
             
                                 func2d.options.elements.line.tension = 0;
                                 checkForX(fxInp[2].value, data);
@@ -208,7 +238,6 @@ fxBtn.forEach(fb => {
                                 data.length = 0;
                                 a = findAPos(a, fxValue);
                                 drawHomoShortPos(fxValue, a, leftX, data);
-                                console.log(fxValue);
 
                                 func2d.options.elements.line.tension = 0;
                                 checkForX(fxInp[2].value, data);
@@ -416,6 +445,18 @@ function drawHomoTinyXPos(range, data) {
 
     function f(x) {
         return Math.abs(x);
+    }
+
+    for (let x = leftX; x < rightX; x++) {
+        data.push({x:x, y: f(x)});
+    }
+}
+function drawHomoTinyXNeg(range, data) {
+    let leftX = range;
+    let rightX = ~range+1;
+
+    function f(x) {
+        return Math.abs(x)*(-1);
     }
 
     for (let x = leftX; x < rightX; x++) {
