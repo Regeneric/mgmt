@@ -178,6 +178,8 @@ header.base section#resultBox {
 .activated {
     margin: 2px;
 
+    text-align: center;
+    align-items: flex-start;
     height: 50px;
     width: 70px;
 

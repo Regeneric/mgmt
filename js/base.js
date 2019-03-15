@@ -264,7 +264,10 @@ document.addEventListener("keyup", () => {
         } case "-": {
             document.querySelector("#btnminus").classList.value = "calc";
             break;
-        } case "*": {
+        } 
+        case "*":
+        case "Shift": {
+            document.querySelector("#btnplus").classList.value = "calc";
             document.querySelector("#btnmultiple").classList.value = "calc";
             break;
         }
