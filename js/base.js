@@ -7,7 +7,7 @@ const calc = document.querySelectorAll(".calc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-const maxChar = 16; // Max number of characters you can input
+const maxChar = 12; // Max number of characters you can input
 const btnColor = "#31363b";
 const btnColorFocus = "#22282e";
 /*-!PROPS!-*/

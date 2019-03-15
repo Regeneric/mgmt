@@ -149,6 +149,8 @@ header.base section#resultBox {
     height: 50px;
     width: 70px;
 
+    text-align: center;
+    align-items: flex-start;
     background-color: rgb(223, 223, 223);
     outline: none;
 
