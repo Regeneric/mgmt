@@ -81,7 +81,7 @@ body {
     text-align: center;
     font-weight: 500;
     font-size: 10pt;
-    -webkit-app-region: drag;\
+    -webkit-app-region: drag;
 }
 .btns-group {
     float: right;
@@ -168,6 +168,10 @@ header.base section#resultBox {
 
     cursor: pointer;
     -webkit-user-select: none;
+}
+
+#btnequals {
+    line-height: 105px;
 }
 
 .baseButton:active, .calc:active {
