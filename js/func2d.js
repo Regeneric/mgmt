@@ -20,7 +20,7 @@ const squreDesc = document.querySelectorAll(".fx-desc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-let fxValue = 0;
+let fxValue = fxInp[1].value
 let func2d = null;
 let pos = 1;
 
@@ -101,7 +101,6 @@ fxBtn.forEach(fb => {
             
                 fxValue = fxInp[1].value
                 fxInp[3].checked = false;
-                // func2d.destroy();
             
                 fxFind.forEach(r => {
                     if (r.fx.test(fxValue)) {
@@ -255,10 +254,9 @@ fxBtn.forEach(fb => {
                     }
                 });
             
-                // func2d = new Chart(ctx, chartProps);
                 func2d.data.datasets[0].label = fxValue.toString();
-                func2d.options.scales.xAxes[0].ticks.min = parseInt(leftX);
-                func2d.options.scales.xAxes[0].ticks.max = parseInt(rightX);
+                    func2d.options.scales.xAxes[0].ticks.min = parseInt(leftX);
+                    func2d.options.scales.xAxes[0].ticks.max = parseInt(rightX);
                 func2d.update();
                 break;
             }
