@@ -3,7 +3,7 @@ const electron = require("electron");
 const path = require("path");
 const url = require("url");
 
-const {app, BrowserWindow, ipcMain, ipcRenderer} = electron;
+const {app, BrowserWindow, ipcMain, ipcRenderer, session} = electron;
 /*-!SETUP!-*/
 
 /*--PROPS--*/
@@ -30,7 +30,7 @@ let popWindow = null;
         show: false,
         resizable: false,
         frame: false
-    };  const popProp = {
+    };  const help2dProp = {
         dir: __dirname,
         file: "help2d.html",
         protocol: "file:",
@@ -69,8 +69,8 @@ function loadWindow(oWindow, oProp) {
 
 /*--IPC--*/
 ipcMain.on("popCreate", (e, input) => popWindow = new BrowserWindow(pop));
-ipcMain.on("popShow", (e, input) => {
-    popWindow = loadWindow(popWindow, popProp)
+ipcMain.on("help2dShow", (e, input) => {
+    popWindow = loadWindow(popWindow, help2dProp)
     popWindow.on("ready-to-show", () => popWindow.show());
     popWindow.on("close", () => popWindow = null);
 });

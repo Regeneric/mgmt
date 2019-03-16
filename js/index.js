@@ -15,21 +15,11 @@ const site = document.querySelector("main");
 
 /*--PROPS--*/
 let win = null;
-let clickIndex = null;
-
-let file = 1;
-let edit = 1;
-let help = 1;
+let file = edit = help = 1;
 
 const funcProp = {
     dir: __dirname,
     file: "func2d.html",
-    protocol: "file:",
-    slashes: true
-}; 
-const help2dProp = {
-    dir: __dirname,
-    file: "help2d.html",
     protocol: "file:",
     slashes: true
 };
@@ -45,7 +35,7 @@ const scienceProp = {
     file: "science.html",
     protocol: "file:",
     slashes: true
-}
+};
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -56,12 +46,14 @@ titleBtns.forEach(btn => {
             case "mini": {
                 win = remote.getCurrentWindow();
                 win.minimize();
+
                 break;
-            } case "maxi": {
-                break;
-            } case "close": {
+            } 
+            case "maxi": break;
+            case "close": {
                 win = remote.getCurrentWindow();
                 win.close();
+
                 break;
             }
         }
@@ -81,27 +73,23 @@ menu.forEach(m => {
     m.addEventListener("click", () => {
         switch(m.id) {
             case "file": {
-                file += 1;
+                file = edit = help += 1; // do zmiany
                 if (!(file % 2)) menuDrop[0].style.display = "block";
-                else menuDrop[0].style.color = "none";
+                else menuDrop[0].style.display = "none";
                 
                 menuDrop[1].style.display = "none";
                 menuDrop[2].style.display = "none";
-
                 break;
-                
-            }
-            case "edit": {
-                edit += 1;
+            } case "edit": {
+                file = edit = help += 1; // do zmiany
                 if (!(edit % 2)) menuDrop[1].style.display = "block";
                 else menuDrop[1].style.display = "none";
 
                 menuDrop[0].style.display = "none";
                 menuDrop[2].style.display = "none";
                 break;
-            }
-            case "help": {
-                help += 1;
+            } case "help": {
+                file = edit = help += 1; // do zmiany
                 if (!(help % 2)) menuDrop[2].style.display = "block";
                 else menuDrop[2].style.display = "none";
 
@@ -115,42 +103,34 @@ menu.forEach(m => {
 
 liDrop.forEach(ld => {
     ld.addEventListener("click", () => {
+        win = remote.getCurrentWindow();
+        win.setResizable(true);
+        
         switch(ld.id) {
             case "base": {
-                win = remote.getCurrentWindow();
-                win.setResizable(true);
                 win.setSize(330, 510);
-                win.setResizable(false);
                 win = loadWindow(win, mainProp);
                 break;
             } case "func2d": { 
-                win = remote.getCurrentWindow();
-                win.setResizable(true);
                 win.setSize(1290, 730);
-                win.setResizable(false);
                 win = loadWindow(win, funcProp);
                 break;
             } case "poss-funcs": {
                 const ipcRenderer = require("electron").ipcRenderer;
-                ipcRenderer.send("popCreate", 1);
-                ipcRenderer.send("popShow", 1);
+                    ipcRenderer.send("popCreate", 1);
+                    ipcRenderer.send("help2dShow", 1);
                 break;
             } case "func3d": {
-                win = remote.getCurrentWindow();
-                win.setResizable(true);
                 win.setSize(1280, 730);
-                win.setResizable(false);
                 win = loadWindow(win, func3DProp);
                 break;
             } case "science": {
-                win = remote.getCurrentWindow();
-                win.setResizable(true);
-                win.setSize(1280, 730);
-                win.setResizable(false);
+                win.setSize(1280, 730);;
                 win = loadWindow(win, scienceProp);
                 break;
             }
         }
+        win.setResizable(false);
     });
 });
 
