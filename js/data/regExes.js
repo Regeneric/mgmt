@@ -274,14 +274,14 @@ module.exports = {
 
         
         {
-            id: 5.1,
+            id: 5.1, // dokończyć
             name: "homoFx",
             fx: /^([\d]{1,7}|a)\/\(x(\+|\-)([\d]{1,7}|p)\)(\+|\-)([\d]{1,7}|q)$/,
             desc: [
                 "a/(x-p)+q",
             ]
         }, {
-            id: 5.2,
+            id: 5.2, // dokończyć
             name: "homoFxShort",
             fx: /^([\d]{1,20}|a)\/x$/,
             desc: [
@@ -334,7 +334,6 @@ module.exports = {
             ]
         },
         
-
         
         {
             id: 18,
@@ -382,7 +381,7 @@ module.exports = {
         const regAbs = [{
             id: 0,
             name: "regA",
-            re: /^.[\d]{0,6}/g
+            re: /^[-]{0,1}([\d]{1,6}|a)/g
         }, {
             id: 1,
             name: "regP",
@@ -390,7 +389,7 @@ module.exports = {
         }, {
             id: 2,
             name: "regQ",
-            re: /(?=)(\+|\-)([\d]{1,6}|\q)$/g
+            re: /(?=)(\+|\-)([\d]{1,6}|q)$/g
         }, {
             id: 3,
             name: "regX",
