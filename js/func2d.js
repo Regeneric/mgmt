@@ -125,11 +125,8 @@ fxBtn.forEach(fb => {
                             case 5.3:
                             case 18:
                             case 19: {
-                                fxValue = r.fx.exec(fxValue)[0];
-
                                 // Zamienia x^2 na x**2 na potrzeby eval()
                                 fxValue = fxValue.replace('^', "**");  
-                                console.log(fxValue);
                                 
                                 data.length = 0;
                                 drawLinearFx(fxValue, a, b, leftX, data);
@@ -140,13 +137,11 @@ fxBtn.forEach(fb => {
 
                             case 1.11: pos = 0;
                             case 1.1: {
-                                fxValue = r.fx.exec(fxValue)[0];
-            
-                                if (pos) findABCPos(P, fxValue);
-                                else findABCNeg(P, fxValue);
-                                
                                 // Zamienia x^2 na x**2 na potrzeby eval()
                                 fxValue = fxValue.replace('^', "**");
+
+                                if (pos) findABCPos(P, fxValue);
+                                else findABCNeg(P, fxValue);
 
                                 P.d = deltaFx(P.a, P.b, P.c);
                                 
@@ -177,8 +172,6 @@ fxBtn.forEach(fb => {
 
                             case 4.11:
                             case 4.1: {
-                                fxValue = r.fx.exec(fxValue)[0];
-
                                 data.length = 0;
                                 let P = findAPQXPos(a, p, q, x, fxValue);
                                     a = P.a; p = P.p; q = P.q; x = P.x;
@@ -191,7 +184,6 @@ fxBtn.forEach(fb => {
                             }
                             
                             case 6.11: {
-                                fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
 
                                 data.length = 0;
@@ -203,7 +195,6 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.21: {
-                                fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
                                 if(fxValue < 0) fxValue = Math.abs(fxValue);
 
@@ -217,7 +208,6 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.31: {                             
-                                fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
 
                                 data.length = 0;
@@ -229,7 +219,6 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.1: {                             
-                                fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|');
                                 
                                 data.length = 0;
@@ -241,7 +230,7 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.2: {                           
-                                fxValue = r.fx.exec(fxValue)[0];
+                                // fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
             
                                 data.length = 0;
@@ -329,7 +318,6 @@ function drawDNeg(fx, W, range, data) {
 }
 
 function findABCPos(P, fx) {
-    console.log(P.a, P.b, P.c);
     quad.forEach(r => {
         switch (r.id) {
             case 0: {
@@ -462,18 +450,22 @@ function findAPQXPos(a, p, q, x, fx) {
     abs.forEach(r => {
         switch (r.id) {
             case 0: {
+                console.log(r.re.test(fx));
                 a = eval(r.re.exec(fx)[0]);
                 if (a[0] === '+') a = a.split('+')[1];
+                
                 // P.a = eval(r.re.exec(fx)[0]);
                 // if (P.a[0] === '+') P.a = P.a.split('+')[1];
                 break;
             } case 1: {
                 p = eval(r.re.exec(fx)[0]);
+
                 // P.p = eval(r.re.exec(fx)[0]);
                 break;
             } case 2: { 
                 q = eval(r.re.exec(fx)[0]);
                 if (q[0] === '+') q = q.split('+')[1];
+
                 // P.q = eval(r.re.exec(fx)[0]);
                 // if (P.q[0] === '+') P.q = P.q.split('+')[1];
                 break; 
@@ -482,6 +474,7 @@ function findAPQXPos(a, p, q, x, fx) {
                 x = x.split('|')[1];
                 x = eval(x);
                 if (x[0] === '+') x = x.split('+')[1];
+
                 // P.x = r.re.exec(fx)[0];
                 // P.x = P.x.split('|')[1];
                 // P.x = eval(P.x);
