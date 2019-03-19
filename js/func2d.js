@@ -450,7 +450,6 @@ function findAPQXPos(a, p, q, x, fx) {
     abs.forEach(r => {
         switch (r.id) {
             case 0: {
-                console.log(r.re.test(fx));
                 a = eval(r.re.exec(fx)[0]);
                 if (a[0] === '+') a = a.split('+')[1];
                 
