@@ -91,7 +91,7 @@ body {
     padding: 2px;
     margin-right: 1px;
     position: relative;
-} .title-btn {
+} .title-btn{
     height: 32px;   
     width: 46px;
     margin: -2px;
@@ -146,7 +146,7 @@ header.base section#resultBox {
     color: #bcbcbc;
 }
 
-.baseButton, .calc {
+.baseButton, .calc{
     margin: 2px;
 
     height: 50px;
@@ -219,26 +219,36 @@ table#base {
 /*--MAIN--*/
 .inputs-group {
     display: inline-block;
-} .fx {
+
+} .fx, .fx-btn {
+    background-color: rgb(223, 223, 223);
+
+    border: solid 1px rgb(124, 124, 124);
+    border-radius: 3px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+    color: #5e5e5e;
+
     padding: 10px;
-    color: #fff;
     font-size: 14pt;
+
+    
+
 } .fx-desc {
     margin-right: 10px;
+    width: 20px;
 } .fx-inp {
+    width: 50px;
     margin-right: 10px;
     padding: 4px;
     padding-right: 35px;
-} .fx-btn {
-    padding: 6px 6px;
+} .fx-btn:hover {
     background-color: #3c3c3c;
     color: #bcbcbc;
-    border: none;
-    font-weight: 600;
-} .fx-btn:hover {
-    background-color: #505050;
     cursor: pointer;
+} #fx-draw{
+    width: 130px;
 }
+
 /*-!MAIN!-*/
 
 
