@@ -35,6 +35,11 @@ let popWindow = null;
         file: "help2d.html",
         protocol: "file:",
         slashes: true
+    };  const aboutProp = {
+        dir: __dirname,
+        file: "about.html",
+        protocol: "file:",
+        slashes: true
     };
 /*-!PROPS!-*/
 
@@ -68,9 +73,14 @@ function loadWindow(oWindow, oProp) {
 /*-!RUN!-*/
 
 /*--IPC--*/
-ipcMain.on("popCreate", (e, input) => popWindow = new BrowserWindow(pop));
-ipcMain.on("help2dShow", (e, input) => {
+ipcMain.on("popCreate", (e, data) => popWindow = new BrowserWindow(pop));
+ipcMain.on("help2dShow", (e, data) => {
     popWindow = loadWindow(popWindow, help2dProp)
+    popWindow.on("ready-to-show", () => popWindow.show());
+    popWindow.on("close", () => popWindow = null);
+});
+ipcMain.on("aboutShow", (e, data) => {
+    popWindow = loadWindow(popWindow, aboutProp);
     popWindow.on("ready-to-show", () => popWindow.show());
     popWindow.on("close", () => popWindow = null);
 });
