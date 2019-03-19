@@ -14,14 +14,22 @@ const ctx = document.querySelector("#func2d-chart").getContext("2d");
 
 const fxBtn = document.querySelectorAll(".fx-btn");
 const fxInp = document.querySelectorAll(".fx-inp");
+<<<<<<< HEAD
 const fxDraw = document.querySelector("#fx-draw")
+=======
+const fxDraw = document.querySelector("#fx-draw");
+>>>>>>> stylowanie
 
 const squareDiv = document.querySelectorAll("#square");
 const squreDesc = document.querySelectorAll(".fx-desc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
+<<<<<<< HEAD
 let fxValue = fxDraw.value;
+=======
+let fxValue = fxInp[0].value
+>>>>>>> stylowanie
 let func2d = null;
 let pos = 1;
 
@@ -97,10 +105,17 @@ fxBtn.forEach(fb => {
                 func2d.options.elements.line.tension = 0.3;
                 squareDiv.forEach(s => s.style.display = "none");
             
+<<<<<<< HEAD
                 rightX = fxInp[0].value;
                 leftX = ~rightX+1;   
             
                 fxValue = fxDraw.value;
+=======
+                rightX = fxInp[1].value;
+                leftX = ~rightX+1; 
+            
+                fxValue = fxInp[0].value
+>>>>>>> stylowanie
                 fxInp[3].checked = false;
             
                 fxFind.forEach(r => {
