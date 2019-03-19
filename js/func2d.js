@@ -122,6 +122,7 @@ fxBtn.forEach(fb => {
                             case 3.11:
                             case 5.1:
                             case 5.2:
+                            case 5.3:
                             case 18:
                             case 19: {
                                 fxValue = r.fx.exec(fxValue)[0];
