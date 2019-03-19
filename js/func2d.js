@@ -14,19 +14,20 @@ const ctx = document.querySelector("#func2d-chart").getContext("2d");
 
 const fxBtn = document.querySelectorAll(".fx-btn");
 const fxInp = document.querySelectorAll(".fx-inp");
+const fxDraw = document.querySelector("#fx-draw")
 
 const squareDiv = document.querySelectorAll("#square");
 const squreDesc = document.querySelectorAll(".fx-desc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-let fxValue = fxInp[1].value
+let fxValue = fxDraw.value;
 let func2d = null;
 let pos = 1;
 
 let a = b = c = x = p = q = 1;
 
-const P = {a: 1, b: 1, c: 1, p: 1, q: 1, d: 0};
+const P = {a: 1, b: 1, c: 1, p: 1, q: 1, x: 1, d: 0};
 const W = {p: 0, q: 0};
 const X = {x1: 0, x2: 0};
 
@@ -97,9 +98,9 @@ fxBtn.forEach(fb => {
                 squareDiv.forEach(s => s.style.display = "none");
             
                 rightX = fxInp[0].value;
-                leftX = ~rightX+1; 
+                leftX = ~rightX+1;   
             
-                fxValue = fxInp[1].value
+                fxValue = fxDraw.value;
                 fxInp[3].checked = false;
             
                 fxFind.forEach(r => {
@@ -121,13 +122,11 @@ fxBtn.forEach(fb => {
                             case 3.11:
                             case 5.1:
                             case 5.2:
+                            case 5.3:
                             case 18:
                             case 19: {
-                                fxValue = r.fx.exec(fxValue)[0];
-
                                 // Zamienia x^2 na x**2 na potrzeby eval()
                                 fxValue = fxValue.replace('^', "**");  
-                                console.log(fxValue);
                                 
                                 data.length = 0;
                                 drawLinearFx(fxValue, a, b, leftX, data);
@@ -138,13 +137,11 @@ fxBtn.forEach(fb => {
 
                             case 1.11: pos = 0;
                             case 1.1: {
-                                fxValue = r.fx.exec(fxValue)[0];
-            
-                                if (pos) findABCPos(P, fxValue);
-                                else findABCNeg(P, fxValue);
-                                
                                 // Zamienia x^2 na x**2 na potrzeby eval()
                                 fxValue = fxValue.replace('^', "**");
+
+                                if (pos) findABCPos(P, fxValue);
+                                else findABCNeg(P, fxValue);
 
                                 P.d = deltaFx(P.a, P.b, P.c);
                                 
@@ -175,8 +172,6 @@ fxBtn.forEach(fb => {
 
                             case 4.11:
                             case 4.1: {
-                                fxValue = r.fx.exec(fxValue)[0];
-
                                 data.length = 0;
                                 let P = findAPQXPos(a, p, q, x, fxValue);
                                     a = P.a; p = P.p; q = P.q; x = P.x;
@@ -189,7 +184,6 @@ fxBtn.forEach(fb => {
                             }
                             
                             case 6.11: {
-                                fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
 
                                 data.length = 0;
@@ -201,7 +195,6 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.21: {
-                                fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
                                 if(fxValue < 0) fxValue = Math.abs(fxValue);
 
@@ -214,8 +207,7 @@ fxBtn.forEach(fb => {
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
-                            case 6.31: {
-                                fxValue = r.fx.exec(fxValue)[0];
+                            case 6.31: {                             
                                 fxValue = fxValue.split('|')[1];
 
                                 data.length = 0;
@@ -226,8 +218,7 @@ fxBtn.forEach(fb => {
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
-                            case 6.1: {
-                                fxValue = r.fx.exec(fxValue)[0];
+                            case 6.1: {                             
                                 fxValue = fxValue.split('|');
                                 
                                 data.length = 0;
@@ -238,8 +229,8 @@ fxBtn.forEach(fb => {
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
-                            case 6.2: {
-                                fxValue = r.fx.exec(fxValue)[0];
+                            case 6.2: {                           
+                                // fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
             
                                 data.length = 0;
@@ -455,25 +446,39 @@ function drawHomoTinyXNeg(range, data) {
 }
 
 function findAPQXPos(a, p, q, x, fx) {
+// function findAPQXPos(P, fx) {
     abs.forEach(r => {
         switch (r.id) {
             case 0: {
+                console.log(r.re.test(fx));
                 a = eval(r.re.exec(fx)[0]);
                 if (a[0] === '+') a = a.split('+')[1];
+                
+                // P.a = eval(r.re.exec(fx)[0]);
+                // if (P.a[0] === '+') P.a = P.a.split('+')[1];
                 break;
             } case 1: {
                 p = eval(r.re.exec(fx)[0]);
-                // if (p[0] === '+') p = p.split('+')[1];
+
+                // P.p = eval(r.re.exec(fx)[0]);
                 break;
             } case 2: { 
                 q = eval(r.re.exec(fx)[0]);
                 if (q[0] === '+') q = q.split('+')[1];
+
+                // P.q = eval(r.re.exec(fx)[0]);
+                // if (P.q[0] === '+') P.q = P.q.split('+')[1];
                 break; 
             } case 3: {
                 x = r.re.exec(fx)[0];
                 x = x.split('|')[1];
                 x = eval(x);
                 if (x[0] === '+') x = x.split('+')[1];
+
+                // P.x = r.re.exec(fx)[0];
+                // P.x = P.x.split('|')[1];
+                // P.x = eval(P.x);
+                // if (P.x[0] === '+') P.x = P.x.split('+')[1];
                 break;
             }
         }
