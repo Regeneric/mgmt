@@ -103,6 +103,8 @@ menu.forEach(m => {
 
 liDrop.forEach(ld => {
     ld.addEventListener("click", () => {
+        const ipcRenderer = require("electron").ipcRenderer;
+
         win = remote.getCurrentWindow();
         win.setResizable(true);
         
@@ -116,9 +118,12 @@ liDrop.forEach(ld => {
                 win = loadWindow(win, funcProp);
                 break;
             } case "poss-funcs": {
-                const ipcRenderer = require("electron").ipcRenderer;
-                    ipcRenderer.send("popCreate", 1);
-                    ipcRenderer.send("help2dShow", 1);
+                ipcRenderer.send("popCreate", 1);
+                ipcRenderer.send("help2dShow", 1);
+                break;
+            } case "about": {
+                ipcRenderer.send("popCreate", 1);
+                ipcRenderer.send("aboutShow", 1);
                 break;
             } case "func3d": {
                 win.setSize(1280, 730);

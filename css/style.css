@@ -271,6 +271,43 @@ width: 100%;
 
 /*-!MAIN!-*/
 
+/*--about.html--*/
+.about-main {
+    margin: auto;
+    padding-bottom: 0;
+    text-align: center;
+    color: #ccc;
+    font-weight: 550;
+    font-size: 15pt;
+} .about-img {
+    width: 20%;
+    margin: 0;
+    padding: 10px;
+    padding-top: 15px;
+} .about-desc {
+    margin-top: -17px;
+    padding: 0;
+    font-weight: 400;
+    font-size: 13pt;
+} .desc-group {
+    margin-left: auto;
+    width: 56%;
+    text-align: left;
+} .desc {
+    margin: 0;
+    padding: 0;
+    font-weight: 200;
+    font-size: 11pt;
+} .desc:first-child {
+    padding-top: 10px;
+} .desc#chromium {
+    padding-top: 10px;
+} .desc#gpl {
+    color: #ccc;
+    font-weight: 550;
+    text-decoration: none;
+}
+/*-!about.html!-*/
 
 /* 
 width
