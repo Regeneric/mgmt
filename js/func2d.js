@@ -7,9 +7,6 @@ const chart = require("chart.js");
 const chartZoom = require("chartjs-plugin-zoom");
 
 const fxFind = require("./js/data/regExes").fx();
-    const quad = require("./js/data/regExes").quad();
-    const quadNeg = require("./js/data/regExes").quadNeg();
-    const abs = require("./js/data/regExes").abs();
 
 // Przygotowania pod optymalizację kodu
 // const reg = require("./js/data/regExes");
@@ -254,7 +251,6 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.2: {                           
-                                // fxValue = r.fx.exec(fxValue)[0];
                                 fxValue = fxValue.split('|')[1];
             
                                 data.length = 0;
@@ -371,6 +367,7 @@ function drawDZero(fx, X, range, data) {
 }
 
 function findABCPos(P, fx) {
+    const quad = require("./js/data/regExes").quad();
     quad.forEach(r => {
         switch (r.id) {
             case 0: {
@@ -390,6 +387,7 @@ function findABCPos(P, fx) {
     });
 }
 function findABCNeg(P, fx) {
+    const quadNeg = require("./js/data/regExes").quadNeg();
     quadNeg.forEach(r => {
         switch (r.id) {
             case 0: {
@@ -499,27 +497,22 @@ function drawHomoTinyXNeg(range, data) {
 }
 
 function findAPQXPos(a, p, q, x, fx) {
-// function findAPQXPos(P, fx) {
+    const abs = require("./js/data/regExes").abs();
     abs.forEach(r => {
         switch (r.id) {
             case 0: {
                 a = eval(r.re.exec(fx)[0]);
                 if (a[0] === '+') a = a.split('+')[1];
-                
-                // P.a = eval(r.re.exec(fx)[0]);
-                // if (P.a[0] === '+') P.a = P.a.split('+')[1];
+
                 break;
             } case 1: {
                 p = eval(r.re.exec(fx)[0]);
 
-                // P.p = eval(r.re.exec(fx)[0]);
                 break;
             } case 2: { 
                 q = eval(r.re.exec(fx)[0]);
                 if (q[0] === '+') q = q.split('+')[1];
 
-                // P.q = eval(r.re.exec(fx)[0]);
-                // if (P.q[0] === '+') P.q = P.q.split('+')[1];
                 break; 
             } case 3: {
                 x = r.re.exec(fx)[0];
@@ -527,10 +520,6 @@ function findAPQXPos(a, p, q, x, fx) {
                 x = eval(x);
                 if (x[0] === '+') x = x.split('+')[1];
 
-                // P.x = r.re.exec(fx)[0];
-                // P.x = P.x.split('|')[1];
-                // P.x = eval(P.x);
-                // if (P.x[0] === '+') P.x = P.x.split('+')[1];
                 break;
             }
         }
