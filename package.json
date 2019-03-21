@@ -1,13 +1,21 @@
 {
   "name": "wgec",
-  "author": "Hubert Batkiewicz <hbatkiewicz898@gmail.com>",
+  "productName": "WGEC",
+  "description": "WebGL Electron Canvas - Scientific Calculator",
+  "author": "Hubert Batkiewicz <hbatkiewicz898@gmail.com> (https://github.com/Regeneric)",
   "contributors": [
     "Gabriel Król <werander.k@gmail.com>",
     "Patryk Piszczek <patrykpiszczek3@gmail.com>"
   ],
-  "version": "0.2.3",
+  "version": "0.2.4",
+  "license": "GPLv3",
   "private": true,
   "main": "main.js",
+  "engines": {
+    "electron": ">= 4.0.4",
+    "node": ">= 10.11.0",
+    "npm": ">= 6.9.0"
+  },
   "scripts": {
     "dev": "git checkout develop && npm install && electron main.js",
     "start": "git checkout master && npm install && electron main.js",
@@ -18,12 +26,14 @@
   "build": {
     "appId": "com.electron.wgec",
     "mac": {
+      "icon": "img/wgec-icon.svg",
       "category": "public.app-category.utilities",
       "target": [
         "default"
       ]
     },
     "linux": {
+      "icon": "img/wgec-icon.svg",
       "category": "Utility",
       "target": [
         "AppImage",
@@ -32,7 +42,11 @@
       ]
     },
     "win": {
-      "target": "NSIS"
+      "icon": "img/wgec-icon.svg",
+      "target": [
+        "nsis",
+        "msi"
+      ]
     }
   },
   "dependencies": {
