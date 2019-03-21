@@ -5,41 +5,39 @@
 /*--SETUP--*/
 const chart = require("chart.js");
 const chartZoom = require("chartjs-plugin-zoom");
+    const ctx = document.querySelector("#func2d-chart").getContext("2d");
 
 const fxFind = require("./js/data/regExes").fx();
 
-// Przygotowania pod optymalizację kodu
-// const reg = require("./js/data/regExes");
-//     const {fx, quad, quadNeg, abs} = reg;
-
-const ctx = document.querySelector("#func2d-chart").getContext("2d");
-
 const fxBtn = document.querySelectorAll(".fx-btn");
 const fxInp = document.querySelectorAll(".fx-inp");
-const fxDraw = document.querySelector("#fx-draw");
+const fxDraw = document.querySelector("#fx-draw").value;
 
 const squareDiv = document.querySelectorAll("#square");
 const squreDesc = document.querySelectorAll(".fx-desc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-let fxValue = fxInp[0].value
+let fxValue = fxDraw;   // User's input
 let func2d = null;
-let pos = 1;
+let pos = 1;    // Check if a is positive or negative in equation
 
-let a = b = c = x = p = q = 1;
-
+// Degault values
+let a = b = c = x = p = q = 1;  
 const P = {a: 1, b: 1, c: 1, p: 1, q: 1, x: 1, d: 0};
 const W = {p: 0, q: 0};
 const X = {x1: 0, x2: 0, x12: 0};
 
+// Wideness of the graph
 let rightX = 0;
 let leftX = 0; 
 
+// Arrays for data and colour
 const data = new Array();
 const ptBgColour = new Array();
 const ptBorderCl = new Array();
 
+// Chart properties
 const chartProps = {
     type: "line",
     data: {
@@ -109,12 +107,12 @@ fxBtn.forEach(fb => {
         switch(fb.id) {
             case "fx-draw-btn": {
                 func2d.options.elements.line.tension = 0.3;
-                squareDiv.forEach(s => s.style.display = "none");
+                squareDiv.forEach(s => s.style.display = "none");   // Hide all divs driven by quadratic equation
             
                 rightX = fxInp[1].value;
                 leftX = ~rightX+1; 
             
-                fxValue = fxInp[0].value
+                fxValue = fxDraw;
                 fxInp[3].checked = false;
             
                 fxFind.forEach(r => {
@@ -139,7 +137,7 @@ fxBtn.forEach(fb => {
                             case 5.3:
                             case 18:
                             case 19: {
-                                // Zamienia x^2 na x**2 na potrzeby eval()
+                                // Repalce x^2 on x**2 for eval() function
                                 fxValue = fxValue.replace('^', "**");  
                                 
                                 data.length = 0;
@@ -151,7 +149,7 @@ fxBtn.forEach(fb => {
 
                             case 1.11: pos = 0;
                             case 1.1: {
-                                // Zamienia x^2 na x**2 na potrzeby eval()
+                                // Repalce x^2 on x**2 for eval() function
                                 fxValue = fxValue.replace('^', "**");
 
                                 if (pos) findABCPos(P, fxValue);
@@ -165,12 +163,13 @@ fxBtn.forEach(fb => {
                                     X.x12 = x12Fx(P.a, P.b);
                                 } else {
                                     X.x1 = "Brak";
-                                    X.x2 = "Brak;"
+                                    X.x2 = "Brak";
                                 }
 
                                 W.p = pFx(P.a, P.b);
                                 W.q = qFx(P.a, P.d);
 
+                                // Round values
                                 if (fxInp[4].checked) {
                                     X.x1 = Math.round(X.x1);
                                     X.x2 = Math.round(X.x2);
@@ -184,7 +183,8 @@ fxBtn.forEach(fb => {
                                 else if (P.d == 0) drawDZero(fxValue, X, leftX, data);
                                 else drawDNeg(fxValue, W, leftX, data);
             
-                                squareDiv.forEach(s => s.style.display = "block");          
+                                // Show all divs driven by quadratic equation
+                                squareDiv.forEach(s => s.style.display = "block");  
                                 squreDesc.forEach(s => showDivs(s, P, W, X));
                                 
                                 checkForX(fxInp[2].value, data);
@@ -216,6 +216,7 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.21: {
+                                // Split '|' sing for eval() and Math.abs() functions
                                 fxValue = fxValue.split('|')[1];
                                 if(fxValue < 0) fxValue = Math.abs(fxValue);
 
@@ -228,7 +229,8 @@ fxBtn.forEach(fb => {
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
-                            case 6.31: {                             
+                            case 6.31: {           
+                                // Split '|' sing for eval() and Math.abs() functions                                                  
                                 fxValue = fxValue.split('|')[1];
 
                                 data.length = 0;
@@ -240,6 +242,7 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.1: {                             
+                                // Split '|' sing for eval() and Math.abs() functions
                                 fxValue = fxValue.split('|');
                                 
                                 data.length = 0;
@@ -250,7 +253,8 @@ fxBtn.forEach(fb => {
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
-                            case 6.2: {                           
+                            case 6.2: { 
+                                // Split '|' sing for eval() and Math.abs() functions                          
                                 fxValue = fxValue.split('|')[1];
             
                                 data.length = 0;
@@ -265,6 +269,7 @@ fxBtn.forEach(fb => {
                             case 7.2:
                             case 7.3:
                             case 7.4: {
+                                // Split 'sin' word on 'Math.sin()' for eval() function
                                 fxValue = fxValue.replace("sin", "Math.sin");
                                 func2d.options.elements.line.tension = 0.7;
 
@@ -278,6 +283,7 @@ fxBtn.forEach(fb => {
                     }
                 });
 
+                // Set axis label
                 func2d.data.datasets[0].label = fxValue.toString();
                     func2d.options.scales.xAxes[0].ticks.min = parseInt(leftX);
                     func2d.options.scales.xAxes[0].ticks.max = parseInt(rightX);
