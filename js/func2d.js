@@ -139,6 +139,7 @@ fxBtn.forEach(fb => {
                             case 1.1: {
                                 // Zamienia x^2 na x**2 na potrzeby eval()
                                 fxValue = fxValue.replace('^', "**");
+                                console.log(fxValue);
 
                                 if (pos) findABCPos(P, fxValue);
                                 else findABCNeg(P, fxValue);
@@ -318,6 +319,7 @@ function drawDNeg(fx, W, range, data) {
 }
 
 function findABCPos(P, fx) {
+    console.log(fx);
     quad.forEach(r => {
         switch (r.id) {
             case 0: {

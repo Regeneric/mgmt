@@ -2,8 +2,7 @@
 const inputBox = document.querySelector("#inputBox");
 const resultBox = document.querySelector("#resultBox");
 
-const baseButtons = document.querySelectorAll(".baseButton");
-const calc = document.querySelectorAll(".calc");
+const calcButtons = document.querySelectorAll(".calcButton");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
@@ -13,119 +12,44 @@ const maxChar = 12; // Max number of characters you can input
 /*--RUN--*/
 /*--EVENTS--*/
 
-// Mouse 0-9
-baseButtons.forEach(baseButton => {
-    baseButton.addEventListener("click", () => {
-        // Continue inserting numbers after using calculate button
-        if (resultBox.className == "highlited") {
-            resultBox.className = "unhighlited";
-            inputBox.className = "highlited";
-            inputBox.firstChild.nodeValue = ' ';
-        }
-        // Max char number
-        if (inputBox.firstChild.nodeValue.length <= maxChar) {
-            // Insert 0
-            if (baseButton.id == "btn0"){
-                // 0 at the start of a number
-                if (inputBox.firstChild.nodeValue == " "){
-                    inputBox.firstChild.nodeValue = 0;
-                }
-                // 0 in other places
-                if (inputBox.firstChild.nodeValue.match(/\d+/g).map(Number)[inputBox.firstChild.nodeValue.match(/\d+/g).map(Number).length-1] == 0 ) {
-                    if (/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) inputBox.firstChild.nodeValue += 0;
-                }
-                else inputBox.firstChild.nodeValue += 0;
-            }
-            
-
-            // Insert 1-9
-            for (let i = 1; i < 10; i++) {
-                if (baseButton.id == "btn" + i && inputBox.firstChild.nodeValue !== '0') {
-                    inputBox.firstChild.nodeValue += i;
-                }
-            }
-        }
-        //Update resultbox
-        resultBox.firstChild.nodeValue = "= " + eval(inputBox.firstChild.nodeValue);
+//Insert by mouse
+calcButtons.forEach(calcButton => {
+    calcButton.addEventListener("mousedown", () => {
+        calculate(calcButton.getAttribute("name"));
     });
 });
 
-//Mouse operations
-calc.forEach(calc => {
-    calc.addEventListener("click", () => {
-
-        //Continue after using equal button
-        if (resultBox.className == "highlited" && calc.id != "btnequals" && calc.id != "btnbackspace"){
-            resultBox.className = "unhighlited";
-            inputBox.className = "highlited";
-            inputBox.firstChild.nodeValue = resultBox.firstChild.nodeValue.substr(2);
-        }
-
-        //Equal button
-        if (calc.id == "btnequals" && resultBox.className == "unhighlited") {
-            resultBox.className = "highlited";
-            ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
-            inputBox.className = "unhighlited";
-        }
-
-        //Calculating buttons
-        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
-            switch(calc.id) {
-                case "btnplus": {
-                    inputBox.firstChild.nodeValue += "+";
-                    break;
-                } case "btnminus": {
-                    inputBox.firstChild.nodeValue += "-";
-                    break;
-                } case "btnmultiple": {
-                    inputBox.firstChild.nodeValue += "*";
-                    break;
-                } case "btndivide": { 
-                    inputBox.firstChild.nodeValue += "/";
-                    break;
-                } case "btndot": {
-                    if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue))){
-                    inputBox.firstChild.nodeValue += ".";
-                    }
-                    break;
-                }
-            }
-        }
-
-        //Minus at the beginning
-        if (calc.id == "btnminus" && inputBox.firstChild.nodeValue == ' ') {
-            inputBox.firstChild.nodeValue += "-";
-        }
-
-        //Backspace button
-        if (calc.id == "btnbackspace") {
-
-            if (inputBox.firstChild.nodeValue != " ") {
-                inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.slice(0, -1);
-            }
-
-            if ( !(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) ) {
-                if (inputBox.firstChild.nodeValue.length > 1) {
-                    resultBox.firstChild.nodeValue = "= " + eval(inputBox.firstChild.nodeValue);
-                } else resultBox.firstChild.nodeValue = "= ";
-            }
-        }
-
-        //C button
-        if (calc.id == "btnc") {
-            inputBox.firstChild.nodeValue = " ";
-            resultBox.firstChild.nodeValue = "= ";
-        }
+//Uncolor by mouse
+calcButtons.forEach(calcButton => {
+    calcButton.addEventListener("mouseleave", () => {
+        uncolor(calcButton.getAttribute("name"));
     });
 });
 
+//Uncolor by mouse
+calcButtons.forEach(calcButton => {
+    calcButton.addEventListener("mouseup", () => {
+        uncolor(calcButton.getAttribute("name"));
+    });
+});
 
-//Keyboard support
+//Insert by keyboard
 document.addEventListener("keydown", () => {
-    console.log (event.key);
+    calculate(event.key);
+});
 
-        //Inserting numbers
-        if (!(isNaN(event.key))) {
+//Uncolor by keyboard
+document.addEventListener("keyup", () => {
+    uncolor(event.key)
+});
+
+
+
+function calculate(action){
+    console.log (action);
+
+    //Inserting numbers
+    if (!(isNaN(action))) {
 
         //Continue inserting numbers after using calculate button
         if (resultBox.className == "highlited") {
@@ -138,7 +62,7 @@ document.addEventListener("keydown", () => {
         if (inputBox.firstChild.nodeValue.length <= maxChar) {
             
                 // Insert 0
-                if (event.key == "0") {
+                if (action == "0") {
                     //0 at the start of a number
                     if (inputBox.firstChild.nodeValue == " ") {
                         inputBox.firstChild.nodeValue = 0;
@@ -154,7 +78,7 @@ document.addEventListener("keydown", () => {
 
                 // Insert 1-9
                 for (let i = 1; i < 10; i++) {
-                    if (event.key == i) {
+                    if (action == i) {
                         if (inputBox.firstChild.nodeValue !== '0') {
                         inputBox.firstChild.nodeValue += i;
                     }
@@ -166,16 +90,17 @@ document.addEventListener("keydown", () => {
                 resultBox.firstChild.nodeValue = "= " + eval(inputBox.firstChild.nodeValue);
             }
         }
-            //Keyboard operations
+
+        //Keyboard operations
             //Continue after using equal button
-            if (resultBox.className == "highlited" && ["+", "-", "*", ":", "/", ".", ","].includes(event.key)) {
+            if (resultBox.className == "highlited" && ["+", "-", "*", ":", "/", ".", ","].includes(action)) {
                 resultBox.className = "unhighlited";
                 inputBox.className = "highlited";
                 inputBox.firstChild.nodeValue = resultBox.firstChild.nodeValue.substr(2);
             }
 
             //Equal button
-            if (event.key == "Enter" || event.key == "=") {
+            if (action == "Enter" || action == "=") {
                 if (resultBox.className == "unhighlited") {
                     resultBox.className = "highlited";
                     ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
@@ -185,7 +110,7 @@ document.addEventListener("keydown", () => {
             }
 
             //Calculating buttons
-                switch(event.key) {
+                switch(action) {
                     case "+": {
                         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
                             inputBox.firstChild.nodeValue += "+";
@@ -211,7 +136,7 @@ document.addEventListener("keydown", () => {
                     }
                     case ",":
                     case ".": {
-                        if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) && inputBox.firstChild.nodeValue != ' ' && !(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1]))) {
                             inputBox.firstChild.nodeValue += ".";
                         } document.querySelector("#btndot").classList.value = "activated";
                         break;
@@ -219,12 +144,12 @@ document.addEventListener("keydown", () => {
                 }
 
                 //Minus at the beginning
-                if (event.key == "-" && inputBox.firstChild.nodeValue == ' ') {
+                if (action == "-" && inputBox.firstChild.nodeValue == ' ') {
                     inputBox.firstChild.nodeValue += "-";
                 }
 
             //Backspace button
-            if (event.key == "Backspace") {
+            if (action == "Backspace") {
 
                 if (inputBox.firstChild.nodeValue != " ") {
                     inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.slice(0, -1);
@@ -239,62 +164,58 @@ document.addEventListener("keydown", () => {
             }
 
             //C button
-            if (event.key == "Escape") {
+            if (action == "Escape") {
                 inputBox.firstChild.nodeValue = " ";
                 resultBox.firstChild.nodeValue = "= ";
                 document.querySelector("#btnc").classList.value = "activated";
             }
-});
+}
 
 
-
-////////////////////////////////////Keyboard button colors//////////////////////////////////////////////
-document.addEventListener("keyup", () => {
-
-    if (!(isNaN(event.key))) {
-        document.querySelector("#btn"+ event.key).classList.value = "baseButton";
+function uncolor(action) {
+    if (!(isNaN(action))) {
+        document.querySelector("#btn"+ action).classList.value = "calcButton";
     }
 
-    switch (event.key) {
+    switch (action) {
         case "+": {
-            document.querySelector("#btnplus").classList.value = "calc";
+            document.querySelector("#btnplus").classList.value = "calcButton";
             break;
         } case "-": {
-            document.querySelector("#btnminus").classList.value = "calc";
+            document.querySelector("#btnminus").classList.value = "calcButton";
             break;
         } 
         case "*":
         case "Shift": {
-            document.querySelector("#btnplus").classList.value = "calc";
-            document.querySelector("#btnmultiple").classList.value = "calc";
+            document.querySelector("#btnplus").classList.value = "calcButton";
+            document.querySelector("#btnmultiple").classList.value = "calcButton";
             break;
         }
         case ":":
         case "/": {
-            document.querySelector("#btndivide").classList.value = "calc";
+            document.querySelector("#btndivide").classList.value = "calcButton";
             break; 
         } 
         case "Enter":
         case "=": {
-            document.querySelector("#btnequals").classList.value = "calc";
+            document.querySelector("#btnequals").classList.value = "calcButton";
             break;
         }
         case "Escape":
         case "Delete": {
-            document.querySelector("#btnc").classList.value = "calc";
+            document.querySelector("#btnc").classList.value = "calcButton";
             break;
         }
         case ".":
         case ",": {
-            document.querySelector("#btndot").classList.value = "calc";
+            document.querySelector("#btndot").classList.value = "calcButton";
             break;
         } case "Backspace": {
-            document.querySelector("#btnbackspace").classList.value = "calc";
+            document.querySelector("#btnbackspace").classList.value = "calcButton";
             break;
         }
     }
-});
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+}
 
 /*-!EVENTS!-*/ 
 /*-!RUN!-*/
