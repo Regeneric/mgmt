@@ -12,29 +12,33 @@ const maxChar = 12; // Max number of characters you can input
 /*--RUN--*/
 /*--EVENTS--*/
 
-
+//Insert by mouse
 calcButtons.forEach(calcButton => {
     calcButton.addEventListener("mousedown", () => {
         calculate(calcButton.getAttribute("name"));
     });
 });
 
+//Uncolor by mouse
 calcButtons.forEach(calcButton => {
     calcButton.addEventListener("mouseleave", () => {
         uncolor(calcButton.getAttribute("name"));
     });
 });
 
+//Uncolor by mouse
 calcButtons.forEach(calcButton => {
     calcButton.addEventListener("mouseup", () => {
         uncolor(calcButton.getAttribute("name"));
     });
 });
 
+//Insert by keyboard
 document.addEventListener("keydown", () => {
     calculate(event.key);
 });
 
+//Uncolor by keyboard
 document.addEventListener("keyup", () => {
     uncolor(event.key)
 });
@@ -167,6 +171,7 @@ function calculate(action){
             }
 }
 
+
 function uncolor(action) {
     if (!(isNaN(action))) {
         document.querySelector("#btn"+ action).classList.value = "calcButton";
@@ -212,6 +217,5 @@ function uncolor(action) {
     }
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
 /*-!EVENTS!-*/ 
 /*-!RUN!-*/

@@ -177,11 +177,6 @@ header.base section#resultBox {
     line-height: 105px;
 }
 
-.calcButton:active {
-    background-color: #22282e;
-    color: rgb(204, 204, 204);
-}
-
 .activated {
     margin: 2px;
 
