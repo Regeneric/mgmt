@@ -34,7 +34,7 @@ let a = b = c = x = p = q = 1;
 
 const P = {a: 1, b: 1, c: 1, p: 1, q: 1, x: 1, d: 0};
 const W = {p: 0, q: 0};
-const X = {x1: 0, x2: 0};
+const X = {x1: 0, x2: 0, x12: 0};
 
 let rightX = 0;
 let leftX = 0; 
@@ -156,15 +156,20 @@ fxBtn.forEach(fb => {
                             case 1.1: {
                                 // Zamienia x^2 na x**2 na potrzeby eval()
                                 fxValue = fxValue.replace('^', "**");
-                                console.log(fxValue);
 
                                 if (pos) findABCPos(P, fxValue);
                                 else findABCNeg(P, fxValue);
 
                                 P.d = deltaFx(P.a, P.b, P.c);
-                                
-                                X.x1 = x1Fx(P.a, P.b, P.d);
-                                X.x2 = x2Fx(P.a, P.b, P.d);
+                                if (P.d > 0) {
+                                    X.x1 = x1Fx(P.a, P.b, P.d);
+                                    X.x2 = x2Fx(P.a, P.b, P.d);
+                                } else if (P.d == 0) {
+                                    X.x12 = x12Fx(P.a, P.b);
+                                } else {
+                                    X.x1 = "Brak";
+                                    X.x2 = "Brak;"
+                                }
 
                                 W.p = pFx(P.a, P.b);
                                 W.q = qFx(P.a, P.d);
@@ -172,13 +177,14 @@ fxBtn.forEach(fb => {
                                 if (fxInp[4].checked) {
                                     X.x1 = Math.round(X.x1);
                                     X.x2 = Math.round(X.x2);
+                                    X.x12 = Math.round(X.x12);
                                     W.p = Math.round(W.p);
                                     W.q = Math.round(W.q);
                                 }
                                             
                                 data.length = 0;
                                 if (P.d > 0) drawDPos(fxValue, X, leftX, data);
-                                else if (P.d == 0) console.log("Delta 0");
+                                else if (P.d == 0) drawDZero(fxValue, X, leftX, data);
                                 else drawDNeg(fxValue, W, leftX, data);
             
                                 squareDiv.forEach(s => s.style.display = "block");          
@@ -266,8 +272,6 @@ fxBtn.forEach(fb => {
                                 fxValue = fxValue.replace("sin", "Math.sin");
                                 func2d.options.elements.line.tension = 0.7;
 
-                                console.log(fxValue);
-
                                 data.length = 0;
                                 drawSinFx(fxValue, leftX, data);
 
@@ -311,8 +315,9 @@ func2d = new Chart(ctx, chartProps);
 // Quadratic Equation
 ////////////////////////////////////////////////////////////////
 let deltaFx = (a, b, c) => {return b**2 - 4*a*c}
-let x1Fx = (a, b, d) => {return -b - Math.sqrt(d)/(2*a)}
-let x2Fx = (a, b, d) => {return -b + Math.sqrt(d)/(2*a)}
+let x1Fx = (a, b, d) => {return ((-1*b) - Math.sqrt(d))/(2*a)}
+let x2Fx = (a, b, d) => {return ((-1*b) + Math.sqrt(d))/(2*a)}
+let x12Fx = (a, b) => {return (-1*b)/(2*a)}
 let pFx = (a, b) => {return -b/(2*a)}
 let qFx = (a, d) => {return -d/(4*a)}
 
@@ -349,9 +354,23 @@ function drawDNeg(fx, W, range, data) {
         data.push({x: x, y: f(x)});
     }
 }
+function drawDZero(fx, X, range, data) {
+    let leftX = range;
+    let rightX = ~leftX+1;
+    
+    function f(x) {
+        return eval(fx);
+    }
+
+    for (let x = leftX; x < X.x12; x++) {
+        data.push({x: x, y: f(x)});
+    }
+    for (let x = X.x12; x < rightX; x++) {
+        data.push({x: x, y: f(x)});
+    }
+}
 
 function findABCPos(P, fx) {
-    console.log(fx);
     quad.forEach(r => {
         switch (r.id) {
             case 0: {
