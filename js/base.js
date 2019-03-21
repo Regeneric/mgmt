@@ -211,7 +211,7 @@ document.addEventListener("keydown", () => {
                     }
                     case ",":
                     case ".": {
-                        if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(/[0-9]{0,}\.[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) && inputBox.firstChild.nodeValue != ' ' && !(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1]))) {
                             inputBox.firstChild.nodeValue += ".";
                         } document.querySelector("#btndot").classList.value = "activated";
                         break;
