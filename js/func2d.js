@@ -1,5 +1,6 @@
 /*--SETUP--*/
 const chart = require("chart.js");
+const chartZoom = require("chartjs-plugin-zoom");
 
 const fxFind = require("./js/data/regExes").fx();
     const quad = require("./js/data/regExes").quad();
@@ -83,6 +84,18 @@ const chartProps = {
                     zeroLineWidth: 1
                 }
             }]
+        },
+        plugins: {
+            zoom: {
+                pan: {
+                    enabled: true,
+                    mode: "xy"
+                },
+                zoom: {
+                    enabled: true,
+                    mode: "xy"
+                }
+            }
         }
     }
 };
@@ -242,10 +255,25 @@ fxBtn.forEach(fb => {
                                 checkForX(fxInp[2].value, data);
                                 break;
                             }
+                            case 7.1:
+                            case 7.2:
+                            case 7.3:
+                            case 7.4: {
+                                fxValue = fxValue.replace("sin", "Math.sin");
+                                func2d.options.elements.line.tension = 0.7;
+
+                                console.log(fxValue);
+
+                                data.length = 0;
+                                drawSinFx(fxValue, leftX, data);
+
+                                checkForX(fxInp[2].value, data);
+                                break;
+                            }
                         }
                     }
                 });
-            
+
                 func2d.data.datasets[0].label = fxValue.toString();
                     func2d.options.scales.xAxes[0].ticks.min = parseInt(leftX);
                     func2d.options.scales.xAxes[0].ticks.max = parseInt(rightX);
@@ -508,6 +536,22 @@ function drawLinearFx(fx, a, b, range, data) {
         data.push({x: x, y: f(x)});
     } 
 }
+////////////////////////////////////////////////////////////////
+
+// Sinus graph
+////////////////////////////////////////////////////////////////
+function drawSinFx(fx, range, data) {
+    let leftX = range;
+    let rightX = ~range+1;
+
+    function f(x) {
+        return eval(fx).toFixed(3);
+    }
+
+    for (let x = leftX; x < rightX; x++) {
+        data.push({x: x, y: f(x)});
+    } 
+}   
 ////////////////////////////////////////////////////////////////
 
 function checkForX(x, obj) {

@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "chart.js": "^2.7.3",
+    "chartjs-plugin-zoom": "^0.7.0",
     "plotly.js-dist": "^1.45.2"
   },
   "devDependencies": {
