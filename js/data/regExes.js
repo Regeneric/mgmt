@@ -1,3 +1,7 @@
+/*--INFO--*/
+// Author: Hubert Batkiewicz
+/*-!INFO!-*/
+
 module.exports = {
     fx: () => {
         const fx = [{

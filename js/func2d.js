@@ -1,3 +1,7 @@
+/*--INFO--*/
+// Author: Hubert Batkiewicz
+/*-!INFO!-*/
+
 /*--SETUP--*/
 const chart = require("chart.js");
 const chartZoom = require("chartjs-plugin-zoom");

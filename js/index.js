@@ -1,3 +1,8 @@
+/*--INFO--*/
+// Author: Hubert Batkiewicz
+// Contributors: Gabriel Król
+/*-!INFO!-*/
+
 /*--SETUP--*/
 // const ipcRenderer = require("electron").ipcRenderer;
 const remote = require("electron").remote;

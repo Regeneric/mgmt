@@ -1,3 +1,8 @@
+/*--INFO--*/
+// Author: Hubert Batkiewicz
+// Contributors: Gabriel Król
+/*-!INFO!-*/
+
 /*--SETUP--*/
 const electron = require("electron");
 const path = require("path");

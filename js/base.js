@@ -1,3 +1,7 @@
+/*--INFO--*/
+// Author: Gabriel Król
+/*-!INFO!-*/
+
 /*--SETUP--*/
 const inputBox = document.querySelector("#inputBox");
 const resultBox = document.querySelector("#resultBox");

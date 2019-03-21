@@ -1,3 +1,7 @@
+/*--INFO--*/
+// Author: Hubert Batkiewicz
+/*-!INFO!-*/
+
 /*--SETUP--*/
 const Plotly = require("plotly.js-dist");
 /*-!SETUP!-*/
