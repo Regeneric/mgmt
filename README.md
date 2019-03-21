@@ -14,5 +14,5 @@ Install one at a time:
 `npm run current` - run the app version from current branch  
 `npm run dev` - develop version start  
 `npm run pack` - pack the app and make it ready to ship  
-`npm run dist` - build the app and get the final product  
+`npm run build` - build the app and get the final product  
 `npm run start` - production version start  

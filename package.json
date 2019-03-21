@@ -7,7 +7,7 @@
     "Gabriel Król <werander.k@gmail.com>",
     "Patryk Piszczek <patrykpiszczek3@gmail.com>"
   ],
-  "version": "0.2.4",
+  "version": "0.3.1",
   "license": "GPLv3",
   "private": true,
   "main": "main.js",
@@ -21,7 +21,7 @@
     "start": "git checkout master && npm install && electron main.js",
     "current": "electron main.js",
     "pack": "build --dir",
-    "dist": "build"
+    "build": "build"
   },
   "build": {
     "appId": "com.electron.wgec",
