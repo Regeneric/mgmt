@@ -75,20 +75,20 @@ titleBtns.forEach(btn => {
 
 /*--EVENTS--*/
 menu.forEach(m => {
-    m.addEventListener("click", () => {
+    m.addEventListener("mouseover", () => {
         switch(m.id) {
             case "file": {
                 file = edit = help += 1; // do zmiany
                 if (!(file % 2)) menuDrop[0].style.display = "block";
-                else menuDrop[0].style.display = "none";
-                
+                else menuDrop[1].style.display = "none";
+
                 menuDrop[1].style.display = "none";
-                menuDrop[2].style.display = "none";
+                menuDrop[2].style.display = "none"
                 break;
             } case "edit": {
                 file = edit = help += 1; // do zmiany
                 if (!(edit % 2)) menuDrop[1].style.display = "block";
-                else menuDrop[1].style.display = "none";
+                else menuDrop[2].style.display = "none";
 
                 menuDrop[0].style.display = "none";
                 menuDrop[2].style.display = "none";
@@ -96,7 +96,7 @@ menu.forEach(m => {
             } case "help": {
                 file = edit = help += 1; // do zmiany
                 if (!(help % 2)) menuDrop[2].style.display = "block";
-                else menuDrop[2].style.display = "none";
+                else menuDrop[1].style.display = "none";
 
                 menuDrop[0].style.display = "none";
                 menuDrop[1].style.display = "none";
@@ -149,6 +149,8 @@ menuDrop.forEach(md => {
         md.style.display = "none";
     });
 });
+
+
 /*-!EVENTS!-*/
 /*-!RUN!-*/
 

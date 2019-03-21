@@ -31,7 +31,11 @@ body {
     
     -webkit-user-select: none; /* tekst na górnym pasku nie jest zaznaczalny*/
 }
+#file, #edit, #help{
+    margin-right: 2px;
+}
 .menu {
+    
     float: left;
     padding: 2px;
     position: relative;
