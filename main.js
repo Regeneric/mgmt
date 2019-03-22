@@ -20,12 +20,7 @@ let mainWindow = null;
         show: false,
         resizable: false,
         frame: false,
-    };  const mainProp = {
-            dir: __dirname,
-            file: "index.html",
-            protocol: "file:",
-            slashes: true
-    };
+    };  const mainProp = windowProps("base.html");
 
 let popWindow = null;
     const pop = {
@@ -35,24 +30,16 @@ let popWindow = null;
         show: false,
         resizable: false,
         frame: false
-    };  const help2dProp = {
-        dir: __dirname,
-        file: "help2d.html",
-        protocol: "file:",
-        slashes: true
-    };  const aboutProp = {
-        dir: __dirname,
-        file: "about.html",
-        protocol: "file:",
-        slashes: true
-    };
+    };  
+    const help2dProp = windowProps("help2d.html");
+    const aboutProp = windowProps("about.html");
 /*-!PROPS!-*/
 
 /*--RUN--*/
 /*--EVENTS--*/
 app.on("ready", () => {
     mainWindow = new BrowserWindow(main);
-        mainWindow = loadWindow(mainWindow, mainProp);
+    mainWindow = loadWindow(mainWindow, mainProp);
 
     mainWindow.once("ready-to-show", () => {
         mainWindow.show();
@@ -72,19 +59,27 @@ function loadWindow(oWindow, oProp) {
         pathname: path.join(oProp.dir, oProp.file),
         protocol: oProp.protocol,
         slashes: oProp.slashes
-    }));
-    return this.oWindow;
+    })); return this.oWindow;
+}
+
+function windowProps(file) {
+    const prop = {
+        dir: __dirname,
+        file: file,
+        protocol: "file:",
+        slashes: true
+    }; return prop;
 }
 /*-!RUN!-*/
 
 /*--IPC--*/
 ipcMain.on("popCreate", (e, data) => popWindow = new BrowserWindow(pop));
-ipcMain.on("help2dShow", (e, data) => {
+ipcMain.once("help2dShow", (e, data) => {
     popWindow = loadWindow(popWindow, help2dProp)
     popWindow.on("ready-to-show", () => popWindow.show());
     popWindow.on("close", () => popWindow = null);
 });
-ipcMain.on("aboutShow", (e, data) => {
+ipcMain.once("aboutShow", (e, data) => {
     popWindow = loadWindow(popWindow, aboutProp);
     popWindow.on("ready-to-show", () => popWindow.show());
     popWindow.on("close", () => popWindow = null);

@@ -1,0 +1,115 @@
+<!-- --INFO-- -->
+<!-- Author: Gabriel Król -->
+<!-- Contributors: Patryk Piszczek -->
+<!-- -!INFO!- -->
+
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="css/style.css">
+
+        <script src="main.js" defer></script>
+        <script src="js/index.js" defer></script>
+        <script src="js/base.js" defer></script>
+    </head>
+    
+    <body>
+        <!-- Title bar -->
+        <header class="title-bar" role="banner">
+            <nav class="menu" role="navigation">
+                <ul>
+                    <li id="file"><img src="img/file.png" alt="File">
+                        <ul class="dropdown" id="file-drop">
+                            <li class="li-drop" id="base">Base Calculator</li>
+                            <li class="li-drop" id="science">Scientific Calculator</li>
+                            <li class="li-drop" id="func2d">Function Drawing (2D)</li>
+                            <li class="li-drop" id="func3d">Function Drawing (3D)</li>
+                        </ul>
+                    </li>
+                    <li id="edit">Edit
+                        <ul class="dropdown" id="edit-drop">
+                            <li class="li-drop">Switch Theme</li>
+                            <li class="li-drop">edit1</li>
+                            <li class="li-drop">edit2</li>
+                        </ul>
+                    </li>
+                    <li id="help">Help
+                        <ul class="dropdown" id="help-drop">
+                            <li class="li-drop">help</li>
+                            <li class="li-drop">help1</li>
+                            <li class="li-drop" id="about">About</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <span class="title">Calc</span>
+
+            <div class="btns-group">
+                <button class="title-btn" id="mini"><img src="img/minimize-title-mm.png" alt="--"></button>
+                <button class="title-btn" id="maxi"><img src="img/maximize-title-mm.png" alt="[]"></button>
+                <button class="title-btn" id="close"><img id="closeImg" src="img/close-title-mm.png" alt="X"></button>
+            </div>
+        </header>
+        <!-- !Title Bar! -->
+
+        <main role=”main”>
+                <header class="base">
+                    <section id="inputBox" class="highlited"> </section>
+                    <section id="resultBox" class="unhighlited">= </section>
+                </header>
+
+            <table id="base">
+                <tr>
+                    <td><div class="calcButton" name="Escape" id="btnc">C</div></td>
+                    <td><div class="calcButton" name="Backspace" id="btnbackspace">←</div></td>
+                    <td><div class="calcButton" name="/" id="btndivide">÷</div></td>
+                    <td><div class="calcButton" name="*" id="btnmultiple">x</div></td>
+                </tr>
+                <tr>
+                    <td><div class="calcButton" name="7" id="btn7">7</div></td>
+                    <td><div class="calcButton" name="8" id="btn8">8</div></td>
+                    <td><div class="calcButton" name="9" id="btn9">9</div></td>
+                    <td><div class="calcButton" name="-" id="btnminus">-</div></td>
+                </tr>
+                <tr>
+                    <td><div class="calcButton" name="4" id="btn4">4</div></td>
+                    <td><div class="calcButton" name="5" id="btn5">5</div></td>
+                    <td><div class="calcButton" name="6" id="btn6">6</div></td>
+                    <td><div class="calcButton" name="+" id="btnplus">+</div></td>
+                </tr>
+                <tr>
+                    <td><div class="calcButton" name="1" id="btn1">1</div></td>
+                    <td><div class="calcButton" name="2" id="btn2">2</div></td>
+                    <td><div class="calcButton" name="3" id="btn3">3</div></td>
+                    <td rowspan="5"><div style="height: 108px" class="calcButton" name="=" id="btnequals">=</div></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><div style="width: 150px" class="calcButton" name="0" id="btn0">0</div></td>
+                    <td><div class="calcButton" name="." id="btndot">.</div></td>
+                </tr>
+            </table>
+                
+                
+        </main>
+    </body>
+</html>
+
+<!-- WGEC - Scientific Calculator
+Copyright (C) 2019  Hubert Batkiewicz, Gabriel Król, Patryk Piszczek
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>. -->
