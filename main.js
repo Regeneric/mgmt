@@ -18,7 +18,7 @@ let mainWindow = null;
         height: 480,
         title: "Main Window",
         show: false,
-        resizable: false,
+        resizable: true,
         frame: false,
     };  const mainProp = windowProps("base.html");
 

@@ -75,31 +75,32 @@ titleBtns.forEach(btn => {
 
 /*--EVENTS--*/
 menu.forEach(m => {
-    m.addEventListener("mouseover", () => {
+    m.addEventListener("click", () => {
         switch(m.id) {
             case "file": {
-                file = edit = help += 1; // do zmiany
-                if (!(file % 2)) menuDrop[0].style.display = "block";
-                else menuDrop[1].style.display = "none";
-
-                menuDrop[1].style.display = "none";
-                menuDrop[2].style.display = "none"
+                if  (menuDrop[0].style.display == "none" || menuDrop[0].style.display == "") { 
+                    menuDrop[0].style.display = "block";
+                    menuDrop[1].style.display = "none";
+                    menuDrop[2].style.display = "none";
+                }
+                else menuDrop[0].style.display = "none"
                 break;
-            } case "edit": {
-                file = edit = help += 1; // do zmiany
-                if (!(edit % 2)) menuDrop[1].style.display = "block";
-                else menuDrop[2].style.display = "none";
-
-                menuDrop[0].style.display = "none";
-                menuDrop[2].style.display = "none";
+            } 
+            case "edit": { 
+                if  (menuDrop[1].style.display == "none" || menuDrop[1].style.display == "") { 
+                    menuDrop[1].style.display = "block";
+                    menuDrop[0].style.display = "none";
+                    menuDrop[2].style.display = "none";
+                }
+                else menuDrop[1].style.display = "none"
                 break;
             } case "help": {
-                file = edit = help += 1; // do zmiany
-                if (!(help % 2)) menuDrop[2].style.display = "block";
-                else menuDrop[1].style.display = "none";
-
-                menuDrop[0].style.display = "none";
-                menuDrop[1].style.display = "none";
+                if  (menuDrop[2].style.display == "none" || menuDrop[2].style.display == "") { 
+                    menuDrop[2].style.display = "block";
+                    menuDrop[0].style.display = "none";
+                    menuDrop[1].style.display = "none";
+                }
+                else menuDrop[2].style.display = "none"
                 break;
             }
         }
@@ -115,7 +116,7 @@ liDrop.forEach(ld => {
         
         switch(ld.id) {
             case "base": {
-                win.setSize(330, 510);
+                win.setSize(335, 480);
                 win = loadWindow(win, mainProp);
                 break;
             } case "func2d": { 
@@ -147,6 +148,7 @@ liDrop.forEach(ld => {
 menuDrop.forEach(md => {
     site.addEventListener("mousedown", () => {
         md.style.display = "none";
+        file = edit = help += 1;
     });
 });
 
