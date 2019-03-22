@@ -1,13 +1,39 @@
-## WGEC - Scientific Calculator
-tutaj opis
+# WGEC - Scientific Calculator
+
+W świecie galopującej technologii, coraz potężniejszych komputerów i nacisku na multiplatformowość aplikacji, do których tworzenia łatwo będzie znaleźć utalentowanych ludzi, Electron, razem z całym dobrodziejstwem webowych technologii, wydaje się być rozwiązaniem niemal idealnym. 
+
+Bo jak inaczej nazwać rozwiązanie, które za pomocą języka JavaScript, przeglądarki Chromium i środowiska uruchomieniowego Node, pozwala w krótkim czasie i w sytuacji ograniczonych zasobów, napisać aplikacje od komunikatora głosowo-tekstowego, przez narzędzia do tworzenia interfejsów graficznych, a na dowolnym innym pomyślę kończąc?
+A do tego przeniesienie kodu, aby uruchamiał się natywnie w naszej przeglądarce internetowej, osiągamy niemal zerowym kosztem.
+
+Nasza autorska aplikacja, WGEC, przedstawia w prosty i przystępny sposób koncepcję tego, jak w przyszłości może wyglądać produkcja oraz dystrybucja aplikacji, gdzie postawiono w dużej mierze na skalowalność kodu, oraz prostotę jego pisania. Pokazuje, że dowolny typ projektu może napisać zarówno grupa zapaleńców, jak i potężna korporacja, a obydwoje będą korzystać z tych samych narzędzi i rozwiązań.
+
+Gdzie język JavaScript jest już na tyle dojrzały, że sam w sobie, bez żadnych dodatkowych frameworków, jest w stanie zapewnić interaktywność i odpowiednie działanie w rękach zarówno amatorów, jak i doświadczonych programistów.
+Gdzie HTML i CSS w kilka chwil pozwolą zestawić miły dla oka i responsywny interfejs, który we współpracy z grafikami może być nie do odróżnienia od natywnych rozwiązań, znanych chociażby z UWP Microsoftu.
+Gdzie za pomocą Node możemy uruchamiać aplikację na drugim końcu świata i bez problemu komunikować się z klientem na naszym komputerze czy nawet telefonie!
+Gdzie rozwiązanie pozwala wykorzystywać tak popularne teraz rozwiązanie, jakim jest React czy Vue, lub oprzeć się na sprawdzonym jQuery, aby poprawić zarówno wrażenia wizualne, jak i samo działanie aplikacji.
+
+Naukowy kalkulator, którego bazę i wszelkie modułowe rozwiązania można dowolnie przerabiać i dodawać, bez obaw o kompatybilność z resztą aplikacji, to tylko jeden z tysięcy pomysłów, które można zastosować, aby przekazać ideę tego, jak proste stało się w dzisiejszych czasach nowoczesnych i multiplatformowych aplikacji.
 
 ## Zespół oraz współtwórcy
-tutaj opis
 
-## Główne założenia
-tutaj opis
+**Hubert Batkiewicz**  
+Koordynacja projektu, baza kodowa i modułowość aplikacji, dokumentacja techniczna
 
-## Used technology
+**Gabriel Król**  
+Główny programista, skrypty i narzędzia deweloperskie, działanie i responsywność interfejsu
+
+**Patryk Piszczek**  
+Oprawa graficzna, działanie i responsywność interfejsu, zachowania specyficzne dla platformy
+
+## Oprogramoawnie i technologie
+
+**Software**
+  * **OS**: Arch Linux | Ubuntu 18.10 | Windows 10 (1809) | macOS 10.14.3
+  * **VM**: QEMU | VMWare
+  * **Edytor**: Visual Studio Code | VIM
+  * **Grafika**: InkScape | GIMP | Figma
+  * **VC**: Git | GitHub
+  * **Misc**: Simplenote | Slack | Kitematic
 
 **Main**  
  * HTML 5
@@ -22,16 +48,13 @@ tutaj opis
    * chartjs-plugin-zoom
  * plotly.js-dist
 
-**Main testing env**
- * Arch Linux && Ubuntu 18.10
- * Windows 10 (1809)
- * macOS 10.14.3
-
-### main.js
+# Dokumentacja
+## main.js
 
 Ładowanie zawartości pliku HTML do okna przeglądarki
 ```js 
-  function loadWindow(oWindow: any, oProp: any): loadWindow
+  function loadWindow(oWindow: any, oProp: any): loadWindow  
+  function windowProps(file: any): obj
 ```
 
 Poniższy przykład pokazuje, jak załadować zawartość okna po utworzeniu obiektu BrowserWindow:
@@ -40,12 +63,7 @@ Poniższy przykład pokazuje, jak załadować zawartość okna po utworzeniu obi
     width: 1280,
     height: 720,
     title: "Main Window"
-  }; const windowProps = {
-        dir: __dirname,
-        file: "index.html",
-        protocol: "file:",
-        slashes: true
-  };
+  }; const windowProps = windowProps("index.html");
 
   // W głównym procesie
   const {BrowserWindow} = require("electron");
@@ -53,13 +71,13 @@ Poniższy przykład pokazuje, jak załadować zawartość okna po utworzeniu obi
     win = loadWindow(win, windowProps);
 ```
 
-### base.js
+## base.js
 
 > `function calculate(action: any): void`  
 > `function uncolor(action: any): void`
 
-### func2d.js
-#### Quadratic equation
+## func2d.js
+### Funkcja kwadratowe
 
 Obliczanie delty oraz miejsc zerowych:
 ```js
@@ -172,7 +190,7 @@ Na przykładzie równania `2*x^2+3*x-9`:
   squareDiv.forEach(s => showDivs(s, P, W, X)); // Obiekt P ma określone parametry A, B i C
 ```
 
-#### Homonymous equation
+### Funkcja homograficzna
 
 Rysowanie wykresów funkcji homograficznej:
 ```js 
@@ -217,7 +235,7 @@ Na przykładzie `a*|x|`:
   drawHomoShortPos(fx, a, range, data);
 ```
 
-#### Linear equation
+### Funkcja liniowa
 
 Podstawowa funkcja pozwalająca głównie obliczać równania liniowe, potrafi jednak poradzić sobie także z czymkolwiek, co nie wymaga rozbijania na poszczególne parametry i mieści w się w pojedynczym stringu równania.
 ```js
@@ -245,7 +263,7 @@ Na przykładzie `a*(x-b)*(x+c)`:
   drawLinearFx(fx, a, b, range, data);
 ```
 
-#### Sinus graph
+### Wykres funkcji sinus
 
 Rysowanie wykresu funkcji sinus, zasada działania bardzo podobna, do rysowania wykresu funkcji liniowej.
 ```js
@@ -276,7 +294,7 @@ Na przykładzie `3*sin(x+1)-2`:
   drawSinFx(fx, range, data);
 ```
 
-#### Misc
+### Różne
 
 Odnajdywanie miejsc zerowych funkcji i określanie wartości funkcji.
 ```js
