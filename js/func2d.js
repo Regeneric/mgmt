@@ -11,18 +11,18 @@ const fxFind = require("./js/data/regExes").fx();
 
 const fxBtn = document.querySelectorAll(".fx-btn");
 const fxInp = document.querySelectorAll(".fx-inp");
-const fxDraw = document.querySelector("#fx-draw").value;
+const fxDraw = document.querySelector("#fx-draw");
 
 const squareDiv = document.querySelectorAll("#square");
 const squreDesc = document.querySelectorAll(".fx-desc");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-let fxValue = fxDraw;   // User's input
+let fxValue = fxDraw.value;   // User's input
 let func2d = null;
 let pos = 1;    // Check if a is positive or negative in equation
 
-// Degault values
+// Default values
 let a = b = c = x = p = q = 1;  
 const P = {a: 1, b: 1, c: 1, p: 1, q: 1, x: 1, d: 0};
 const W = {p: 0, q: 0};
@@ -112,7 +112,7 @@ fxBtn.forEach(fb => {
                 rightX = fxInp[1].value;
                 leftX = ~rightX+1; 
             
-                fxValue = fxDraw;
+                fxValue = fxDraw.value;
                 fxInp[3].checked = false;
             
                 fxFind.forEach(r => {
@@ -171,11 +171,17 @@ fxBtn.forEach(fb => {
 
                                 // Round values
                                 if (fxInp[4].checked) {
-                                    X.x1 = Math.round(X.x1);
-                                    X.x2 = Math.round(X.x2);
-                                    X.x12 = Math.round(X.x12);
-                                    W.p = Math.round(W.p);
-                                    W.q = Math.round(W.q);
+                                    if (X.x1 == "Brak" || X.x2 == "Brak") {
+                                        X.x12 = Math.round(X.x12);
+                                        W.p = Math.round(W.p);
+                                        W.q = Math.round(W.q);
+                                    } else {
+                                        X.x1 = Math.round(X.x1);
+                                        X.x2 = Math.round(X.x2);
+                                        X.x12 = Math.round(X.x12);
+                                        W.p = Math.round(W.p);
+                                        W.q = Math.round(W.q);
+                                    }
                                 }
                                             
                                 data.length = 0;
@@ -216,7 +222,7 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.21: {
-                                // Split '|' sing for eval() and Math.abs() functions
+                                // Split '|' sign for eval() and Math.abs() functions
                                 fxValue = fxValue.split('|')[1];
                                 if(fxValue < 0) fxValue = Math.abs(fxValue);
 
@@ -230,7 +236,7 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.31: {           
-                                // Split '|' sing for eval() and Math.abs() functions                                                  
+                                // Split '|' sign for eval() and Math.abs() functions                                                  
                                 fxValue = fxValue.split('|')[1];
 
                                 data.length = 0;
@@ -242,7 +248,7 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.1: {                             
-                                // Split '|' sing for eval() and Math.abs() functions
+                                // Split '|' sign for eval() and Math.abs() functions
                                 fxValue = fxValue.split('|');
                                 
                                 data.length = 0;
@@ -254,7 +260,7 @@ fxBtn.forEach(fb => {
                                 break;
                             }
                             case 6.2: { 
-                                // Split '|' sing for eval() and Math.abs() functions                          
+                                // Split '|' sign for eval() and Math.abs() functions                          
                                 fxValue = fxValue.split('|')[1];
             
                                 data.length = 0;
@@ -269,7 +275,7 @@ fxBtn.forEach(fb => {
                             case 7.2:
                             case 7.3:
                             case 7.4: {
-                                // Split 'sin' word on 'Math.sin()' for eval() function
+                                // Replace 'sin' word on 'Math.sin()' for eval() function
                                 fxValue = fxValue.replace("sin", "Math.sin");
                                 func2d.options.elements.line.tension = 0.7;
 
@@ -335,10 +341,12 @@ function drawDPos(fx, X, range, data) {
         data.push({x: x, y: f(x)});
     }
     for (let x = X.x1; x < X.x2; x++) {
-        data.push({x: x, y: f(x)});
+        if (x == X.x1) data.push({x: X.x1, y: 0});
+        else data.push({x: x, y: f(x)});  
     }
     for (let x = X.x2; x < rightX; x++) {
-        data.push({x: x, y: f(x)});
+        if (x == X.x2) data.push({x: X.x2, y: 0});
+        else data.push({x: x, y: f(x)});
     }
 }
 function drawDNeg(fx, W, range, data) {
