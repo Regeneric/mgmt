@@ -10,7 +10,7 @@ const calcButtons = document.querySelectorAll(".calcButton");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-const maxChar = 12; // Max number of characters you can input
+const maxChar = 13; // Max number of characters you can input
 /*-!PROPS!-*/
 
 /*--RUN--*/

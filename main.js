@@ -14,8 +14,8 @@ const {app, BrowserWindow, ipcMain, ipcRenderer} = electron;
 /*--PROPS--*/
 let mainWindow = null;
     const main = {
-        width: 330,
-        height: 490,
+        width: 335,
+        height: 480,
         title: "Main Window",
         show: false,
         resizable: false,
