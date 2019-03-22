@@ -253,24 +253,19 @@ width: 100%;
     color: #bcbcbc;
     cursor: pointer;
 } #fx-draw{
-    width: 130px;
-} #square{
-    float: right;
-    height: 15px;    
-} .fxw{
-    
-    float: left;
-    padding-right: 500px;
-    
+    width: 130px;  
 } .fxx{
-    float: left;
-    padding-right: 395px;
-    margin-top: 10px;
-} .fxd{
-    float: left;
-    padding-right: 500px;
-    margin-top: 10px;
-    
+    position: absolute;
+    top: 620px;
+    left: 620px;
+} .fxw{
+    position: absolute;
+    top: 685px;
+    left: 620px;
+}  .fxd{
+    position: absolute;
+    left: 620px;
+    top: 555px;
 }
 
 
