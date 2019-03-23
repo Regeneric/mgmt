@@ -58,9 +58,34 @@
 
         <main role=”main”>
             <div id="func3d-chart" style="width: 1280px; height: 500px;"></div>
+            <div class="fx">
+                <span class="fx-desc">Precyzja: </span>
+                    <input class="fx-inp" id="fx-prec" type="number" step="1" value="1000"  maxlength="4">
+            </div>
+
+            <div class="fx">
+                <span class="fx-desc" id="x-desc">X: </span>
+                    <input type="text" class="fx-inp" id="x-inp" autofocus value="abs(x)">
+                
+                <input type="text" class="fx-inp" id="y-inp" value="+" maxlength="1">
+
+                <span class="fx-desc" id="y-desc">Y: </span>
+                    <input type="text" class="fx-inp" id="y-inp" value="y^2">
+
+                <button class="fx-btn" id="fx-draw-btn">Rysuj wykres</button>
+            </div>
+
+            <div class="fx">
+                <span class="fx-desc">Pokaż miejsca zerowe: </span>
+                <input class="fx-inp" id="fx-zero" type="checkbox">
+
+                <span class="fx-desc">Zaokrąglij wynik: </span>
+                <input class="fx-inp" id="fx-zero" type="checkbox" checked="true">
+            </div>   
         </main>
     </body>
 </html>
+
 
 <!-- WGEC - Scientific Calculator
 Copyright (C) 2019  Hubert Batkiewicz, Gabriel Król, Patryk Piszczek
