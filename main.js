@@ -16,7 +16,6 @@ let mainWindow = null;
     const main = {
         width: 335,
         height: 480,
-        title: "Main Window",
         show: false,
         resizable: true,
         frame: false,
@@ -26,7 +25,6 @@ let popWindow = null;
     const pop = {
         width: 800,
         height: 480,
-        title: "Help",
         show: false,
         resizable: false,
         frame: false
@@ -74,12 +72,12 @@ function windowProps(file) {
 
 /*--IPC--*/
 ipcMain.on("popCreate", (e, data) => popWindow = new BrowserWindow(pop));
-ipcMain.once("help2dShow", (e, data) => {
+ipcMain.on("help2dShow", (e, data) => {
     popWindow = loadWindow(popWindow, help2dProp)
     popWindow.on("ready-to-show", () => popWindow.show());
     popWindow.on("close", () => popWindow = null);
 });
-ipcMain.once("aboutShow", (e, data) => {
+ipcMain.on("aboutShow", (e, data) => {
     popWindow = loadWindow(popWindow, aboutProp);
     popWindow.on("ready-to-show", () => popWindow.show());
     popWindow.on("close", () => popWindow = null);

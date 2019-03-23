@@ -161,6 +161,7 @@ fxBtn.forEach(fb => {
                                     X.x2 = x2Fx(P.a, P.b, P.d);
                                 } else if (P.d == 0) {
                                     X.x12 = x12Fx(P.a, P.b);
+                                    X.x1 = X.x2 = X.x12; 
                                 } else {
                                     X.x1 = "Brak";
                                     X.x2 = "Brak";

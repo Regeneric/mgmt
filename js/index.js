@@ -4,12 +4,9 @@
 /*-!INFO!-*/
 
 /*--SETUP--*/
-// const ipcRenderer = require("electron").ipcRenderer;
-const remote = require("electron").remote;
+const {remote} = require("electron");
 
-const title = document.querySelector(".title");
-    const titleBtns = document.querySelectorAll(".title-btn");
-
+const titleBtns = document.querySelectorAll(".title-btn");
 const menu = document.querySelectorAll(".menu ul li");
     const menuDrop = document.querySelectorAll(".menu ul .dropdown");
     const liDrop = document.querySelectorAll(".menu ul .li-drop");
@@ -20,27 +17,12 @@ const site = document.querySelector("main");
 
 /*--PROPS--*/
 let win = null;
-let file = edit = help = 1;
 
-const funcProp = {
-    dir: __dirname,
-    file: "func2d.html",
-    protocol: "file:",
-    slashes: true
-};
-const func3DProp = {
-    dir: __dirname,
-    file: "func3d.html",
-    protocol: "file:",
-    slashes: true
-};
+const funcProp = windowProps("func2d.html");
+const func3DProp = windowProps("func3d.html");
 
-const scienceProp = {
-    dir: __dirname,
-    file: "science.html",
-    protocol: "file:",
-    slashes: true
-};
+const scienceProp = windowProps("science.html");
+const conversionProp = windowProps("conversion.html");
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -109,7 +91,7 @@ menu.forEach(m => {
 
 liDrop.forEach(ld => {
     ld.addEventListener("click", () => {
-        const ipcRenderer = require("electron").ipcRenderer;
+        const {ipcRenderer} = require("electron");
 
         win = remote.getCurrentWindow();
         win.setResizable(true);
@@ -118,26 +100,37 @@ liDrop.forEach(ld => {
             case "base": {
                 win.setSize(335, 480);
                 win = loadWindow(win, mainProp);
+
                 break;
             } case "func2d": { 
                 win.setSize(1225, 730);
                 win = loadWindow(win, funcProp);
+
                 break;
             } case "poss-funcs": {
                 ipcRenderer.send("popCreate", 1);
                 ipcRenderer.send("help2dShow", 1);
+
                 break;
             } case "about": {
                 ipcRenderer.send("popCreate", 1);
                 ipcRenderer.send("aboutShow", 1);
+
                 break;
             } case "func3d": {
                 win.setSize(1280, 730);
                 win = loadWindow(win, func3DProp);
+
                 break;
             } case "science": {
                 win.setSize(1280, 730);;
                 win = loadWindow(win, scienceProp);
+
+                break;
+            } case "conversion": {
+                win.setSize(1280, 730);;
+                win = loadWindow(win, conversionProp);
+
                 break;
             }
         }
@@ -148,7 +141,6 @@ liDrop.forEach(ld => {
 menuDrop.forEach(md => {
     site.addEventListener("mousedown", () => {
         md.style.display = "none";
-        file = edit = help += 1;
     });
 });
 

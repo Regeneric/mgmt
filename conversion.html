@@ -1,5 +1,5 @@
 <!-- --INFO-- -->
-<!-- Author: Hubert Batkiewicz -->
+<!-- Author: Gabriel Król -->
 <!-- Contributors: Patryk Piszczek -->
 <!-- -!INFO!- -->
 
@@ -7,13 +7,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" href="css/style.css">
 
         <script src="main.js" defer></script>
         <script src="js/index.js" defer></script>
-        <script src="js/func2d.js" defer></script>
+        <script src="js/base.js" defer></script>
     </head>
     
     <body>
@@ -27,28 +27,27 @@
                             <li class="li-drop" id="science">Scientific Calculator</li>
                             <li class="li-drop" id="func2d">Function Drawing (2D)</li>
                             <li class="li-drop" id="func3d">Function Drawing (3D)</li>
+                            <li class="li-drop" id="conversion">Convert Values</li>
                         </ul>
                     </li>
                     <li id="edit">Edit
                         <ul class="dropdown" id="edit-drop">
                             <li class="li-drop">Switch Theme</li>
-                            <li class="li-drop">Allow Zooming <input type="checkbox" id="zoom-btn"></li>
+                            <li class="li-drop">edit1</li>
                             <li class="li-drop">edit2</li>
                         </ul>
                     </li>
                     <li id="help">Help
                         <ul class="dropdown" id="help-drop">
-                            <li class="li-drop" id="poss-funcs">Equations Cheatsheet</li>
                             <li class="li-drop">help</li>
+                            <li class="li-drop">help1</li>
                             <li class="li-drop" id="about">About</li>
                         </ul>
                     </li>
-                    
                 </ul>
-                
             </nav>
-            
-            <div class="title"></div>
+
+            <span class="title"></span>
 
             <div class="btns-group">
                 <button class="title-btn" id="mini"><img src="img/minimize-title-mm.png" alt="--"></button>
@@ -59,54 +58,7 @@
         <!-- !Title Bar! -->
 
         <main role=”main”>
-            <div class="line-chart">
-                <canvas id="func2d-chart" height="500" width="1200px"></canvas>
-            </div>
-            <div class="inputs-group">
-             <div class="fx">
-                    <span class="fx-desc">f(x) =</span>
-                    <input class="fx-inp" id="fx-draw" type="text" value="a*x+b" autofocus maxlength="25">
-                    <span class="fx-desc">Precyzja: </span>
-                    <input class="fx-inp" id="fx-prec" type="number" step="1" value="25"  maxlength="3">
-
-                    <button class="fx-btn" id="fx-draw-btn">Rysuj wykres</button>
-
-                    <div class="fxd" id="square">
-                            <span class="fx-desc">delta = </span>
-                            <span class="fx-desc" id="d"></span>
-                    </div>
-                    
                 
-                </div>
-                
-                <div class="fx">
-                    <span class="fx-desc">Punkt o współrzędnej x = </span>
-                    <input class="fx-inp" id="fx-x" value="0"  maxlength="3">
-                    <button class="fx-btn" id="fx-show-x">Pokaż</button>
-               
-                    <div class="fxx" id="square">
-                        <span class="fx-desc">x1 = </span>
-                        <span class="fx-desc" id="x1"></span>
-
-                        <span class="fx-desc">x2 = </span>
-                        <span class="fx-desc" id="x2"></span>
-                    </div>
-
-                </div>
-                <div class="fx">
-                    <span class="fx-desc">Pokaż miejsca zerowe: </span>
-                    <input class="fx-inp" id="fx-zero" type="checkbox">
-
-                    <span class="fx-desc">Zaokrąglij wynik: </span>
-                    <input class="fx-inp" id="fx-zero" type="checkbox" checked="true">
-
-                    <div class="fxw" id="square">
-                        <span class="fx-desc">W = </span>
-                        <span class="fx-desc" id="W"></span>
-                    </div>
-
-                </div>               
-            </div>
         </main>
     </body>
 </html>
