@@ -4,7 +4,7 @@
 
 /*--SETUP--*/
 const time = require("./data/time");
-    const {secToMin, minToHr, hrToDay, dayToWeek, weekToMnt, mntToYear, yearToDec, decToAge} = time;
+    const {convertUp, convertDown} = time;
 /*--SETUP--*/
 
 

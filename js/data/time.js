@@ -3,30 +3,13 @@
 /*-!INFO!-*/
 
 module.exports = {
-    secToMin: (obj) => {
-        if (obj.growing) return (obj.input/60).toFixed(6);
-        else return (obj.input*60).toFixed(6);
+    convertUp: (o) => {
+        if (o.firstScale < o.secondScale) {
+            // ...do some stuff in convering up
+        } else converDown(o);
     },
-    minToHr: () => {
-        return "minToHr ok";
-    },
-    hrToDay: () => {
-        return "hrToDay ok";
-    },
-    dayToWeek: () => {
-        return "dayToWeek ok";
-    },
-    weekToMnt: () => {
-        return "weekToMnt ok";
-    },
-    mntToYear: () => {
-        return "mntToYear ok";
-    },
-    yearToDec: () => {
-        return "yearToDec ok";
-    },
-    decToAge: () => {
-        return "decToAge ok";
+    convertDown: (o) => {
+
     }
 }
 
