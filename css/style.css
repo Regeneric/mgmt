@@ -317,7 +317,7 @@ width: 100%;
     font-weight: 550;
     text-decoration: none;
 }
-
+/*-!about.html!-*/
 
 /*--conversion.html--*/
 
@@ -350,9 +350,12 @@ width: 100%;
     width: 458px;
     height: 52px;
     z-index: -2;
-    
+} .cur-select option:hover {
+    color: #eaf5ff;
+    background-color: #1e90ff;
+} 
 
-} body {
+body {
     overflow: hidden;
 }  .cur-span_1{
     position: absolute;
@@ -365,8 +368,6 @@ width: 100%;
     left: 155px;
     z-index: 1;
 } 
-
-/*-!about.html!-*/
 
 
 /* WGEC - Scientific Calculator

@@ -10,6 +10,9 @@ const btn = document.querySelector(".fx-btn");
 const cvInp = document.querySelector(".cv-inp");
 const curSelect = document.querySelectorAll(".cur-select");
 const curResult = document.querySelector("#curr_result");
+const curReplace = document.querySelector(".cur-span-replace");
+
+const options = document.querySelectorAll(".currency_from .cur-select option");
 ////////////////////////////////////////////////////////////////
 
 // Time
@@ -26,10 +29,16 @@ const curResult = document.querySelector("#curr_result");
 
 // Currency
 ////////////////////////////////////////////////////////////////
+options.forEach(o => {
+    o.addEventListener("click", () => {
+        curReplace.innerHTML = o.value;
+    });
+});
+
 btn.addEventListener("click", () => {
     const curFrom = curSelect[0].options[curSelect[0].selectedIndex].value.toString();
     const curTo = curSelect[1].options[curSelect[1].selectedIndex].value.toString();
-    const howMuch = cvInp.value;
+    const howMuch = parseFloat(cvInp.value);
         
     const base = curFrom;
     const api = "https://api.exchangeratesapi.io/latest?base=" + base;
