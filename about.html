@@ -30,12 +30,12 @@
 
         <main role=”main”>
             <div class="about-main">
-                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img class="about-img" src="img/sample-icon.png" alt="wgec-calc"></a>
+                <img class="about-img" src="img/sample-icon.png" alt="wgec-calc">
                 <p>WGEC - Scientific Calculator</p>
                 <div class="about-desc">
                     WebGL Electron Canvas
                     <p class="desc" id="copy">Copyright (C) 2019</p>
-                    <a class="desc" id="gpl" href="https://www.gnu.org/licenses/gpl.html" target="_blank">GNU GPL v3</a>
+                    <p class="desc" id="gpl" style="cursor: pointer">GNU GPL v3</p>
                     <div class="desc-group">
                         <p class="desc" id="electron">Electron: 4.0.4</p>
                         <p class="desc" id="node">Node: 10.11.0</p>
@@ -45,6 +45,21 @@
             </div>
         </main>
     </body>
+
+    <script>
+        const img = document.querySelector(".about-img");
+        const gpl = document.querySelector("#gpl");
+
+        img.addEventListener("click", () => {
+            const {exec} = require("child_process");
+            exec("xdg-open https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+        });
+
+        gpl.addEventListener("click", () => {
+            const {exec} = require("child_process");
+            exec("xdg-open https://www.gnu.org/licenses/gpl.html");
+        });
+    </script>
 </html>
 
 <!-- WGEC - Scientific Calculator
