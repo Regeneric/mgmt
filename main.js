@@ -19,6 +19,9 @@ let mainWindow = null;
         show: false,
         resizable: true,
         frame: false,
+        webPreferences: {
+            nodeIntegration: true,
+        }
     };  const mainProp = windowProps("base.html");
 
 let popWindow = null;
@@ -27,7 +30,10 @@ let popWindow = null;
         height: 480,
         show: false,
         resizable: false,
-        frame: false
+        frame: false,
+        webPreferences: {
+            nodeIntegration: true,
+        }
     };  
     const help2dProp = windowProps("help2d.html");
     const aboutProp = windowProps("about.html");

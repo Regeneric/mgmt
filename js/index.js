@@ -133,8 +133,20 @@ liDrop.forEach(ld => {
 
                 break;
             }
+        } // win.setResizable(false);
+
+        switch(ld.id) {
+            case "currency": {
+                loadCurrency();
+                break;
+            } case "time": { 
+                loadTime();
+                break;
+            } case "volume": {
+                loadVolume();
+                break;
+            }
         }
-        // win.setResizable(false);
     });
 });
 
