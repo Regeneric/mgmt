@@ -3,26 +3,42 @@
 /*-!INFO!-*/
 
 /*--SETUP--*/
-const time = require("./data/time");
+const time = require("./js/data/time");
     const {convertUp, convertDown} = time;
+
+const btn = document.querySelector(".fx-btn");
+
+const cvInp = document.querySelector(".cv-inp");
+const curSelect = document.querySelectorAll(".cur-select");
+const curResult = document.querySelector("#curr_result");
 /*--SETUP--*/
 
-
-/*--PROPS--*/
-let input = 232323;
-let type1 = "sec";
-let type2 = "min";
-/*-!PROPS!-*/
-
-
 /*--RUN--*/
-(() => {
-    console.log(secToMin({
-        input: input,
-        growing: false
-    }));
-})();
+/*--EVENTS--*/
+btn.addEventListener("click", () => {
+    const curFrom = curSelect[0].options[curSelect[0].selectedIndex].value.toString();
+    const curTo = curSelect[1].options[curSelect[1].selectedIndex].value.toString();
+    const howMuch = cvInp.value;
+        
+    const base = curFrom;
+    const api = "https://api.exchangeratesapi.io/latest?base=" + base;
 
+    fetch(api)
+        .then(data => data.json())
+        .then(json => {
+            Object.entries(json).forEach(key => {
+                Object.entries(key[1]).forEach(k => {
+                    if (k[0] == curTo) {
+                        const result = (k[1]*howMuch).toFixed(2);
+                        console.log(howMuch, curFrom, '=', result, curTo);
+                        curResult.innerHTML = result + ' ' + curTo;
+                    }
+                })
+            });
+        })
+    .catch(err => console.log(err));
+});
+/*-!EVENTS!-*/
 /*-!RUN!-*/
 
 
