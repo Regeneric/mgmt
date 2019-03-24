@@ -3,18 +3,29 @@
 /*-!INFO!-*/
 
 /*--SETUP--*/
-const time = require("./js/data/time");
-    const {convertUp, convertDown} = time;
-
+// Currency
+////////////////////////////////////////////////////////////////
 const btn = document.querySelector(".fx-btn");
 
 const cvInp = document.querySelector(".cv-inp");
 const curSelect = document.querySelectorAll(".cur-select");
 const curResult = document.querySelector("#curr_result");
+////////////////////////////////////////////////////////////////
+
+// Time
+////////////////////////////////////////////////////////////////
+
+
+// Volume
+////////////////////////////////////////////////////////////////
+
 /*--SETUP--*/
 
 /*--RUN--*/
 /*--EVENTS--*/
+
+// Currency
+////////////////////////////////////////////////////////////////
 btn.addEventListener("click", () => {
     const curFrom = curSelect[0].options[curSelect[0].selectedIndex].value.toString();
     const curTo = curSelect[1].options[curSelect[1].selectedIndex].value.toString();
@@ -30,14 +41,15 @@ btn.addEventListener("click", () => {
                 Object.entries(key[1]).forEach(k => {
                     if (k[0] == curTo) {
                         const result = (k[1]*howMuch).toFixed(2);
-                        console.log(howMuch, curFrom, '=', result, curTo);
                         curResult.innerHTML = result + ' ' + curTo;
                     }
-                })
+                });
             });
         })
     .catch(err => console.log(err));
 });
+////////////////////////////////////////////////////////////////
+
 /*-!EVENTS!-*/
 /*-!RUN!-*/
 

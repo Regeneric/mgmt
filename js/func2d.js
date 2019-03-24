@@ -15,6 +15,13 @@ const fxDraw = document.querySelector("#fx-draw");
 
 const squareDiv = document.querySelectorAll("#square");
 const squreDesc = document.querySelectorAll(".fx-desc");
+
+const checkbox = document.querySelectorAll(".checkbox");
+    const zoomBtn = checkbox[0];
+
+    checkbox[0].style.backgroundColor = "rgb(9, 71, 113)";
+    checkbox[1].style.backgroundColor = "rgb(188, 188, 188)";
+    checkbox[2].style.backgroundColor = "rgb(9, 71, 113)";
 /*-!SETUP!-*/
 
 /*--PROPS--*/
@@ -108,12 +115,20 @@ fxBtn.forEach(fb => {
             case "fx-draw-btn": {
                 func2d.options.elements.line.tension = 0.3;
                 squareDiv.forEach(s => s.style.display = "none");   // Hide all divs driven by quadratic equation
+
+                console.log(zoomBtn.style.backgroundColor);
+                if (zoomBtn.style.backgroundColor == "rgb(9, 71, 113)") {
+                    func2d.options.plugins.zoom.pan.enabled = true;
+                    func2d.options.plugins.zoom.zoom.enabled = true;
+                } else {
+                    func2d.options.plugins.zoom.pan.enabled = false;
+                    func2d.options.plugins.zoom.zoom.enabled = false;
+                }
             
                 rightX = fxInp[1].value;
                 leftX = ~rightX+1; 
             
                 fxValue = fxDraw.value;
-                fxInp[3].checked = false;
             
                 fxFind.forEach(r => {
                     if (r.fx.test(fxValue)) {
@@ -171,7 +186,7 @@ fxBtn.forEach(fb => {
                                 W.q = qFx(P.a, P.d);
 
                                 // Round values
-                                if (fxInp[4].checked) {
+                                if (checkbox[2].style.backgroundColor == "rgb(9, 71, 113)") {
                                     if (X.x1 == "Brak" || X.x2 == "Brak") {
                                         X.x12 = Math.round(X.x12);
                                         W.p = Math.round(W.p);
@@ -309,13 +324,25 @@ fxBtn.forEach(fb => {
     });
 });
 
-fxInp[3].addEventListener("click", () => {
+checkbox[1].addEventListener("click", () => {
     ptBgColour.length = 0;
     ptBorderCl.length = 0;
-
-    if (fxInp[3].checked) findZero(data); 
-    func2d.update();
+    
+    console.log(checkbox[1].style.backgroundColor);
+    if (checkbox[1].style.backgroundColor == "rgb(188, 188, 188)") findZero(data); 
+    else {
+        checkForX(fxInp[2].value, data);
+        checkbox[1].style.backgroundColor = "rgb(9, 71, 113)";
+    } func2d.update();
 });
+
+checkbox.forEach(c => {
+    c.addEventListener("click", () => {
+        if (c.style.backgroundColor == "rgb(188, 188, 188)") {
+            c.style.backgroundColor = "rgb(9, 71, 113)";
+        } else c.style.backgroundColor = "rgb(188, 188, 188)";
+    });
+})
 /*-!EVENTS!-*/
 
 squareDiv.forEach(s => s.style.display = "none");
@@ -582,7 +609,7 @@ function drawSinFx(fx, range, data) {
 ////////////////////////////////////////////////////////////////
 
 function checkForX(x, obj) {
-    fxInp[3].checked = false;
+    checkbox[1].style.backgroundColor = "rgb(188, 188, 188)";
     obj.forEach(d => {
         if (d.x == x) {
             ptBgColour.push("#fff384");
