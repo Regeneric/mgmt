@@ -1,5 +1,6 @@
 /*--INFO--*/
 // Author: Hubert Batkiewicz
+// Contributors: Patryk Piszczek
 /*-!INFO!-*/
 
 /*--SETUP--*/
@@ -10,7 +11,16 @@ const btn = document.querySelector(".fx-btn");
 const cvInp = document.querySelector(".cv-inp");
 const curSelect = document.querySelectorAll(".cur-select");
 const curResult = document.querySelector("#curr_result");
+
+const currencies = document.querySelectorAll(".currencies");
+const times = document.querySelectorAll(".times");
+const volume = document.querySelectorAll(".volume");
+
+const loadTime = document.querySelector("#switch1");
+
+// Window Changing
 ////////////////////////////////////////////////////////////////
+
 
 // Time
 ////////////////////////////////////////////////////////////////
