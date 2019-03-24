@@ -4,11 +4,13 @@
 
 /*--SETUP--*/
 const Plotly = require("plotly.js-dist");
+
+const fxInp = document.querySelectorAll(".fx-inp");
+const fxBtn = document.querySelector(".fx-btn")
 /*-!SETUP!-*/
 
-function f(x, y) {
-    return x ** 2 + y ** 2;
-}
+/*--PROPS--*/
+let a = b = c = p = q = 1;
 
 let leftAxis = -1000;
 let rightAxis = 1000;
@@ -17,15 +19,7 @@ const xAx = new Array();
 const yAx = new Array();
 const zAx = new Array();
 
-for (let x = leftAxis; x < rightAxis; x++) {
-    xAx.push(x);
-    for (let y = leftAxis; y < rightAxis; y += 10) {
-        yAx.push(y);
-        zAx.push(f(x, y));
-    }
-}
-
-var data = [
+const data = [
     {
         opacity: 0.5,
         type: "scatter3d",
@@ -56,8 +50,46 @@ const layout = {
         },
     }
 }
+/*-!PROPS!-*/
+
+/*--RUN--*/
+/*--EVENTS--*/
+fxBtn.addEventListener("click", () => {
+    let xVal = fxInp[1].value;
+    let sign = fxInp[2].value;
+    let yVal = fxInp[3].value; 
+    
+    xVal = xVal.replace("abs", "Math.abs");
+    yVal = yVal.replace("abs", "Math.abs");
+    xVal = xVal.replace("sin", "Math.sin");
+    yVal = yVal.replace("sin", "Math.sin");
+
+    xVal = xVal.replace('^', "**");
+    yVal = yVal.replace('^', "**");
+
+    let fx = xVal+sign+yVal;
+    drawFunction(fx, xVal, yVal);
+});
+/*-!EVENTS!-*/
 
 Plotly.newPlot("func3d-chart", data, layout, { showSendToCloud: true });
+
+function drawFunction(fx, x, y) {
+    function f(x, y) {
+        return eval(fx)
+    }
+    
+    for (let x = leftAxis; x < rightAxis; x += 10) {
+        xAx.push(x);
+        for (let y = leftAxis; y < rightAxis; y += 10) {
+            yAx.push(y);
+            zAx.push(f(x, y));
+        }
+    }
+
+    Plotly.newPlot("func3d-chart", data, layout, { showSendToCloud: true });
+}
+/*-!RUN!-*/
 
 
 // WGEC - Scientific Calculator

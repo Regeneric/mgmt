@@ -58,7 +58,110 @@
         <!-- !Title Bar! -->
 
         <main role=”main”>
+            <div class="currencies">
+                <div class="currency_am">
+                    <span class="cur-span">Wynik</span>
+                    <input class="cv-inp" id="inp-am">
+                </div>
+
+                <div class="currency_res">
+                        <span class="cur-span">Po przeliczeniu:</span>
+                        <span class="cur-span" id="curr_result"></span>
+                </div>
+
+                <div class="currency_from">
+                    <span class="cur-span">Waluta z:</span>
                 
+                    <select class="cur-select" onfocus='this.size=5;' onblur='this.size=1;' 
+                    onchange='this.size=5; this.blur();' >
+                        <option value="default">--Wybierz walutę--</option>
+                        <option value="PLN">PLN - Polska</option>
+                        <option value="EUR">EUR - Unia Europejska</option>
+                        <option value="USD">USD - Stany Zjednoczone</option>
+                        <option value="GBP">GPB - Wielka Brytania</option>
+                        <option value="CHF">CHF - Szwajcaria</option>
+                        <option value="AUD">AUD - Australia</option>
+                        <option value="BRL">BRL - Brazylia</option>
+                        <option value="BGN">BGN - Bułgaria</option>
+                        <option value="CZK">CZK - Czechy</option>
+                        <option value="CNY">CNY - ChRL</option>
+                        <option value="CAD">CAD - Kanada</option>
+                        <option value="CLP">CLP - Chile</option>
+                        <option value="DKK">DKK - Dania</option>
+                        <option value="HRK">HRL - Chorwacja</option>
+                        <option value="HUF">HUF - Węgry</option>
+                        <option value="HKD">HKD - Hongkong</option>
+                        <option value="ISK">ISK - Islandia</option>
+                        <option value="INR">INR - Indie</option>
+                        <option value="IDR">IDR - Indonezja</option>
+                        <option value="ILS">ILS - Izrael</option>
+                        <option value="JPY">JPY - Japonia</option>
+                        <option value="KRW">KRW - Korea Południowa</option>
+                        <option value="MYR">MYR - Malezja</option>
+                        <option value="MXN">MXN - Meksyk</option>
+                        <option value="NZD">NZD - Nowa Zelandia</option>
+                        <option value="NOK">NOK - Norwegia</option>
+                        <option value="PHP">PHP - Filipiny</option>
+                        <option value="RUB">RUB - Rosja</option>
+                        <option value="RON">RON - Rumunia</option>
+                        <option value="SGD">SGD - Singapur</option>
+                        <option value="SEK">SEK - Szwecja</option>
+                        <option value="TRY">TRY - Turcja</option>
+                        <option value="THB">THB - Tajlandia</option>
+                        <option value="UAH">UAH - Ukraina</option>
+                        <option value="XDR">XDR - MFW</option>
+                        <option value="ZAR">ZAR - RPA</option>
+                    </select>
+                </div>
+
+                <div class="currency_to">
+                    <span class="cur-span">Waluta na:</span>
+                    <select class="cur-select" onfocus='this.size=5;' onblur='this.size=1;' 
+                    
+                    onchange='this.size=5; this.blur();' >
+                        <option value="default">--Wybierz walutę--</option>
+                        <option value="PLN">PLN - Polska</option>
+                        <option value="EUR">EUR - Unia Europejska</option>
+                        <option value="USD">USD - Stany Zjednoczone</option>
+                        <option value="GBP">GPB - Wielka Brytania</option>
+                        <option value="CHF">CHF - Szwajcaria</option>
+                        <option value="AUD">AUD - Australia</option>
+                        <option value="BRL">BRL - Brazylia</option>
+                        <option value="BGN">BGN - Bułgaria</option>
+                        <option value="CZK">CZK - Czechy</option>
+                        <option value="CNY">CNY - ChRL</option>
+                        <option value="CAD">CAD - Kanada</option>
+                        <option value="CLP">CLP - Chile</option>
+                        <option value="DKK">DKK - Dania</option>
+                        <option value="HRK">HRL - Chorwacja</option>
+                        <option value="HUF">HUF - Węgry</option>
+                        <option value="HKD">HKD - Hongkong</option>
+                        <option value="ISK">ISK - Islandia</option>
+                        <option value="INR">INR - Indie</option>
+                        <option value="IDR">IDR - Indonezja</option>
+                        <option value="ILS">ILS - Izrael</option>
+                        <option value="JPY">JPY - Japonia</option>
+                        <option value="KRW">KRW - Korea Południowa</option>
+                        <option value="MYR">MYR - Malezja</option>
+                        <option value="MXN">MXN - Meksyk</option>
+                        <option value="NZD">NZD - Nowa Zelandia</option>
+                        <option value="NOK">NOK - Norwegia</option>
+                        <option value="PHP">PHP - Filipiny</option>
+                        <option value="RUB">RUB - Rosja</option>
+                        <option value="RON">RON - Rumunia</option>
+                        <option value="SGD">SGD - Singapur</option>
+                        <option value="SEK">SEK - Szwecja</option>
+                        <option value="TRY">TRY - Turcja</option>
+                        <option value="THB">THB - Tajlandia</option>
+                        <option value="UAH">UAH - Ukraina</option>
+                        <option value="XDR">XDR - MFW</option>
+                        <option value="ZAR">ZAR - RPA</option>
+                        
+                </div>
+
+                
+
+            </div>
         </main>
     </body>
 </html>

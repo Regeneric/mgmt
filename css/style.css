@@ -226,7 +226,7 @@ table#base {
    
 float: left;
 width: 100%;
-} .fx, .fx-btn {
+} .fx, .fx-btn, .currency_am, .currency_from, .currency_to, .currency_res {
     background-color: rgb(223, 223, 223);
 
     border: solid 1px rgb(124, 124, 124);
@@ -307,6 +307,35 @@ width: 100%;
     font-weight: 550;
     text-decoration: none;
 }
+
+
+/*--conversion.html--*/
+
+.currency_from{
+    float: left;
+    width: 218px;
+    height: 15%;
+    min-height: 125px;
+} .currency_to{
+    float: left;
+    width: 218px;
+    height: 15%;
+    min-height: 125px;
+} .currencies{
+    float: left;
+} .currency_am{
+    width: 458px;
+} .cur-select{
+    background-color: rgb(223, 223, 223);
+    outline-color: transparent;
+} .currency_res{
+    position: absolute;
+    top: 226px;
+    width: 458px;
+    height: 72px;
+
+}
+
 /*-!about.html!-*/
 
 
