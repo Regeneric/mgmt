@@ -24,6 +24,10 @@ const options = document.querySelectorAll(".currency_from .cur-select option");
 
 /*--SETUP--*/
 
+/*--PROPS--*/
+curReplace.innerHTML = options[0].value;
+/*-!PROPS!-*/
+
 /*--RUN--*/
 /*--EVENTS--*/
 
