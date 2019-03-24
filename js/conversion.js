@@ -1,5 +1,6 @@
 /*--INFO--*/
 // Author: Hubert Batkiewicz
+// Contributors: Patryk Piszczek
 /*-!INFO!-*/
 
 /*--SETUP--*/
@@ -14,6 +15,7 @@ const curReplace = document.querySelector(".cur-span-replace");
 
 const options = document.querySelectorAll(".currency_from .cur-select option");
 ////////////////////////////////////////////////////////////////
+
 
 // Time
 ////////////////////////////////////////////////////////////////
