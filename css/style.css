@@ -227,12 +227,12 @@ table#base {
 float: left;
 width: 100%;
 } .fx, .fx-btn, .currency_am, .currency_from, .currency_to, .currency_res {
-    background-color: rgb(223, 223, 223);
+    background-color: #3c3c3c1c;
 
-    border: solid 1px rgb(124, 124, 124);
+    border: solid 1px #7c7c7c;
     border-radius: 3px;
-    box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
-    color: #5e5e5e;
+    outline: none;
+    color: #ffffff;
 
     padding: 10px;
     font-size: 14pt;
@@ -268,8 +268,13 @@ width: 100%;
     font-size: 6pt;
     background-color: rgb(9, 71, 113);
     border: 1px solid rgb(188, 188, 188);
-    margin-left: 8px;
-    margin-top: -3px;
+    margin-left: 5px;
+    margin-top: 20px;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 } .checkbox:hover {
     cursor: pointer;
 }
@@ -321,25 +326,45 @@ width: 100%;
     width: 218px;
     height: 15%;
     min-height: 125px;
+    z-index: -1;
 } .currency_to{
     float: left;
     width: 218px;
     height: 15%;
     min-height: 125px;
+    z-index: -1;
 } .currencies{
     float: left;
 } .currency_am{
+    position: absolute;
     width: 458px;
+    top: 177px;
+    z-index: -1;
 } .cur-select{
     background-color: rgb(223, 223, 223);
     outline-color: transparent;
 } .currency_res{
+    float: left;
     position: absolute;
-    top: 226px;
+    top: 246px;
     width: 458px;
-    height: 72px;
+    height: 52px;
+    z-index: -2;
+    
 
-}
+} body {
+    overflow: hidden;
+}  .cur-span_1{
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    z-index: 1;
+}  .cur-span_2{
+    position: absolute;
+    top: 20px;
+    left: 155px;
+    z-index: 1;
+} 
 
 /*-!about.html!-*/
 

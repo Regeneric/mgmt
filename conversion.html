@@ -61,13 +61,14 @@
             <div class="currencies">
                 <div class="currency_am">
                     <span class="cur-span">Wartość: </span>
-                    <input class="cv-inp" id="inp-am" type="number" value="1">
+                    <input class="cv-inp" id="inp-am" type="text" value="1" minlength="1" maxlength="10">
+                    <span class="cur-span-replace">PLN</span>
                     <button class="fx-btn">Przelicz</button>
                 </div>
 
                 <div class="currency_res">
-                        <span class="cur-span">Po przeliczeniu:</span>
-                        <span class="cur-span" id="curr_result"></span>
+                        <span class="cur-span_1">Po przeliczeniu:</span>
+                        <span class="cur-span_2" id="curr_result"></span>
                 </div>
 
                 <div class="currency_from">
