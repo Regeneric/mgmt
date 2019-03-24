@@ -226,7 +226,7 @@ table#base {
    
 float: left;
 width: 100%;
-} .fx, .fx-btn, .currency_am, .currency_from, .currency_to, .currency_res {
+} .liniowa, .fx, .fx-btn, .currency_am, .currency_from, .currency_to, .currency_res, .help-btn, .vert-btn {
     background-color: #3c3c3c1c;
 
     border: solid 1px #7c7c7c;
@@ -236,6 +236,7 @@ width: 100%;
 
     padding: 10px;
     font-size: 14pt;
+    cursor: pointer;
 } .fx-desc {
     margin-right: 10px;
     width: 20px;
@@ -246,7 +247,7 @@ width: 100%;
     margin-right: 10px;
     padding: 4px;
     padding-right: 35px;
-} .fx-btn:hover {
+} .fx-btn:hover, .help-btn:hover, .vert-btn:hover {
     background-color: #3c3c3c;
     color: #bcbcbc;
     cursor: pointer;
@@ -384,6 +385,23 @@ body {
     left: 155px;
     z-index: 1;
 } 
+
+/*--help2d.html--*/
+.left-btn{
+    width: 100px;
+    float: left;
+    display: run-in;
+}  .help-btn{
+    height: 70px;
+    width: 200px;
+    margin-right: -4px;
+} .vert-btn, .liniowa {
+    height: 70px;
+    float: right;
+    width: 150px;
+}
+
+
 
 
 /* WGEC - Scientific Calculator
