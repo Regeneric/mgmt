@@ -53,14 +53,10 @@
         <!-- !Title Bar! -->
 
         <main role=”main”>
-            <div id="func3d-chart" style="width: 1280px; height: 500px;"></div>
+            <div id="func3d-chart" style="width: 1280px; height: 500px; z-index: 0;"></div>
             <div class="fx">
-                <span class="fx-desc">Precyzja: </span>
-                    <input class="fx-inp" id="fx-prec" type="number" step="1" value="1000"  maxlength="4">
-            </div>
-
-            <div class="fx">
-                <span class="fx-desc" id="x-desc">X: </span>
+            
+                    <span class="fx-desc" id="x-desc">X: </span>
                     <input type="text" class="fx-inp" id="x-inp" autofocus value="abs(x)">
                 
                 <input type="text" class="fx-inp" id="y-inp" value="+" maxlength="1">
@@ -72,11 +68,17 @@
             </div>
 
             <div class="fx">
-                <span class="fx-desc">Pokaż miejsca zerowe: </span>
-                <input class="fx-inp" id="fx-zero" type="checkbox">
+                    <span class="fx-desc">Precyzja: </span>
+                    <input class="fx-inp" id="fx-prec" type="number" step="1" value="1000"  maxlength="4">
 
-                <span class="fx-desc">Zaokrąglij wynik: </span>
-                <input class="fx-inp" id="fx-zero" type="checkbox" checked="true">
+            </div>
+
+            <div class="fx2">
+                <span class="fx-desc1">Pokaż miejsca zerowe: </span>
+                <span class="checkbox1" id="fx-zero1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                <span class="fx-desc1">Zaokrąglij wynik: </span>
+                <span class="checkbox1" id="fx-round2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             </div>   
         </main>
     </body>

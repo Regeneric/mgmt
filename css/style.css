@@ -33,6 +33,7 @@ body {
     -webkit-user-select: none; /* tekst na górnym pasku nie jest zaznaczalny*/
 }
 #file, #edit, #help{
+    padding-top: 8px;
     margin-right: 2px;
 }
 #file {
@@ -226,7 +227,7 @@ table#base {
    
 float: left;
 width: 100%;
-} .liniowa, .fx, .fx-btn, .currency_am, .currency_from, .currency_to, .currency_res, .help-btn, .vert-btn {
+} .liniowa, .fx, .fx2, .fx-btn, .currency_am, .currency_from, .currency_to, .currency_res, .help-btn, .vert-btn {
     background-color: #3c3c3c1c;
 
     border: solid 1px #7c7c7c;
@@ -236,8 +237,8 @@ width: 100%;
 
     padding: 10px;
     font-size: 14pt;
-    cursor: pointer;
-} .fx-desc {
+    
+} .fx-desc, .fx-desc1 {
     margin-right: 10px;
     width: 20px;
 } #desc-zero{
@@ -267,7 +268,7 @@ width: 100%;
     top: 555px;
 }
 
-.checkbox {
+.checkbox, .checkbox1 {
     font-size: 6pt;
     background-color:transparent;
     border: 2px solid rgb(188, 188, 188);
@@ -280,7 +281,7 @@ width: 100%;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-} .checkbox:hover {
+} .checkbox:hover, .checkbox1:hover {
     cursor: pointer;
     
 } #fx-round, #fx-zero{
@@ -403,6 +404,17 @@ body {
     height: 70px;
     float: right;
     width: 150px;
+}
+
+
+
+
+/*--func3d.html--*/
+.dropdown{
+    z-index: 2;
+} .fx2{
+    height: 55px;
+    line-height: 50px;
 }
 
 
