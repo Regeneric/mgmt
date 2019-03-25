@@ -58,5 +58,145 @@ module.exports = {
             '<option value="GAL">Galon</option>',
             '<option value="QT">Kwarta</option>'
         ]; return data;
+    },
+    timeConvert: (from, to, howMuch) => {
+        let milis = 0;
+        switch(from) {
+            case "SEK": {
+                milis = howMuch*1000;
+                break;
+            }
+            case "MIN": {
+                milis = howMuch*60*1000;
+                break;
+            }
+            case "HRS": {
+                milis = howMuch*60*60*1000;
+                break;
+            }
+            case "DAY": {
+                milis = howMuch*60*60*24*1000;
+                break;
+            }
+            case "WEK": {
+                milis = howMuch*60*60*24*7*1000;
+                break;
+            }
+            case "MNT": {
+                milis = howMuch*60*60*24*7*4*1000;
+                break;
+            }
+            case "YRS": {
+                milis = howMuch*60*60*24*7*4*12*1000;
+                break;
+            }
+            case "AGE": {
+                milis = howMuch*60*60*24*7*4*12*100*1000;
+                break;
+            }
+        }
+    
+        let result = 0;
+        switch(to) {
+            case "SEK": {
+                result = milis/1000;
+                break;
+            }
+            case "MIN": {
+                result = milis/60/1000;
+                break;
+            }
+            case "HRS": {
+                result = milis/60/60/1000;
+                break;
+            }
+            case "DAY": {
+                result = milis/60/60/24/1000;
+                break;
+            }
+            case "WEK": {
+                result = milis/60/60/24/7/1000;
+                break;
+            }
+            case "MNT": {
+                result = milis/60/60/24/7/4/1000;
+                break;
+            }
+            case "YRS": {
+                result = milis/60/60/24/7/4/12/1000;
+                break;
+            }
+            case "AGE": {
+                result = milis/60/60/24/7/4/12/100/1000;
+                break;
+            }
+        } 
+        return result;
+    },
+    volumeConvert: (from, to, howMuch) => {
+        let milis = 0;
+        switch(from) {
+            case "L": {
+                milis = howMuch*1000;
+                break;
+            }
+            case "ML": {
+                milis = howMuch;
+                break;
+            }
+            case "CM3": {
+                milis = howMuch;
+                break;
+            }
+            case "M3": {
+                milis = howMuch*1000000;
+                break;
+            }
+            case "OZ": {
+                milis = howMuch*29.57;
+                break;
+            }
+            case "GAL": {
+                milis = howMuch*3785.411784;
+                break;
+            }
+            case "QT": {
+                milis = howMuch*946.352946;
+                break;
+            }
+        }
+    
+        let result = 0;
+        switch(to) {
+            case "L": {
+                result = milis/1000;
+                break;
+            }
+            case "ML": {
+                result = milis;
+                break;
+            }
+            case "CM3": {
+                result = milis;
+                break;
+            }
+            case "M3": {
+                result = milis/1000000;
+                break;
+            }
+            case "OZ": {
+                result = milis/29.57;
+                break;
+            }
+            case "GAL": {
+                result = milis/3785.411784;;
+                break;
+            }
+            case "QT": {
+                result = milis/946.352946;
+                break;
+            }
+        } 
+        return result;
     }
 }
