@@ -23,8 +23,8 @@ function loadCurrency() {
     const curSelect = document.querySelectorAll(".cur-select");
     curSelect.forEach(cs => {
         const range = document.createRange();
-        range.selectNodeContents(cs);
-        range.deleteContents();
+            range.selectNodeContents(cs);
+            range.deleteContents();
     });
     curSelect.forEach(cs => {
         curr.forEach(c => {
@@ -133,7 +133,80 @@ function loadTime() {
         const curTo = curSelect[1].options[curSelect[1].selectedIndex].value.toString();
         const howMuch = parseFloat(cvInp.value);
 
-        const date = new Date();
+        let milis = null;
+
+        if (curFrom == curTo) curResult.innerHTML = howMuch + ' ' + curTo;
+        else {
+            switch(curFrom) {
+                case "SEK": {
+                    milis = howMuch*1000;
+                    break;
+                }
+                case "MIN": {
+                    milis = howMuch*60*1000;
+                    break;
+                }
+                case "HRS": {
+                    milis = howMuch*60*60*1000;
+                    break;
+                }
+                case "DAY": {
+                    milis = howMuch*60*60*24*1000;
+                    break;
+                }
+                case "WEK": {
+                    milis = howMuch*60*60*24*7*1000;
+                    break;
+                }
+                case "MNT": {
+                    milis = howMuch*60*60*24*7*4*1000;
+                    break;
+                }
+                case "YRS": {
+                    milis = howMuch*60*60*24*7*4*12*1000;
+                    break;
+                }
+                case "AGE": {
+                    milis = howMuch*60*60*24*7*4*12*100*1000;
+                    break;
+                }
+            }
+
+            switch(curTo) {
+                case "SEK": {
+                    curResult.innerHTML = (milis/1000).toFixed(2) + ' ' + curTo;
+                    break;
+                }
+                case "MIN": {
+                    curResult.innerHTML = (milis/60/1000).toFixed(2) + ' ' + curTo;
+                    break;
+                }
+                case "HRS": {
+                    curResult.innerHTML = (milis/60/60/1000).toFixed(2) + ' ' + curTo;
+                    break;
+                }
+                case "DAY": {
+                    curResult.innerHTML = (milis/60/60/24/1000).toFixed(2) + ' ' + curTo;
+                    break;
+                }
+                case "WEK": {
+                    curResult.innerHTML = (milis/60/60/24/7/1000).toFixed(2) + ' ' + curTo;
+                    break;
+                }
+                case "MNT": {
+                    curResult.innerHTML = (milis/60/60/24/7/4/1000).toFixed(2) + ' ' + curTo;
+                    break;
+                }
+                case "YRS": {
+                    curResult.innerHTML = (milis/60/60/24/7/4/12/1000).toFixed(2) + ' ' + curTo;
+                    break;
+                }
+                case "AGE": {
+                    curResult.innerHTML = (milis/60/60/24/7/4/12/100/1000).toFixed(2) + ' ' + curTo;
+                    break;
+                }
+            }
+        }
     });
 }
 

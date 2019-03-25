@@ -321,3 +321,94 @@ Odnajdywanie miejsc zerowych funkcji i określanie wartości funkcji.
   checkForX(checkX, data);
   func2d.update();
 ```
+
+## conv.js
+### Waluty, czas, objętość
+
+Możliwe do przeliczenia waluty. Kalkulator oparty o aktualizowane przez sieć kursy walut z Europejskiego Banku Centralnego
+```js
+  (property) currency: () => string[]
+  (property) time: () => string[]
+  (property) volume: () => string[]
+```
+
+Kroki dla `time` i `volume` są analogiczne
+```js
+  const select = document.querySelectorAll(".selector");
+  const currency = require("./js/data/conv").currency();
+
+  // Krok opcjonalny, jeśli w select znajdują się już jakieś dzieci:
+  select.forEach(s => {
+    const range = document.createRange();
+        range.selectNodeContents(s);
+        range.deleteContents();
+  });
+
+  // Konwersja string na node i dorzucenie do select
+  select.forEach(s => {
+    currency.forEach(c => {
+      s.appendChild(
+        document.createRange().createContextualFragment(c)
+      );
+    });
+  });
+```
+
+## regExes.js
+### Wyrażenia regularne do funkcji
+
+```js
+(property) fx: () => {
+    id: number;
+    name: string;
+    fx: RegExp;
+    desc: string[];
+}[]
+```
+
+### Parametry funkcji
+
+```js
+(property) quad: () => {
+    id: number;
+    name: string;
+    re: RegExp;
+}[]
+
+(property) quadNeg: () => {
+    id: number;
+    name: string;
+    re: RegExp;
+}[]
+
+(property) abs: () => {
+    id: number;
+    name: string;
+    re: RegExp;
+}[]
+```
+
+Przechwytywanie funkcji wprowadzonej w pole input przez użytkownika. Odnajdywanie parametrów odbywa się analogicznie, do sposobu poniżej.
+```js
+const fxBtn = document.querySelector(".fx-btn");
+const fxInp = document.querySelector(".fx-inp");
+
+const fxFind = require("./js/data/regExes").fx();
+
+fxBtn.addEventListener("click", () => {
+  fxFind.forEach(f => {
+    if (f.fx.test(fxInp.value)) {
+      switch(f.id) {
+        case 0.1: {
+          console.log("Funkja liniowa", fxInp.value);
+          break;
+        } 
+        case 1.1: {
+          console.log("Funkcja kwadratowa", fxInp.value);
+          break;
+        }
+      }
+    }
+  });
+});
+```

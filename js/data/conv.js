@@ -41,7 +41,7 @@ module.exports = {
             '<option value="SEK">Sekunda</option>',
             '<option value="MIN">Minuta</option>',
             '<option value="HRS">Godzina</option>',
-            '<option value="DYS">Dzień</option>',
+            '<option value="DAY">Dzień</option>',
             '<option value="WEK">Tydzień</option>',
             '<option value="MNT">Miesiąc</option>',
             '<option value="YRS">Rok</option>',
@@ -57,13 +57,6 @@ module.exports = {
             '<option value="OZ">Uncja</option>',
             '<option value="GAL">Galon</option>',
             '<option value="QT">Kwarta</option>'
-        ]; return data;
-    },
-    menuCurr: () => {
-        const data = [
-            '<li class="li-drop">Switch Theme</li>',
-            '<li class="li-drop" id="time">Time</li>',
-            '<li class="li-drop" id="volume">Volume</li>'
         ]; return data;
     }
 }
