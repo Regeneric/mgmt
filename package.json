@@ -21,12 +21,14 @@
     "start": "git checkout master && npm install && electron main.js",
     "current": "electron main.js",
     "pack": "build --dir",
-    "build": "build"
+    "build": "build",
+    "build-win": "build --win",
+    "build-mac": "build --mac"
   },
   "build": {
     "appId": "com.electron.wgec",
     "mac": {
-      "icon": "img/wgec-icon.svg",
+      "artifactName": "${productName}-${version}.${ext}",
       "category": "public.app-category.utilities",
       "target": [
         "default"
@@ -43,10 +45,10 @@
       ]
     },
     "win": {
-      "icon": "img/wgec-icon.svg",
+      "artifactName": "${productName}-${version}.${ext}",
       "target": [
-        "nsis",
-        "msi"
+        "zip",
+        "portable"
       ]
     }
   },
