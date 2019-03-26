@@ -7,7 +7,7 @@
     "Gabriel Król <werander.k@gmail.com>",
     "Patryk Piszczek <patrykpiszczek3@gmail.com>"
   ],
-  "version": "0.3.2",
+  "version": "0.3.4",
   "license": "GPLv3",
   "private": true,
   "main": "main.js",
@@ -38,6 +38,7 @@
       "target": [
         "AppImage",
         "deb",
+        "rpm",
         "pacman"
       ]
     },
