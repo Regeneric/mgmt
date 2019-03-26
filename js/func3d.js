@@ -7,10 +7,14 @@ const Plotly = require("plotly.js-dist");
 
 const fxInp = document.querySelectorAll(".fx-inp");
 const fxBtn = document.querySelector(".fx-btn")
+const checkBox = document.querySelectorAll(".checkbox1");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
 let a = b = c = p = q = 1;
+
+checkBox[0].style.backgroundColor = "rgb(188, 188, 188)";
+checkBox[1].style.backgroundColor = "rgb(9, 71, 113)";
 
 let leftAxis = -1000;
 let rightAxis = 1000;
@@ -55,9 +59,9 @@ const layout = {
 /*--RUN--*/
 /*--EVENTS--*/
 fxBtn.addEventListener("click", () => {
-    let xVal = fxInp[1].value;
-    let sign = fxInp[2].value;
-    let yVal = fxInp[3].value; 
+    let xVal = fxInp[0].value;
+    let sign = fxInp[1].value;
+    let yVal = fxInp[2].value; 
     
     xVal = xVal.replace("abs", "Math.abs");
     yVal = yVal.replace("abs", "Math.abs");
@@ -70,6 +74,14 @@ fxBtn.addEventListener("click", () => {
     let fx = xVal+sign+yVal;
     drawFunction(fx, xVal, yVal);
 });
+
+checkBox.forEach(c => {
+    c.addEventListener("click", () => {
+        if (c.style.backgroundColor == "rgb(188, 188, 188)") {
+            c.style.backgroundColor = "rgb(9, 71, 113)";
+        } else c.style.backgroundColor = "rgb(188, 188, 188)";
+    });
+})
 /*-!EVENTS!-*/
 
 Plotly.newPlot("func3d-chart", data, layout, { showSendToCloud: true });
