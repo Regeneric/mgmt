@@ -16,3 +16,27 @@ Install one at a time:
 `npm run pack` - pack the app and make it ready to ship  
 `npm run build` - build the app and get the final product  
 `npm run start` - production version start  
+
+## Inslling package
+### Debian/Ubuntu
+`sudo apt update && sudo apt upgrade`  
+`sudo dpkg -i wgec*.deb`  
+
+In the case of missing deps:  
+`sudo apt update && sudo apt upgrade`  
+`sudo apt install -f`  
+
+And then you can run app with:  
+`wgec`  
+
+### Fedora/SUSE
+`sudo dnf install wgec*.rpm`  
+
+And then you can run app with:  
+`wgec`  
+
+### Arch/Manjaro
+`sudo pacman -U wgec*.pacman`
+
+And then you can run app with:  
+`wgec`  
