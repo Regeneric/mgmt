@@ -9,11 +9,15 @@ const time = require("./js/data/conv").time();
 const volume = require("./js/data/conv").volume();
 const it = require("./js/data/conv").itConv();
 
+const {spansText} = require("./js/data/conv");
+
 const btn = document.querySelector(".fx-btn");
     
 const cvInp = document.querySelector(".cv-inp");
 const curResult = document.querySelector("#curr_result");
 const curReplace = document.querySelector(".cur-span-replace");
+const curSelect = document.querySelectorAll(".cur-select");
+const curSpan = document.querySelectorAll(".cur-span");
 /*--SETUP--*/
 
 /*--RUN--*/
@@ -21,37 +25,8 @@ loadCurrency();
 
 function loadCurrency() {
     // Loading currency list
-    const curSelect = document.querySelectorAll(".cur-select");
-    curSelect.forEach(cs => {
-        const range = document.createRange();
-            range.selectNodeContents(cs);
-            range.deleteContents();
-    });
-    curSelect.forEach(cs => {
-        curr.forEach(c => {
-            cs.appendChild(
-                document.createRange().createContextualFragment(c)
-            );
-        });
-    })
-    
-    const curSpan = document.querySelectorAll(".cur-span");
-    curSpan.forEach(cs => {
-        switch(cs.id) {
-            case "value": {
-                cs.innerHTML = "Wartość: ";
-                break;
-            }
-            case "from": {
-                cs.innerHTML = "Waluta z:";
-                break;   
-            }
-            case "to": {
-                cs.innerHTML = "Waluta na:";
-                break;
-            }
-        }
-    });
+    laodElements(curSelect, curr);
+    spansText(curSpan, "currency");
 
     const options = document.querySelectorAll(".currency_from .cur-select option");
     curReplace.innerHTML = options[0].value;
@@ -87,38 +62,9 @@ function loadCurrency() {
 }
 
 function loadTime() {
-    const curSelect = document.querySelectorAll(".cur-select");
-    curSelect.forEach(cs => {
-        const range = document.createRange();
-        range.selectNodeContents(cs);
-        range.deleteContents();
-    });
-
-    curSelect.forEach(cs => {
-        time.forEach(t => {
-            cs.appendChild(
-                document.createRange().createContextualFragment(t)
-            );
-        });
-    });
-
-    const curSpan = document.querySelectorAll(".cur-span");
-    curSpan.forEach(cs => {
-        switch(cs.id) {
-            case "value": {
-                cs.innerHTML = "Wartość: ";
-                break;
-            }
-            case "from": {
-                cs.innerHTML = "Czas z:";
-                break;   
-            }
-            case "to": {
-                cs.innerHTML = "Czas na:";
-                break;
-            }
-        }
-    });
+    // Loading currency list
+    laodElements(curSelect, time);
+    spansText(curSpan, "time");
 
     const options = document.querySelectorAll(".currency_from .cur-select option");
     curReplace.innerHTML = options[0].value;
@@ -143,38 +89,9 @@ function loadTime() {
 }
 
 function loadVolume() {
-    const curSelect = document.querySelectorAll(".cur-select");
-    curSelect.forEach(cs => {
-        const range = document.createRange();
-        range.selectNodeContents(cs);
-        range.deleteContents();
-    });
-
-    curSelect.forEach(cs => {
-        volume.forEach(v => {
-            cs.appendChild(
-                document.createRange().createContextualFragment(v)
-            );
-        });
-    });
-
-    const curSpan = document.querySelectorAll(".cur-span");
-    curSpan.forEach(cs => {
-        switch(cs.id) {
-            case "value": {
-                cs.innerHTML = "Wartość: ";
-                break;
-            }
-            case "from": {
-                cs.innerHTML = "Objętość z:";
-                break;   
-            }
-            case "to": {
-                cs.innerHTML = "Objętość na:";
-                break;
-            }
-        }
-    });
+    // Loading currency list
+    laodElements(curSelect, volume);
+    spansText(curSpan, "volume");
 
     const options = document.querySelectorAll(".currency_from .cur-select option");
     curReplace.innerHTML = options[0].value;
@@ -199,38 +116,9 @@ function loadVolume() {
 }
 
 function loadIt() {
-    const curSelect = document.querySelectorAll(".cur-select");
-    curSelect.forEach(cs => {
-        const range = document.createRange();
-        range.selectNodeContents(cs);
-        range.deleteContents();
-    });
-
-    curSelect.forEach(cs => {
-        it.forEach(i => {
-            cs.appendChild(
-                document.createRange().createContextualFragment(i)
-            );
-        });
-    });
-
-    const curSpan = document.querySelectorAll(".cur-span");
-    curSpan.forEach(cs => {
-        switch(cs.id) {
-            case "value": {
-                cs.innerHTML = "Wartość: ";
-                break;
-            }
-            case "from": {
-                cs.innerHTML = "Liczba z:";
-                break;   
-            }
-            case "to": {
-                cs.innerHTML = "Liczba na:";
-                break;
-            }
-        }
-    });
+    // Loading currency list
+    laodElements(curSelect, it);
+    spansText(curSpan, "it");
 
     const options = document.querySelectorAll(".currency_from .cur-select option");
     curReplace.innerHTML = options[0].value;
@@ -246,15 +134,19 @@ function loadIt() {
         const curTo = curSelect[1].options[curSelect[1].selectedIndex].value.toString();
         const howMuch = (cvInp.value).toString();
 
-        // if (curFrom == curTo) curResult.innerHTML = howMuch + ' ' + curTo;
         const result = convert(curFrom, curTo, howMuch, "it");
-            if (result === "ZABRONIONE") curResult.innerHTML = result;
-            else curResult.innerHTML = result + ' ' + curTo;
+        
+        if (result === "ZABRONIONE") curResult.innerHTML = result;
+        else curResult.innerHTML = result + ' ' + curTo;
     });
 }
 
 function convert(from, to, howMuch, type) {
     switch(type) {
+        case "it": {
+            const {itConvert} = require("./js/data/conv");
+            return itConvert(from, to, howMuch);
+        }
         case "time": {
             const {timeConvert} = require("./js/data/conv");
             return timeConvert(from, to, howMuch);
@@ -263,11 +155,21 @@ function convert(from, to, howMuch, type) {
             const {volumeConvert} = require("./js/data/conv");
             return volumeConvert(from, to, howMuch);
         }
-        case "it": {
-            const {itConvert} = require("./js/data/conv");
-            return itConvert(from, to, howMuch);
-        }
     }
+}
+
+function laodElements(where, data) {
+    where.forEach(w => {
+        const range = document.createRange();
+            range.selectNodeContents(w);
+            range.deleteContents();
+        
+        data.forEach(d => {
+            w.appendChild(
+                document.createRange().createContextualFragment(d)
+            );
+        });
+    });
 }
 /*-!RUN!-*/
 

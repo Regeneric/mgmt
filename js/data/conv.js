@@ -267,5 +267,81 @@ module.exports = {
             }
         } 
         return result;
+    },
+    spansText: (span, type) => {
+        switch(type) {
+            case "currency": {
+                span.forEach(s => {
+                    switch(s.id) {
+                        case "value": {
+                            s.innerHTML = "Wartość: ";
+                            break;
+                        }
+                        case "from": {
+                            s.innerHTML = "Waluta z:";
+                            break;   
+                        }
+                        case "to": {
+                            s.innerHTML = "Waluta na:";
+                            break;
+                        }
+                    }
+                }); break;
+            }
+            case "it": {
+                span.forEach(s => {
+                    switch(s.id) {
+                        case "value": {
+                            s.innerHTML = "Wartość: ";
+                            break;
+                        }
+                        case "from": {
+                            s.innerHTML = "Liczba z:";
+                            break;   
+                        }
+                        case "to": {
+                            s.innerHTML = "Liczba na:";
+                            break;
+                        }
+                    }
+                }); break;
+            }
+            case "time": {
+                span.forEach(s => {
+                    switch(s.id) {
+                        case "value": {
+                            s.innerHTML = "Wartość: ";
+                            break;
+                        }
+                        case "from": {
+                            s.innerHTML = "Czas z:";
+                            break;   
+                        }
+                        case "to": {
+                            s.innerHTML = "Czas na:";
+                            break;
+                        }
+                    }
+                }); break;
+            }
+            case "volume": {
+                span.forEach(s => {
+                    switch(s.id) {
+                        case "value": {
+                            s.innerHTML = "Wartość: ";
+                            break;
+                        }
+                        case "from": {
+                            s.innerHTML = "Objętość z:";
+                            break;   
+                        }
+                        case "to": {
+                            s.innerHTML = "Objętość na:";
+                            break;
+                        }
+                    }
+                }); break;
+            }
+        }
     }
 }

@@ -103,7 +103,7 @@ liDrop.forEach(ld => {
 
                 break;
             } case "func2d": { 
-                win.setSize(1225, 730);
+                win.setSize(1280, 730);
                 win = loadWindow(win, funcProp);
 
                 break;
