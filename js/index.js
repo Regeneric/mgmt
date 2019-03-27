@@ -139,7 +139,12 @@ liDrop.forEach(ld => {
             case "currency": {
                 loadCurrency();
                 break;
-            } case "time": { 
+            }
+            case "it": {
+                loadIt();
+                break
+            } 
+            case "time": { 
                 loadTime();
                 break;
             } case "volume": {

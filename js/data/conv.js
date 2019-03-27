@@ -59,6 +59,14 @@ module.exports = {
             '<option value="QT">Kwarta</option>'
         ]; return data;
     },
+    itConv: () => {
+        const data = [
+            '<option value="BIN">System binarny</option>',
+            '<option value="OCT">System oktalny</option>',
+            '<option value="DEC">System dziesiętny</option>',
+            '<option value="HEX">System szesnastkowy</option>',
+        ]; return data;
+    },
     timeConvert: (from, to, howMuch) => {
         let milis = 0;
         switch(from) {
@@ -194,6 +202,67 @@ module.exports = {
             }
             case "QT": {
                 result = milis/946.352946;
+                break;
+            }
+        } 
+        return result;
+    },
+    itConvert: (from, to, howMuch) => {
+        let isOk = 1;
+        let milis = 0;
+        switch(from) {
+            case "BIN": {
+                howMuch.split('').forEach(h => {
+                    if (h >= 2 || isNaN(h)) isOk = 0;
+                }) 
+
+                if (isOk) milis = parseInt(howMuch, 2);
+                else return "ZABRONIONE";
+
+                break;      
+            }          
+            case "OCT": {
+                howMuch.split('').forEach(h => {
+                    if (h >= 8 || isNaN(h)) isOk = 0;
+                }) 
+
+                if (isOk) milis = parseInt(howMuch, 8);
+                else return "ZABRONIONE";
+
+                break;                
+            }
+            case "DEC": {
+                howMuch.split('').forEach(h => {
+                    if (isNaN(h)) isOk = 0;
+                }) 
+
+                if (isOk) milis = parseInt(howMuch);
+                else return "ZABRONIONE";
+
+                break;
+            }
+            case "HEX": {
+                milis = parseInt(howMuch, 16);
+                break;
+            }
+        }
+
+        let result = 0;
+        switch(to) {
+            case "BIN": {
+                result = milis.toString(2);
+                break;
+            }
+            case "OCT": {
+                result = milis.toString(8);
+                break;
+            }
+            case "DEC": {
+                result = parseInt(milis);
+                break;
+            }
+            case "HEX": {
+                result = (milis.toString(16)).toUpperCase();
                 break;
             }
         } 

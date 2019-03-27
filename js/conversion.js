@@ -7,6 +7,7 @@
 const curr = require("./js/data/conv").currency();
 const time = require("./js/data/conv").time();
 const volume = require("./js/data/conv").volume();
+const it = require("./js/data/conv").itConv();
 
 const btn = document.querySelector(".fx-btn");
     
@@ -197,6 +198,61 @@ function loadVolume() {
     });
 }
 
+function loadIt() {
+    const curSelect = document.querySelectorAll(".cur-select");
+    curSelect.forEach(cs => {
+        const range = document.createRange();
+        range.selectNodeContents(cs);
+        range.deleteContents();
+    });
+
+    curSelect.forEach(cs => {
+        it.forEach(i => {
+            cs.appendChild(
+                document.createRange().createContextualFragment(i)
+            );
+        });
+    });
+
+    const curSpan = document.querySelectorAll(".cur-span");
+    curSpan.forEach(cs => {
+        switch(cs.id) {
+            case "value": {
+                cs.innerHTML = "Wartość: ";
+                break;
+            }
+            case "from": {
+                cs.innerHTML = "Liczba z:";
+                break;   
+            }
+            case "to": {
+                cs.innerHTML = "Liczba na:";
+                break;
+            }
+        }
+    });
+
+    const options = document.querySelectorAll(".currency_from .cur-select option");
+    curReplace.innerHTML = options[0].value;
+
+    options.forEach(o => {
+        o.addEventListener("click", () => {
+            curReplace.innerHTML = o.value;
+        });
+    });
+
+    btn.addEventListener("click", () => {
+        const curFrom = curSelect[0].options[curSelect[0].selectedIndex].value.toString();
+        const curTo = curSelect[1].options[curSelect[1].selectedIndex].value.toString();
+        const howMuch = (cvInp.value).toString();
+
+        // if (curFrom == curTo) curResult.innerHTML = howMuch + ' ' + curTo;
+        const result = convert(curFrom, curTo, howMuch, "it");
+            if (result === "ZABRONIONE") curResult.innerHTML = result;
+            else curResult.innerHTML = result + ' ' + curTo;
+    });
+}
+
 function convert(from, to, howMuch, type) {
     switch(type) {
         case "time": {
@@ -206,6 +262,10 @@ function convert(from, to, howMuch, type) {
         case "volume": {
             const {volumeConvert} = require("./js/data/conv");
             return volumeConvert(from, to, howMuch);
+        }
+        case "it": {
+            const {itConvert} = require("./js/data/conv");
+            return itConvert(from, to, howMuch);
         }
     }
 }
