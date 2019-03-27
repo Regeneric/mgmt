@@ -73,8 +73,53 @@ Poniższy przykład pokazuje, jak załadować zawartość okna po utworzeniu obi
 
 ## base.js
 
-> `function calculate(action: any): void`  
-> `function uncolor(action: any): void`
+Wprowadzanie danych oraz wykonywanie operacji matematycznych na podstawie wartości *name* przycisku, lub wartości *event.key* klawiatury:
+```js
+  function calculate(action: any): void
+```
+
+Na przykładzie liczb od `1` do `9`:
+```js
+const inputBox = document.querySelector("#inputBox");
+
+for (let i = 1; i < 10; i++) {
+  if (action == i) {
+    if (inputBox.firstChild.nodeValue !== '0') {
+      inputBox.firstChild.nodeValue += i;
+    }
+```
+
+Przywrócenie domyślnego wyglądu przycisku, po wykonaniu akcji, na podstawie wartości *name* przycisku, lub wartości *event.key* klawiatury:
+```js
+  function uncolor(action: any): void
+```
+
+Na przykładzie wartości `+` dla parametru action:
+```js
+switch (action) {
+  case "+": {
+    document.querySelector("#btnplus").classList.value = "calcButton";
+    break;
+  }
+}
+```
+
+Skopiowanie zawartości zmiennej typu string do schowka systemowego:
+```js
+  function copyStringToClipboard(str: any): void
+```
+
+Na przykładzie wartości `123` dla parametru str:
+```js
+var el = document.createElement('textarea');
+    el.value = "123";
+    el.setAttribute('readonly', '');
+    el.style = {position: 'absolute', left: '-9999px'};
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+```
 
 ## func2d.js
 ### Funkcja kwadratowe
