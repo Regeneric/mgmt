@@ -242,7 +242,14 @@ module.exports = {
                 break;
             }
             case "HEX": {
-                milis = parseInt(howMuch, 16);
+                howMuch = howMuch.toUpperCase();
+                howMuch.split('').forEach(h => {
+                    if (isNaN(h) && (h.charCodeAt(0) < 65 || h.charCodeAt(0) > 70)) isOk = 0;
+                }) 
+
+                if (isOk) milis = parseInt(howMuch, 16);
+                else return "ZABRONIONE";
+
                 break;
             }
         }
