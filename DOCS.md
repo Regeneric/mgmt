@@ -457,3 +457,60 @@ fxBtn.addEventListener("click", () => {
   });
 });
 ```
+
+## conv.js
+### Możliwe opcje wyboru i opisy
+
+Podmiana jednostek i możliwości w oknie bez potrzeby przeładowania całego dokumnetu HTML
+```js
+  function laodElements(where: any, data: any): void
+
+  (property) currency: () => string[]
+  (property) time: () => string[]
+  (property) volume: () => string[]
+  (property) itConv: () => string[]
+```
+
+```js
+  const select = document.querySelectorAll(".select");
+  const currency = require("./js/data/conv").currency();
+
+  loadElements(select, currency);
+```
+
+W zależności od wybranej opcji konwersji jednostek, mamy także możliwość zmiany tekstu wyświetlanego w ramach opisu.
+```js
+  (property) spansText: (span: any, type: any) => void
+```
+
+Do wyboru pozostawiono typy `currency`, `it`, `time`, `volume` oraz możliwość definicji własnych.
+```js
+  const spans = document.querySelectorAll(".desc-span");
+
+  spansText(spans, "time");
+```
+
+### Konwersja jednostek
+
+Funkcja, która stanowi interfejs między kodem klienta, a samymi przeliczeniami
+```js
+  function convert(from: any, to: any, howMuch: any, type: any): any
+
+  (property) timeConvert: (from: any, to: any, howMuch: any) => number
+  (property) volumeConvert: (from: any, to: any, howMuch: any) => number
+  (property) itConvert: (from: any, to: any, howMuch: any) => number | "ZABRONIONE"
+```
+
+Do wyboru pozostawiono typy `currency`, `it`, `time`, `volume` oraz możliwość definicji własnych.
+```js
+  const select = document.querySelectorAll(".select");
+  const input = document.querySelector(".input");
+  const summary = document.querySelector(".span-res");
+
+  const selFrom = select[0].value;
+  const selTo = select[1].value;
+  const howMuch = input.value;
+
+  const result = convert(selFrom, selTo, howMuch, "it");
+  summary.innerHTML = result;
+```
