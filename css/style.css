@@ -395,15 +395,43 @@ body {
 .left-btn{
     width: 100px;
     float: left;
-    display: run-in;
+    
 }  .help-btn{
     height: 70px;
     width: 200px;
-    margin-right: -4px;
-} .vert-btn, .liniowa {
-    height: 70px;
+   
+} .vertical-btn{
+    
     float: right;
+    width: 75%;   
+}   .mainhelp2d{
+   
+    float: left;
+} .btn1, .btn2, .btn3, .btn4, .btn5, .btn6{
+    background-color: #3c3c3c1c;
+
+    border: solid 1px #7c7c7c;
+    border-radius: 3px;
+    outline: none;
+    color: #ffffff;
+
+    margin-right: -5px;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14pt;
+} .btn1{
+    width: 100%;  
+} .btn2{
+    width: 50%;
+} .btn3{
+    width: 200px;
+} .btn4{
     width: 150px;
+}.btn5{
+    width: 120px;
+} .btn6{
+    width: 101px;
 }
 
 

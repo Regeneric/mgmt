@@ -6,6 +6,3 @@
 vert_btn = document.querySelectorAll(".vertical-btn");
 
 
-
-
-
