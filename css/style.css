@@ -407,7 +407,7 @@ body {
 }   .mainhelp2d{
    
     float: left;
-} .btn1, .btn2, .btn3, .btn4, .btn5, .btn6{
+} .btn1, .btn2, .btn3, .btn4, .btn5, .btn6, .btn7, .btn8{
     background-color: #3c3c3c1c;
 
     border: solid 1px #7c7c7c;
@@ -421,17 +421,21 @@ body {
     padding-bottom: 10px;
     font-size: 14pt;
 } .btn1{
-    width: 100%;  
+    width: calc(100%/1);
 } .btn2{
-    width: 50%;
+    width: calc(100%/2);
 } .btn3{
-    width: 200px;
+    width: calc(100%/3);
 } .btn4{
-    width: 150px;
+    width: calc(100%/4);
 }.btn5{
-    width: 120px;
+    width: calc(100%/5);
 } .btn6{
-    width: 101px;
+    width: calc(100%/6);
+} .btn7{
+    width: calc(100%/7);
+} .btn8{
+    width: calc(100%/8);
 }
 
 
