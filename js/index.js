@@ -123,7 +123,7 @@ liDrop.forEach(ld => {
 
                 break;
             } case "science": {
-                win.setSize(1280, 730);
+                win.setSize(660, 630);
                 win = loadWindow(win, scienceProp);
 
                 break;
