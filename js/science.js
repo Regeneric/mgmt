@@ -156,19 +156,28 @@ function calculate(action){
                     }
                     case "sin": {
                         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
-                        inputBox.firstChild.nodeValue = Math.sin(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
+                            if (/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) {
+                                inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + Math.sin(inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
+                            }
+                            else inputBox.firstChild.nodeValue = Math.sin(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
                         } document.querySelector("#btnsin").classList.value = "activated";
                         break;
                     }
                     case "cos": {
                         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
-                        inputBox.firstChild.nodeValue = Math.cos(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
+                            if (/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) {
+                                inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + Math.cos(inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
+                            }
+                            else inputBox.firstChild.nodeValue = Math.cos(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
                         } document.querySelector("#btncos").classList.value = "activated";
                         break;
                     }
                     case "tg": {
                         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
-                        inputBox.firstChild.nodeValue = Math.tan(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
+                            if (/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) {
+                                inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + Math.tan(inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
+                            }
+                            else inputBox.firstChild.nodeValue = Math.tan(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
                         } document.querySelector("#btntg").classList.value = "activated";
                         break;
                     }
@@ -183,7 +192,10 @@ function calculate(action){
                     }
                     case "1/x": {
                         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
-                        inputBox.firstChild.nodeValue = 1/eval(inputBox.firstChild.nodeValue);
+                            if (/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) {
+                                inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + (1/inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
+                            }
+                            else inputBox.firstChild.nodeValue = 1/eval(inputBox.firstChild.nodeValue);
                         } document.querySelector("#btnonetox").classList.value = "activated";
                         break;
                     }
@@ -195,7 +207,10 @@ function calculate(action){
                     }
                     case "power2": {
                         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
-                        inputBox.firstChild.nodeValue = eval(inputBox.firstChild.nodeValue)*eval(inputBox.firstChild.nodeValue);
+                            if (/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) {
+                                inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + (inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g) * inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)));
+                            }
+                            else inputBox.firstChild.nodeValue = eval(inputBox.firstChild.nodeValue)*eval(inputBox.firstChild.nodeValue);
                         } document.querySelector("#btnpower2").classList.value = "activated";
                         break;
                     }
