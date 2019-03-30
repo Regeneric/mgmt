@@ -10,7 +10,9 @@ const calcButtons = document.querySelectorAll(".calcButton");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-const maxChar = 13; // Max number of characters you can input
+const maxChar = 18; // Max number of characters you can input
+const floatPrecision=4; //Precision of float numbers
+let isCalculated = 0;
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -93,17 +95,18 @@ function calculate(action){
 
         //Keyboard operations
             //Continue after using equal button
-            if (resultBox.className == "highlited" && ["+", "-", "*", ":", "/", ".", ","].includes(action)) {
-                resultBox.className = "unhighlited";
-                inputBox.className = "highlited";
-                inputBox.firstChild.nodeValue = resultBox.firstChild.nodeValue.substr(2);
+            if (!(isNaN(action)) && isCalculated==1) {
+                inputBox.firstChild.nodeValue = action;
+                isCalculated = 0;
             }
+            else isCalculated = 0;
 
             //Equal button
             if (action == "Enter" || action == "=") {
                     resultBox.firstChild.nodeValue = inputBox.firstChild.nodeValue;
                     inputBox.firstChild.nodeValue = eval(inputBox.firstChild.nodeValue);
                     //ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
+                    isCalculated = 1;
                     document.querySelector("#btnequals").classList.value = "activated";
             }
 
@@ -149,6 +152,54 @@ function calculate(action){
                         if (inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != "(" && inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != ")" && !(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1]))) {
                         inputBox.firstChild.nodeValue += ")";
                         } document.querySelector("#btnbracket2").classList.value = "activated";
+                        break;
+                    }
+                    case "sin": {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        inputBox.firstChild.nodeValue = Math.sin(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
+                        } document.querySelector("#btnsin").classList.value = "activated";
+                        break;
+                    }
+                    case "cos": {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        inputBox.firstChild.nodeValue = Math.cos(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
+                        } document.querySelector("#btncos").classList.value = "activated";
+                        break;
+                    }
+                    case "tg": {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        inputBox.firstChild.nodeValue = Math.tan(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
+                        } document.querySelector("#btntg").classList.value = "activated";
+                        break;
+                    }
+                    case "sqrt": {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        inputBox.firstChild.nodeValue = Math.sqrt(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
+                        } document.querySelector("#btnsqrt").classList.value = "activated";
+                        break;
+                    }
+                    case "1/x": {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        inputBox.firstChild.nodeValue = 1/eval(inputBox.firstChild.nodeValue);
+                        } document.querySelector("#btnonetox").classList.value = "activated";
+                        break;
+                    }
+                    case "mod": {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                            inputBox.firstChild.nodeValue += "%";
+                        } document.querySelector("#btnmod").classList.value = "activated";
+                        break;
+                    }
+                    case "power2": {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        inputBox.firstChild.nodeValue = eval(inputBox.firstChild.nodeValue)*eval(inputBox.firstChild.nodeValue);
+                        } document.querySelector("#btnpower2").classList.value = "activated";
+                        break;
+                    }
+                    case "^": {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                            inputBox.firstChild.nodeValue += "^";
+                        } document.querySelector("#btnpowern").classList.value = "activated";
                         break;
                     }
                 }
@@ -224,6 +275,38 @@ function uncolor(action) {
         }
         case ")": {
             document.querySelector("#btnbracket2").classList.value = "calcButton";
+            break;
+        }
+        case "sin": {
+            document.querySelector("#btnsin").classList.value = "calcButton";
+            break;
+        }
+        case "cos": {
+            document.querySelector("#btncos").classList.value = "calcButton";
+            break;
+        }
+        case "tg": {
+            document.querySelector("#btntg").classList.value = "calcButton";
+            break;
+        }
+        case "sqrt": {
+            document.querySelector("#btnsqrt").classList.value = "calcButton";
+            break;
+        }
+        case "1/x": {
+            document.querySelector("#btnonetox").classList.value = "calcButton";
+            break;
+        }
+        case "mod": {
+            document.querySelector("#btnmod").classList.value = "calcButton";
+            break;
+        }
+        case "power2": {
+            document.querySelector("#btnpower2").classList.value = "calcButton";
+            break;
+        }
+        case "^": {
+            document.querySelector("#btnpowern").classList.value = "calcButton";
             break;
         }
         }
