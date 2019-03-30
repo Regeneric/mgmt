@@ -174,7 +174,10 @@ function calculate(action){
                     }
                     case "sqrt": {
                         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
-                        inputBox.firstChild.nodeValue = Math.sqrt(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
+                            if (/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) {
+                                inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + Math.sqrt(inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
+                            }
+                            else inputBox.firstChild.nodeValue = Math.sqrt(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
                         } document.querySelector("#btnsqrt").classList.value = "activated";
                         break;
                     }
