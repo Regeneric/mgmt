@@ -31,6 +31,7 @@ function loadCurrency() {
     const options = document.querySelectorAll(".currency_from .cur-select option");
     curReplace.innerHTML = options[0].value;
 
+    /*--EVENTS--*/    
     options.forEach(o => {
         o.addEventListener("click", () => {
             curReplace.innerHTML = o.value;
@@ -59,6 +60,7 @@ function loadCurrency() {
             })
         .catch(err => console.log(err));
     });
+    /*-!EVENTS!-*/
 }
 
 function loadTime() {
@@ -69,6 +71,7 @@ function loadTime() {
     const options = document.querySelectorAll(".currency_from .cur-select option");
     curReplace.innerHTML = options[0].value;
 
+    /*--EVENTS--*/
     options.forEach(o => {
         o.addEventListener("click", () => {
             curReplace.innerHTML = o.value;
@@ -86,6 +89,7 @@ function loadTime() {
             curResult.innerHTML = parseFloat(result).toFixed(2) + ' ' + curTo;
         }
     });
+    /*-!EVENTS!-*/
 }
 
 function loadVolume() {
@@ -96,6 +100,7 @@ function loadVolume() {
     const options = document.querySelectorAll(".currency_from .cur-select option");
     curReplace.innerHTML = options[0].value;
 
+    /*--EVENTS--*/
     options.forEach(o => {
         o.addEventListener("click", () => {
             curReplace.innerHTML = o.value;
@@ -113,6 +118,7 @@ function loadVolume() {
             curResult.innerHTML = parseFloat(result).toFixed(2) + ' ' + curTo;
         }
     });
+    /*-!EVENTS!-*/
 }
 
 function loadIt() {
@@ -123,6 +129,7 @@ function loadIt() {
     const options = document.querySelectorAll(".currency_from .cur-select option");
     curReplace.innerHTML = options[0].value;
 
+    /*--EVENTS--*/
     options.forEach(o => {
         o.addEventListener("click", () => {
             curReplace.innerHTML = o.value;
@@ -133,12 +140,13 @@ function loadIt() {
         const curFrom = curSelect[0].options[curSelect[0].selectedIndex].value.toString();
         const curTo = curSelect[1].options[curSelect[1].selectedIndex].value.toString();
         const howMuch = (cvInp.value).toString();
-
+        
         const result = convert(curFrom, curTo, howMuch, "it");
         
         if (result === "ZABRONIONE") curResult.innerHTML = result;
         else curResult.innerHTML = result + ' ' + curTo;
     });
+    /*-!EVENTS!-*/
 }
 
 function convert(from, to, howMuch, type) {
