@@ -360,6 +360,7 @@ width: 100%;
 } .cur-select{
     background-color: rgb(223, 223, 223);
     outline-color: transparent;
+    width: 100%;
 } .currency_res{
     float: left;
     position: absolute;
@@ -371,7 +372,8 @@ width: 100%;
 } .cur-select option:hover {
     color: #eaf5ff;
     background-color: #1e90ff;
-} 
+} .cur-select option{
+}
 
 body {
     overflow: hidden;
