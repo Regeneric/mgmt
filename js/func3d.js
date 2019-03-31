@@ -13,8 +13,8 @@ const checkBox = document.querySelectorAll(".checkbox1");
 /*--PROPS--*/
 let a = b = c = p = q = 1;
 
-checkBox[0].style.backgroundColor = "rgb(188, 188, 188)";
-checkBox[1].style.backgroundColor = "rgb(9, 71, 113)";
+// checkBox[0].style.backgroundColor = "rgb(188, 188, 188)";
+checkBox[0].style.backgroundColor = "rgb(9, 71, 113)";
 
 let leftAxis = -1000;
 let rightAxis = 1000;
@@ -27,6 +27,9 @@ const data = [
     {
         opacity: 0.5,
         type: "scatter3d",
+        marker: {
+            color: "#cc3756"
+        },
 
         x: xAx,
         y: yAx,
@@ -82,6 +85,16 @@ checkBox.forEach(c => {
         } else c.style.backgroundColor = "rgb(188, 188, 188)";
     });
 })
+
+// checkBox[0].addEventListener("click", () => {
+//     yAx.forEach(y => {
+//         if (y == 0) {
+//             data.marker.color = "#003f1f";
+//         } else {
+//             data.marker.color = "#cc3756";
+//         }
+//     });
+// });
 /*-!EVENTS!-*/
 
 Plotly.newPlot("func3d-chart", data, layout, { showSendToCloud: true });
@@ -92,10 +105,18 @@ function drawFunction(fx, x, y) {
     }
     
     for (let x = leftAxis; x < rightAxis; x += 10) {
-        xAx.push(x);
+        if (checkBox[0].style.backgroundColor == "rgb(9, 71, 113)") xAx.push(Math.round(x));
+        else xAx.push(x);
+
         for (let y = leftAxis; y < rightAxis; y += 10) {
-            yAx.push(y);
-            zAx.push(f(x, y));
+            if (checkBox[0].style.backgroundColor == "rgb(9, 71, 113)") {
+                yAx.push(Math.round(y));
+                zAx.push(Math.round(f(x, y)));
+            }
+            else {
+                yAx.push(y);
+                zAx.push(f(x, y));
+            }
         }
     }
 
