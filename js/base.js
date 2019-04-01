@@ -172,7 +172,7 @@ function calculate(action){
             }
 
             //C button
-            if (action == "Escape") {
+            if (action == "Escape" || action == "Delete") {
                 inputBox.firstChild.nodeValue = " ";
                 resultBox.firstChild.nodeValue = "= ";
                 document.querySelector("#btnc").classList.value = "activated";

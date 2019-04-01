@@ -13,6 +13,7 @@ const calcButtons = document.querySelectorAll(".calcButton");
 const maxChar = 18; // Max number of characters you can input
 const floatPrecision=4; //Precision of float numbers
 let isCalculated = 0;
+let allowClosingBracket = 0;
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -59,12 +60,10 @@ function calculate(action){
 
     //Inserting numbers
     if (!(isNaN(action))) {
-        //Continue inserting numbers after using calculate button
-        //
-
+        
         //Max char number
         if (inputBox.firstChild.nodeValue.length <= maxChar) {
-            
+            if (inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != ")") {
                 // Insert 0
                 if (action == "0") {
                     //0 at the start of a number
@@ -92,6 +91,7 @@ function calculate(action){
                 }
             }
         }
+        }
 
         //Keyboard operations
             //Continue after using equal button
@@ -105,7 +105,7 @@ function calculate(action){
             if (action == "Enter" || action == "=") {
                     resultBox.firstChild.nodeValue = inputBox.firstChild.nodeValue;
                     inputBox.firstChild.nodeValue = eval(inputBox.firstChild.nodeValue);
-                    //ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
+                    ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
                     isCalculated = 1;
                     document.querySelector("#btnequals").classList.value = "activated";
             }
@@ -113,24 +113,24 @@ function calculate(action){
             //Calculating buttons
                 switch(action) {
                     case "+": {
-                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ' || inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] == ")") {
                             inputBox.firstChild.nodeValue += "+";
                         } document.querySelector("#btnplus").classList.value = "activated";
                         break;
                     } case "-": { 
-                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ' || inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] == ")") {
                             inputBox.firstChild.nodeValue += "-";
                         } document.querySelector("#btnminus").classList.value = "activated";
                         break;
                     } case "*": {
-                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ' || inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] == ")") {
                             inputBox.firstChild.nodeValue += "*";
                         } document.querySelector("#btnmultiple").classList.value = "activated";
                         break;
                     } 
                     case ":":
                     case "/": { 
-                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ' || inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] == ")") {
                             inputBox.firstChild.nodeValue += "/";
                         } document.querySelector("#btndivide").classList.value = "activated";
                         break;
@@ -144,13 +144,15 @@ function calculate(action){
                     }
                     case "(": {
                         if (inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != "(" && inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != ")" && isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) {
+                        allowClosingBracket = 1;
                         inputBox.firstChild.nodeValue += "(";
                         } document.querySelector("#btnbracket1").classList.value = "activated";
                         break;
                     }
                     case ")": {
-                        if (inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != "(" && inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != ")" && !(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1]))) {
+                        if (inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != "(" && !(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && allowClosingBracket == 1 ) {
                         inputBox.firstChild.nodeValue += ")";
+                        allowClosingBracket = 0;
                         } document.querySelector("#btnbracket2").classList.value = "activated";
                         break;
                     }
@@ -214,17 +216,14 @@ function calculate(action){
                         } document.querySelector("#btnpower2").classList.value = "activated";
                         break;
                     }
-                    case "^": {
-                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
-                            inputBox.firstChild.nodeValue += "^";
-                        } document.querySelector("#btnpowern").classList.value = "activated";
-                        break;
-                    }
                 }
 
                 //Operations at the beginning
                 if (action == "-" && inputBox.firstChild.nodeValue == ' ') {
                     inputBox.firstChild.nodeValue += "-";
+                }
+                if (action == "(" && inputBox.firstChild.nodeValue == ' ') {
+                    inputBox.firstChild.nodeValue += "(";
                 }
 
             //Backspace button
@@ -237,7 +236,7 @@ function calculate(action){
             }
 
             //C button
-            if (action == "Escape") {
+            if (action == "Escape" || action == "Delete") {
                 inputBox.firstChild.nodeValue = " ";
                 resultBox.firstChild.nodeValue = " ";
                 document.querySelector("#btnc").classList.value = "activated";
@@ -321,10 +320,6 @@ function uncolor(action) {
         }
         case "power2": {
             document.querySelector("#btnpower2").classList.value = "calcButton";
-            break;
-        }
-        case "^": {
-            document.querySelector("#btnpowern").classList.value = "calcButton";
             break;
         }
         }
