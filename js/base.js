@@ -110,6 +110,7 @@ function calculate(action){
             //Equal button
             if (action == "Enter" || action == "=") {
                 if (resultBox.className == "unhighlited") {
+                    if (resultBox.firstChild.nodeValue.length > maxChar) resultBox.firstChild.nodeValue = parseInt(eval(inputBox.firstChild.nodeValue)).toExponential(3);
                     resultBox.className = "highlited";
                     ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
                     inputBox.className = "unhighlited";
