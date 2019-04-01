@@ -163,8 +163,9 @@ header.base section#resultBox {
     height: 50px;
     width: 70px;
 
-    text-align: center;
-    align-items: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(223, 223, 223);
     outline: none;
 
@@ -184,8 +185,37 @@ header.base section#resultBox {
     -webkit-user-select: none;
 }
 
+.calcButtonScience {
+    margin: 2px;
+
+    height: 50px;
+    width: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(138, 138, 138);
+    outline: none;
+
+    border: solid 1px rgb(124, 124, 124);
+    border-radius: 3px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+    color: #444444;
+
+    font-size: 22pt;
+
+    -webkit-transition: background-color 0.2s ease-out;
+    -moz-transition: background-color 0.2s ease-out;
+    -o-transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
+
+    cursor: pointer;
+    -webkit-user-select: none;
+}
+
 #btnequals {
-    line-height: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .activated {
@@ -213,6 +243,33 @@ header.base section#resultBox {
     -webkit-user-select: none;
     background-color: #22282e;
     color: rgb(204, 204, 204);
+}
+
+.activatedScience {
+    margin: 2px;
+
+    height: 50px;
+    width: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px rgb(124, 124, 124);
+    outline: none;
+
+    border: solid 1px rgb(124, 124, 124);
+    border-radius: 3px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.2);
+    color: rgb(204, 204, 204);
+
+    font-size: 22pt;
+
+    -webkit-transition: background-color 0.2s ease-out;
+    -moz-transition: background-color 0.2s ease-out;
+    -o-transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
+
+    cursor: pointer;
+    -webkit-user-select: none;
 }
 
 table#base {
