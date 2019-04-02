@@ -17,7 +17,7 @@ let mainWindow = null;
         width: 335,
         height: 480,
         show: false,
-        resizable: true,
+        resizable: false,
         frame: false,
         webPreferences: {
             nodeIntegration: true,
