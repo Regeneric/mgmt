@@ -284,7 +284,7 @@ table#base {
    
 float: left;
 width: 100%;
-} .liniowa, .fx, .fx2, .fx-btn, .currency_am, .currency_from, .currency_to, .currency_res, .help-btn, .vert-btn {
+} .fx-round2 .liniowa, .fx, .fx3, .fx2, .fx-btn, .currency_am, .currency_from, .currency_to, .currency_res, .help-btn, .vert-btn {
     background-color: #3c3c3c1c;
 
     border: solid 1px #7c7c7c;
@@ -323,6 +323,10 @@ width: 100%;
     position: absolute;
     left: 620px;
     top: 555px;
+} .fx3{
+    
+    width: 100%;
+    height: 40px;
 }
 
 .checkbox, .checkbox1 {
@@ -348,6 +352,13 @@ width: 100%;
 } #fx-zero{
     
     left: 210px;
+} #fx-round2{
+    padding: 4px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 658px;
+    
 }
 
 /*-!MAIN!-*/
