@@ -7,7 +7,7 @@
     "Gabriel Król <werander.k@gmail.com>",
     "Patryk Piszczek <patrykpiszczek3@gmail.com>"
   ],
-  "version": "0.3.4",
+  "version": "0.4.1",
   "license": "GPLv3",
   "private": true,
   "main": "main.js",
@@ -17,40 +17,8 @@
     "npm": ">= 6.9.0"
   },
   "scripts": {
-    "dev": "git checkout develop && npm install && electron main.js",
-    "start": "git checkout master && npm install && electron main.js",
-    "current": "electron main.js",
-    "pack": "build --dir",
-    "build": "build",
-    "build-win": "build --win",
-    "build-mac": "build --mac"
-  },
-  "build": {
-    "appId": "com.electron.wgec",
-    "mac": {
-      "artifactName": "${productName}-${version}.${ext}",
-      "category": "public.app-category.utilities",
-      "target": [
-        "default"
-      ]
-    },
-    "linux": {
-      "icon": "img/wgec-icon.svg",
-      "category": "Utility",
-      "target": [
-        "AppImage",
-        "deb",
-        "rpm",
-        "pacman"
-      ]
-    },
-    "win": {
-      "artifactName": "${productName}-${version}.${ext}",
-      "target": [
-        "zip",
-        "portable"
-      ]
-    }
+    "start": "electron main.js",
+    "start-deps": "npm install && electron main.js"
   },
   "dependencies": {
     "chart.js": "^2.7.3",
