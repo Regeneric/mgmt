@@ -128,7 +128,7 @@ liDrop.forEach(ld => {
 
                 break;
             }
-        } // win.setResizable(false);
+        } win.setResizable(false);
 
         switch(ld.id) {
             case "currency": {
