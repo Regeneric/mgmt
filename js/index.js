@@ -107,11 +107,6 @@ liDrop.forEach(ld => {
                 win = loadWindow(win, funcProp);
 
                 break;
-            } case "poss-funcs": {
-                ipcRenderer.send("popCreate", 1);
-                ipcRenderer.send("help2dShow", 1);
-
-                break;
             } case "about": {
                 ipcRenderer.send("popCreate", 1);
                 ipcRenderer.send("aboutShow", 1);
