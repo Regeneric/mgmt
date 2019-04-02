@@ -110,6 +110,7 @@ function calculate(action){
             //Equal button
             if (action == "Enter" || action == "=") {
                 if (resultBox.className == "unhighlited") {
+                    if (resultBox.firstChild.nodeValue.length > maxChar) resultBox.firstChild.nodeValue = parseInt(eval(inputBox.firstChild.nodeValue)).toExponential(3);
                     resultBox.className = "highlited";
                     ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
                     inputBox.className = "unhighlited";
@@ -172,7 +173,7 @@ function calculate(action){
             }
 
             //C button
-            if (action == "Escape") {
+            if (action == "Escape" || action == "Delete") {
                 inputBox.firstChild.nodeValue = " ";
                 resultBox.firstChild.nodeValue = "= ";
                 document.querySelector("#btnc").classList.value = "activated";

@@ -6,13 +6,14 @@
 const inputBox = document.querySelector("#inputBox");
 const resultBox = document.querySelector("#resultBox");
 
-const calcButtons = document.querySelectorAll(".calcButton");
+const calcButtons = document.querySelectorAll(".calcButton, .calcButtonScience");
 /*-!SETUP!-*/
 
 /*--PROPS--*/
-const maxChar = 18; // Max number of characters you can input
+const maxChar = 22; // Max number of characters you can input
 const floatPrecision=4; //Precision of float numbers
 let isCalculated = 0;
+let allowClosingBracket = 0;
 /*-!PROPS!-*/
 
 /*--RUN--*/
@@ -59,12 +60,10 @@ function calculate(action){
 
     //Inserting numbers
     if (!(isNaN(action))) {
-        //Continue inserting numbers after using calculate button
-        //
-
+        
         //Max char number
         if (inputBox.firstChild.nodeValue.length <= maxChar) {
-            
+            if (inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != ")") {
                 // Insert 0
                 if (action == "0") {
                     //0 at the start of a number
@@ -92,6 +91,7 @@ function calculate(action){
                 }
             }
         }
+        }
 
         //Keyboard operations
             //Continue after using equal button
@@ -105,7 +105,7 @@ function calculate(action){
             if (action == "Enter" || action == "=") {
                     resultBox.firstChild.nodeValue = inputBox.firstChild.nodeValue;
                     inputBox.firstChild.nodeValue = eval(inputBox.firstChild.nodeValue);
-                    //ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
+                    ipcRenderer.send("inputBox", "base" + inputBox.firstChild.nodeValue);
                     isCalculated = 1;
                     document.querySelector("#btnequals").classList.value = "activated";
             }
@@ -113,24 +113,24 @@ function calculate(action){
             //Calculating buttons
                 switch(action) {
                     case "+": {
-                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ' || inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] == ")") {
                             inputBox.firstChild.nodeValue += "+";
                         } document.querySelector("#btnplus").classList.value = "activated";
                         break;
                     } case "-": { 
-                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ' || inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] == ")") {
                             inputBox.firstChild.nodeValue += "-";
                         } document.querySelector("#btnminus").classList.value = "activated";
                         break;
                     } case "*": {
-                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ' || inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] == ")") {
                             inputBox.firstChild.nodeValue += "*";
                         } document.querySelector("#btnmultiple").classList.value = "activated";
                         break;
                     } 
                     case ":":
                     case "/": { 
-                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
+                        if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ' || inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] == ")") {
                             inputBox.firstChild.nodeValue += "/";
                         } document.querySelector("#btndivide").classList.value = "activated";
                         break;
@@ -144,14 +144,16 @@ function calculate(action){
                     }
                     case "(": {
                         if (inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != "(" && inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != ")" && isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) {
+                        allowClosingBracket = 1;
                         inputBox.firstChild.nodeValue += "(";
-                        } document.querySelector("#btnbracket1").classList.value = "activated";
+                        } document.querySelector("#btnbracket1").classList.value = "activatedScience";
                         break;
                     }
                     case ")": {
-                        if (inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != "(" && inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != ")" && !(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1]))) {
+                        if (inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1] != "(" && !(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && allowClosingBracket == 1 ) {
                         inputBox.firstChild.nodeValue += ")";
-                        } document.querySelector("#btnbracket2").classList.value = "activated";
+                        allowClosingBracket = 0;
+                        } document.querySelector("#btnbracket2").classList.value = "activatedScience";
                         break;
                     }
                     case "sin": {
@@ -160,7 +162,7 @@ function calculate(action){
                                 inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + Math.sin(inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
                             }
                             else inputBox.firstChild.nodeValue = Math.sin(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
-                        } document.querySelector("#btnsin").classList.value = "activated";
+                        } document.querySelector("#btnsin").classList.value = "activatedScience";
                         break;
                     }
                     case "cos": {
@@ -169,7 +171,7 @@ function calculate(action){
                                 inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + Math.cos(inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
                             }
                             else inputBox.firstChild.nodeValue = Math.cos(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
-                        } document.querySelector("#btncos").classList.value = "activated";
+                        } document.querySelector("#btncos").classList.value = "activatedScience";
                         break;
                     }
                     case "tg": {
@@ -178,7 +180,7 @@ function calculate(action){
                                 inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + Math.tan(inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
                             }
                             else inputBox.firstChild.nodeValue = Math.tan(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
-                        } document.querySelector("#btntg").classList.value = "activated";
+                        } document.querySelector("#btntg").classList.value = "activatedScience";
                         break;
                     }
                     case "sqrt": {
@@ -187,7 +189,7 @@ function calculate(action){
                                 inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + Math.sqrt(inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
                             }
                             else inputBox.firstChild.nodeValue = Math.sqrt(eval(inputBox.firstChild.nodeValue)).toPrecision(floatPrecision);
-                        } document.querySelector("#btnsqrt").classList.value = "activated";
+                        } document.querySelector("#btnsqrt").classList.value = "activatedScience";
                         break;
                     }
                     case "1/x": {
@@ -196,13 +198,13 @@ function calculate(action){
                                 inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + (1/inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
                             }
                             else inputBox.firstChild.nodeValue = 1/eval(inputBox.firstChild.nodeValue);
-                        } document.querySelector("#btnonetox").classList.value = "activated";
+                        } document.querySelector("#btnonetox").classList.value = "activatedScience";
                         break;
                     }
                     case "mod": {
                         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
                             inputBox.firstChild.nodeValue += "%";
-                        } document.querySelector("#btnmod").classList.value = "activated";
+                        } document.querySelector("#btnmod").classList.value = "activatedScience";
                         break;
                     }
                     case "power2": {
@@ -211,13 +213,16 @@ function calculate(action){
                                 inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + (inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g) * inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)));
                             }
                             else inputBox.firstChild.nodeValue = eval(inputBox.firstChild.nodeValue)*eval(inputBox.firstChild.nodeValue);
-                        } document.querySelector("#btnpower2").classList.value = "activated";
+                        } document.querySelector("#btnpower2").classList.value = "activatedScience";
                         break;
                     }
-                    case "^": {
+                    case "log10": {
                         if (!(isNaN(inputBox.firstChild.nodeValue[inputBox.firstChild.nodeValue.length -1])) && inputBox.firstChild.nodeValue != ' ') {
-                            inputBox.firstChild.nodeValue += "^";
-                        } document.querySelector("#btnpowern").classList.value = "activated";
+                            if (/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g.test(inputBox.firstChild.nodeValue)) {
+                                inputBox.firstChild.nodeValue = inputBox.firstChild.nodeValue.replace(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g, inputBox.firstChild.nodeValue.match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)[0][0] + (Math.log10(inputBox.firstChild.nodeValue).match(/(\+|\-|\*|\/){1}[0-9]{1,}[.]{0,1}[0-9]{0,}$/g)).toPrecision(floatPrecision));
+                            }
+                            else inputBox.firstChild.nodeValue = Math.log10(eval(inputBox.firstChild.nodeValue));
+                        } document.querySelector("#btnlog10").classList.value = "activatedScience";
                         break;
                     }
                 }
@@ -225,6 +230,9 @@ function calculate(action){
                 //Operations at the beginning
                 if (action == "-" && inputBox.firstChild.nodeValue == ' ') {
                     inputBox.firstChild.nodeValue += "-";
+                }
+                if (action == "(" && inputBox.firstChild.nodeValue == ' ') {
+                    inputBox.firstChild.nodeValue += "(";
                 }
 
             //Backspace button
@@ -237,7 +245,7 @@ function calculate(action){
             }
 
             //C button
-            if (action == "Escape") {
+            if (action == "Escape" || action == "Delete") {
                 inputBox.firstChild.nodeValue = " ";
                 resultBox.firstChild.nodeValue = " ";
                 document.querySelector("#btnc").classList.value = "activated";
@@ -288,43 +296,43 @@ function uncolor(action) {
             break;
         }
         case "(": {
-            document.querySelector("#btnbracket1").classList.value = "calcButton";
+            document.querySelector("#btnbracket1").classList.value = "calcButtonScience";
             break;
         }
         case ")": {
-            document.querySelector("#btnbracket2").classList.value = "calcButton";
+            document.querySelector("#btnbracket2").classList.value = "calcButtonScience";
             break;
         }
         case "sin": {
-            document.querySelector("#btnsin").classList.value = "calcButton";
+            document.querySelector("#btnsin").classList.value = "calcButtonScience";
             break;
         }
         case "cos": {
-            document.querySelector("#btncos").classList.value = "calcButton";
+            document.querySelector("#btncos").classList.value = "calcButtonScience";
             break;
         }
         case "tg": {
-            document.querySelector("#btntg").classList.value = "calcButton";
+            document.querySelector("#btntg").classList.value = "calcButtonScience";
             break;
         }
         case "sqrt": {
-            document.querySelector("#btnsqrt").classList.value = "calcButton";
+            document.querySelector("#btnsqrt").classList.value = "calcButtonScience";
             break;
         }
         case "1/x": {
-            document.querySelector("#btnonetox").classList.value = "calcButton";
+            document.querySelector("#btnonetox").classList.value = "calcButtonScience";
             break;
         }
         case "mod": {
-            document.querySelector("#btnmod").classList.value = "calcButton";
+            document.querySelector("#btnmod").classList.value = "calcButtonScience";
             break;
         }
         case "power2": {
-            document.querySelector("#btnpower2").classList.value = "calcButton";
+            document.querySelector("#btnpower2").classList.value = "calcButtonScience";
             break;
         }
-        case "^": {
-            document.querySelector("#btnpowern").classList.value = "calcButton";
+        case "log10": {
+            document.querySelector("#btnlog10").classList.value = "calcButtonScience";
             break;
         }
         }
